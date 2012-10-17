@@ -35,7 +35,7 @@ The formatter is configured with defaults that you may or may not like, but you 
 [[NSDate formatter] setDoesRelativeDateFormatting:NO];
 ```
 
-This is a global change that will affect the use of the formatter whenever you use it after making the change.
+This is a global change that will affect the output of the formatter whenever you use it after making the change.
 
 ## Contact
 
