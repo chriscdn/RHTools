@@ -22,18 +22,20 @@ There is also a `-timesinceDate:withDepth:` method, which lets you compare the d
 
 ## NSDate+formatter.h
 
-This category adds date formatting directly to the `NSDate` class, which prevents the need to instantiate an `NSDateFormatter` object each time you want to format a date for display.  It's quite likely you will want to use the same date formatting throughout your app, so this category gives you a single location to configure and cache the `NSDateFormatter` object.  For example:
+This category adds date formatting directly to the `NSDate` class, which prevents the need to instantiate an `NSDateFormatter` object each time you want to format a date for display.  The category creates and caches a single `NSDateFormatter` for you, which can be reused over and over again in your app.  This is a good thing since you'll likely be using the same date formatting through your app anyway.  For example:
 
 ``` objective-c
 NSString *now = [[NSDate date] formatWithLocalTimeZone]; // Today, 11:45 AM
 NSString *utcnow = [[NSDate date] formatWithUTCTimeZone]; // Today, 9:45 AM
 ```
 
-The formatter is configured with some formatting defaults that you may or may not like.  You can change any of the options directly on the cached formatter.  For example, to disable relative formatting you could add the following to the `-application:didFinishLaunchingWithOptions:` method of your app delegate:
+The formatter is configured with defaults that you may or may not like.  You can change any of the options directly on the formatter.  For example, to disable relative formatting you could add the following to the `-application:didFinishLaunchingWithOptions:` method of your app delegate:
 
 ``` objective-c
 [[NSDate formatter] setDoesRelativeDateFormatting:NO];
 ```
+
+This will change the formatting behaviour anytime the c
 
 ## Contact
 
