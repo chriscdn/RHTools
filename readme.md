@@ -4,7 +4,7 @@ RHTools is a collection of useful objective-c categories and classes.
 
 ## NSDate+timesince.h
 
-This category adds a `-timesince` method to `NSDate`, which compares the current date to date and returns the interval in a human readable format format.  For example,
+This category adds a `-timesince` method to `NSDate`, which compares the receiver to the current date and returns the interval in a human readable format format.  For example,
 
 ``` objective-c
 NSDate *d = [NSDate dateWithTimeIntervalSinceNow:-30020];
