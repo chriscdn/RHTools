@@ -57,7 +57,7 @@ RHActionSheet *sheet = [RHActionSheet actionSheetWithTitle:@"Title"];
 [sheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
 ```
 
-Blocks are released when the user taps a button.  This means you can reference `self` or `sheet` within your blocks without worrying about retain cycles.  It also means you should never retain the `sheet` within your controller.
+Blocks are released when the user taps a button.  This means you can reference `self` or `sheet` within your blocks without worrying about retain cycles.  This is on the condition that `show` is called after allocating.
 
 ## RHAlertView
 
@@ -74,7 +74,7 @@ RHAlertView *alert = [RHAlertView alertWithTitle:@"Title" message:@"Would you li
 [alert show];
 ```
 
-Blocks are released when the user taps a button.  This means you can reference `self` or `alert` within your blocks without worrying about retain cycles.  It also means you should never retain the `alert` within your controller.
+Blocks are released when the user taps a button.  This means you can reference `self` or `alert` within your blocks without worrying about retain cycles.  This is on the condition that `show` is called after allocating.
 
 ## RHBarButtonItem
 
