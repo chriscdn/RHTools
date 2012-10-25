@@ -70,7 +70,7 @@ RHAlertView *alert = [RHAlertView alertWithTitle:@"Title" message:@"Would you li
 	// ...
 }];
 
-[alert addOKButton];
+[alert addCancelButton];
 [alert show];
 ```
 
