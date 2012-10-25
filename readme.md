@@ -94,4 +94,4 @@ Blocks are not released when the user taps the button since it's quite likely th
 [@chriscdn](http://twitter.com/chriscdn)
 
 ## License
-RHManagedObject is available under the MIT license. See the LICENSE file for more info.
+All source available under the MIT license. See the LICENSE file for more info.
