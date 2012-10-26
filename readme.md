@@ -37,6 +37,10 @@ The formatter is configured with defaults that you may or may not like, but you 
 
 This is a global change that will affect the output of the formatter whenever you use it after making the change.
 
+## NSArray+firstObject
+
+This category adds a `firstObject` method to `NSArray`.  It's a convenience method to fetch the first object of an `NSArray` without having to first check if the array is empty.  Just like the `lastObject` method, the method will return `nil` if the array is empty.
+
 ## RHActionSheet
 
 `RHActionSheet` is a subclass of `UIActionSheet` and adds block handling to the buttons.  For example:
