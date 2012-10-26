@@ -88,6 +88,30 @@ self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithTitle:@"Edit" 
 
 Blocks are not released when the user taps the button since it's quite likely the user may tap the button a second time.  For that reason any reference to `self` within the block must be done with a weak reference.
 
+## RHSwitch
+
+`RHSwitch` is a subclass of `UISwitch` and adds block handling to the switch action.  For example:
+
+``` objective-c
+// Instantiate an instance of RHSWitch with an initial "ON" state
+RHSwitch *toggle = [[RHSwitch alloc] initWithBlock:^(BOOL state) {
+	// do something with the new "state"		
+} state:YES];
+
+// You can then add it to a frame (after setting the frame.origin):
+[self.view addSubview:toggle];
+
+// ... or use it with a tableView cell
+[cell setAccessoryView:toggle];
+
+// You can also use it with a NIB by defining the class as RHClass in Interface Builder and defining the block in `viewDidLoad`:
+[toggle setBlock:^(BOOL state) {
+	// do something with the new "state"		
+}];
+```
+
+`RHSwitch` adds a workaround to prevent the block from being called if the switch is tapped in rapid succession.  The block is retained so be sure to only use weak references to `self` or `toggle` within the block.
+
 ## Contact
 
 [Christopher Meyer](https://github.com/chriscdn)  
