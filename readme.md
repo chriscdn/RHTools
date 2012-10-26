@@ -98,19 +98,20 @@ RHSwitch *toggle = [[RHSwitch alloc] initWithBlock:^(BOOL state) {
 	// do something with the new "state"		
 } state:YES];
 
-// You can then add it to a frame (after setting the frame.origin):
+// You can then add it as a subview (after setting the frame.origin):
 [self.view addSubview:toggle];
 
 // ... or use it with a tableView cell
 [cell setAccessoryView:toggle];
 
-// You can also use it with a NIB by defining the class as RHClass in Interface Builder and defining the block in `viewDidLoad`:
+// You can also use it with a NIB by defining the class as RHClass 
+// in Interface Builder and setting the block in viewDidLoad:
 [toggle setBlock:^(BOOL state) {
 	// do something with the new "state"		
 }];
 ```
 
-`RHSwitch` adds a workaround to prevent the block from being called if the switch is tapped in rapid succession.  The block is retained so be sure to only use weak references to `self` or `toggle` within the block.
+`RHSwitch` adds a workaround to prevent the block from being called if the switch is tapped twice in rapid succession.  The block is retained so be sure to only use weak references to `self` or `toggle` within the block.
 
 ## Contact
 
