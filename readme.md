@@ -2,23 +2,9 @@
 
 RHTools is a collection of useful Objective-C categories and classes.  All use ARC.
 
-## NSDate+timesince
+## NSArray+firstObject
 
-This category adds a `-timesince` method to `NSDate`, which compares the receiver to the current date and returns the interval in a human readable format.  For example,
-
-``` objective-c
-NSDate *d = [NSDate dateWithTimeIntervalSinceNow:-30020];
-NSString *ts = [d timesince]; // 8 hours, 20 minutes
-```
-
-The category also has a `-timesinceWithDepth:` method, which controls how much precision you'd like in the output.  For example:
-
-``` objective-c
-NSDate *d = [NSDate dateWithTimeIntervalSinceNow:-30020];
-NSString *ts = [d timesinceWithDepth:3]; // 8 hours, 20 minutes, 20 seconds
-```
-
-There is also a `-timesinceDate:withDepth:` method, which lets you compare the difference between any two arbitrary dates.
+This category adds a `firstObject` method to `NSArray`.  It's a convenience method to fetch the first object of an `NSArray` without having to first check if the array is empty.  Just like the `lastObject` method, the method will return `nil` if the array is empty.
 
 ## NSDate+formatter
 
@@ -37,9 +23,23 @@ The formatter is configured with defaults that you may or may not like, but you 
 
 This is a global change that will affect the output of the formatter whenever you use it after making the change.
 
-## NSArray+firstObject
+## NSDate+timesince
 
-This category adds a `firstObject` method to `NSArray`.  It's a convenience method to fetch the first object of an `NSArray` without having to first check if the array is empty.  Just like the `lastObject` method, the method will return `nil` if the array is empty.
+This category adds a `-timesince` method to `NSDate`, which compares the receiver to the current date and returns the interval in a human readable format.  For example,
+
+``` objective-c
+NSDate *d = [NSDate dateWithTimeIntervalSinceNow:-30020];
+NSString *ts = [d timesince]; // 8 hours, 20 minutes
+```
+
+The category also has a `-timesinceWithDepth:` method, which controls how much precision you'd like in the output.  For example:
+
+``` objective-c
+NSDate *d = [NSDate dateWithTimeIntervalSinceNow:-30020];
+NSString *ts = [d timesinceWithDepth:3]; // 8 hours, 20 minutes, 20 seconds
+```
+
+There is also a `-timesinceDate:withDepth:` method, which lets you compare the difference between any two arbitrary dates.
 
 ## RHActionSheet
 
