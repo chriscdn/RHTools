@@ -4,7 +4,7 @@ RHTools is a collection of useful Objective-C categories and classes.  All use A
 
 ## NSArray+firstObject
 
-This category adds a `firstObject` method to `NSArray`.  It's a convenience method to fetch the first object of an `NSArray` without having to first check if the array is empty.  Just like the `-lastObject` method, the method will return `nil` if the array is empty.
+This category adds a `-firstObject` method to `NSArray`.  It's a convenience method to fetch the first object of an `NSArray` without having to first check if the array is empty.  Just like the `-lastObject` method, it will also return `nil` if the array is empty.
 
 ## NSDate+formatter
 
