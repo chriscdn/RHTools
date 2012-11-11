@@ -1,6 +1,6 @@
 //
 //  NSDate+timesince.m
-//  Version: 0.3
+//  Version: 0.4
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -64,13 +64,13 @@ static NSArray *_unitValues;
 +(NSArray *)unitValues {
     if (_unitValues == nil) {
         _unitValues = [NSArray arrayWithObjects:
-                       [NSNumber numberWithInt:31556926],
-                       [NSNumber numberWithInt:2629744],
-                       [NSNumber numberWithInt:604800],
-                       [NSNumber numberWithInt:86400],
-                       [NSNumber numberWithInt:3600],
-                       [NSNumber numberWithInt:60],
-                       [NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:kYear],
+                       [NSNumber numberWithInt:kMonth],
+                       [NSNumber numberWithInt:kWeek],
+                       [NSNumber numberWithInt:kDay],
+                       [NSNumber numberWithInt:kHour],
+                       [NSNumber numberWithInt:kMinute],
+                       [NSNumber numberWithInt:kSecond],
                         nil];
     }
     return _unitValues;
