@@ -40,7 +40,6 @@ static NSArray *_unitValues;
                           NSLocalizedStringFromTable(@"day", @"NSDate+timesince", nil),
                           NSLocalizedStringFromTable(@"hour", @"NSDate+timesince", nil),
                           NSLocalizedStringFromTable(@"minute", @"NSDate+timesince", nil),
-                          // NSLocalizedStringFromTable(@"second", @"NSDate+timesince", nil),
                            nil];
     }
     return _unitsSingular;
@@ -55,7 +54,6 @@ static NSArray *_unitValues;
                         NSLocalizedStringFromTable(@"days", @"NSDate+timesince", nil),
                         NSLocalizedStringFromTable(@"hours", @"NSDate+timesince", nil),
                         NSLocalizedStringFromTable(@"minutes", @"NSDate+timesince", nil),
-                        // NSLocalizedStringFromTable(@"seconds", @"NSDate+timesince", nil),
                          nil];
     }
     return _unitsPlural;
