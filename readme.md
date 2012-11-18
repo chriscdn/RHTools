@@ -72,7 +72,7 @@ RHActionSheet *sheet = [RHActionSheet actionSheetWithTitle:@"Title"];
 [sheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
 ```
 
-Blocks are released when the user taps a button.  This means you can reference `self` or `sheet` within your blocks without worrying about retain cycles.  This is on the condition that a `show` method is called after allocating.
+Blocks are released when the user taps a button.  This means you can reference `self` or `sheet` within your blocks without worrying about retain cycles.  This is on the condition that a `-show` method is called after allocating.
 
 ## RHAlertView
 
@@ -89,7 +89,7 @@ RHAlertView *alert = [RHAlertView alertWithTitle:@"Title" message:@"Would you li
 [alert show];
 ```
 
-Blocks are released when the user taps a button.  This means you can reference `self` or `alert` within your blocks without worrying about retain cycles.  This is on the condition that `show` is called after allocating.
+Blocks are released when the user taps a button.  This means you can reference `self` or `alert` within your blocks without worrying about retain cycles.  This is on the condition that `-show` is called after allocating.
 
 ## RHBarButtonItem
 
@@ -101,7 +101,7 @@ self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithTitle:@"Edit" 
 }];
 ```
 
-Blocks are not released when the user taps the button since it's quite likely the user may tap the button a second time.  For that reason any reference to `self` within the block must be done with a weak reference.
+Blocks are not released when the user taps the button since it's quite likely the user may tap the button multiple times.  For that reason any reference to `self` within the block must be done with a weak reference.
 
 ## RHSwitch
 
@@ -119,8 +119,7 @@ RHSwitch *toggle = [[RHSwitch alloc] initWithBlock:^(BOOL state) {
 // ... or use it with a tableView cell
 [cell setAccessoryView:toggle];
 
-// You can also use it with a NIB by defining the class as RHClass 
-// in Interface Builder and setting the block in viewDidLoad:
+// You can also use it with a NIB by defining the class as RHClass in Interface Builder and setting the block in viewDidLoad:
 [toggle setBlock:^(BOOL state) {
 	// do something with the new "state"		
 }];
