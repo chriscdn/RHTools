@@ -1,6 +1,6 @@
 //
 //  NSDate+formatter.h
-//  Version: 0.1
+//  Version: 0.2
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -26,10 +26,15 @@
 @interface NSDate (formatter)
 
 +(NSDateFormatter *)formatter;
++(NSDateFormatter *)formatterWithoutTime;
 +(double)localTimeZoneOffset;
 
 -(NSString *)formatWithUTCTimeZone;
 -(NSString *)formatWithLocalTimeZone;
 -(NSString *)formatWithTimeZoneOffset:(NSTimeInterval)offset;
+
+-(NSString *)formatWithUTCTimeZoneWithoutTime;
+-(NSString *)formatWithLocalTimeZoneWithoutTime;
+-(NSString *)formatWithTimeZoneOffsetWithoutTime:(NSTimeInterval)offset;
 
 @end

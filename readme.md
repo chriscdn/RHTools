@@ -8,20 +8,31 @@ This category adds a `-firstObject` method to `NSArray`.  It's a convenience met
 
 ## NSDate+formatter
 
-This category adds date formatting directly to the `NSDate` class, which prevents the need to instantiate an `NSDateFormatter` object each time you want to format a date for display.  The category creates and caches a single `NSDateFormatter` object for you, which can be reused over and over again in your app.  This is a good thing since you'll likely be using the same date formatting throughout your app anyway.  For example:
+This category adds date formatting directly to the `NSDate` class, which prevents the need to instantiate an `NSDateFormatter` object each time you want to format a date for display.  The category creates and caches two `NSDateFormatter` objects (one with time and one without), which can be reused in your app.  This is a good thing since you'll likely be using the same date format throughout your app anyway.  For example:
 
 ``` objective-c
-NSString *now = [[NSDate date] formatWithLocalTimeZone]; // Today, 11:45 AM
-NSString *utcnow = [[NSDate date] formatWithUTCTimeZone]; // Today, 9:45 AM
+NSString *now = [[NSDate date] formatWithLocalTimeZone];    // "Today, 12:45 AM" (assuming GMT+2)
+NSString *utcnow = [[NSDate date] formatWithUTCTimeZone];   // "Yesterday, 10:45 PM"
 ```
 
-The formatter is configured with defaults that you may or may not like, but you can change any of the options directly on the formatter.  For example, to disable relative formatting you could add the following to the `-application:didFinishLaunchingWithOptions:` method of your app delegate:
+The formatter is configured with defaults that you may or may not like, but you can change any of the options directly on the formatter.  For example, to globally disable relative formatting you could add the following to the `-application:didFinishLaunchingWithOptions:` method of your app delegate:
 
 ``` objective-c
 [[NSDate formatter] setDoesRelativeDateFormatting:NO];
 ```
 
-This is a global change that will affect the output of the formatter whenever you use it after making the change.
+There are also methods to format the date without the time component.  For example:
+
+``` objective-c
+NSString *day    = [[NSDate date] formatWithLocalTimeZoneWithoutTime];   // "Today" (assuming GMT+2 just after midnight)
+NSString *utcday = [[NSDate date] formatWithUTCTimeZoneWithoutTime];     // "Yesterday"
+```
+
+Similarily, you can access the formatter directly to change the formatter properties:
+
+``` objective-c
+[[NSDate formatterWithoutTime] setDoesRelativeDateFormatting:NO];
+```
 
 ## NSDate+timesince
 
