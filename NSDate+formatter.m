@@ -1,6 +1,6 @@
 //
 //  NSDate+formatter.m
-//  Version: 0.2
+//  Version: 0.3
 //
 //  Copyright (C) 2012 by Christopher Meyer
 //  http://schwiiz.org/
@@ -57,10 +57,6 @@
     return formatterWithoutTime;
 }
 
-+(double)localTimeZoneOffset {
-    return [[NSTimeZone defaultTimeZone] secondsFromGMT]/3600;
-}
-
 #pragma mark -
 #pragma mark Formatter with time
 -(NSString *)formatWithUTCTimeZone {
@@ -68,14 +64,16 @@
 }
 
 -(NSString *)formatWithLocalTimeZone {
-    NSDateFormatter *formatter = [NSDate formatter];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];    
-    return [formatter stringFromDate:self];
+    return [self formatWithTimeZone:[NSTimeZone localTimeZone]];
 }
 
 -(NSString *)formatWithTimeZoneOffset:(NSTimeInterval)offset {
+    return [self formatWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:offset]];
+}
+
+-(NSString *)formatWithTimeZone:(NSTimeZone *)timezone {
     NSDateFormatter *formatter = [NSDate formatter];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:offset]];
+    [formatter setTimeZone:timezone];
     return [formatter stringFromDate:self];
 }
 
@@ -86,14 +84,16 @@
 }
 
 -(NSString *)formatWithLocalTimeZoneWithoutTime {
-    NSDateFormatter *formatter = [NSDate formatterWithoutTime];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
-    return [formatter stringFromDate:self];
+    return [self formatWithTimeZoneWithoutTime:[NSTimeZone localTimeZone]];
 }
 
 -(NSString *)formatWithTimeZoneOffsetWithoutTime:(NSTimeInterval)offset {
+    return [self formatWithTimeZoneWithoutTime:[NSTimeZone timeZoneForSecondsFromGMT:offset]];
+}
+
+-(NSString *)formatWithTimeZoneWithoutTime:(NSTimeZone *)timezone {
     NSDateFormatter *formatter = [NSDate formatterWithoutTime];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:offset]];
+    [formatter setTimeZone:timezone];
     return [formatter stringFromDate:self];
 }
 
