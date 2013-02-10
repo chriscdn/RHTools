@@ -96,7 +96,7 @@
 		block();
 	}
 	
-	// This line prevents a retain cycle if alert is referenced within the block.
+	// This line prevents a retain cycle if self is referenced within the block.
 	self.actions = nil;
 }
 
