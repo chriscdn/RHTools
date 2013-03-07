@@ -1,5 +1,5 @@
 //
-//  RHBarButtonItem.h
+//  RHButton
 //  Version: 0.2
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,15 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-typedef void (^RHBarButtonItemBlock)(void);
+typedef void (^RHButtonBlock)(void);
 
-@interface RHBarButtonItem : UIBarButtonItem
-
-+(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block;
-+(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block;
-
--(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block;
--(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block;
-
+@interface RHButton : UIButton
 
 @end

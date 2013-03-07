@@ -1,5 +1,5 @@
 //
-//  RHBarButtonItem.m
+//  RHButton
 //  Version: 0.2
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,37 +23,20 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "RHBarButtonItem.h"
+#import "RHButton.h"
 
-@interface RHBarButtonItem()
-@property (nonatomic, copy) RHBarButtonItemBlock block;
+@interface RHButton()
+@property (nonatomic, copy) RHButtonBlock block;
 @end
 
-@implementation RHBarButtonItem
-@synthesize block;
+@implementation RHButton
 
-+(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block {
-    return [[self alloc] initWithTitle:title block:_block];
-}
++(id)buttonWithType:(UIButtonType)buttonType block:(RHButtonBlock)_block {
+	RHButton *button = [RHButton buttonWithType:buttonType];
+	[button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+	[button setBlock:_block];
 
-+(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block {
-    return [[self alloc] initWithBarButtonSystemItem:systemItem block:_block];
-}
-
--(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block {
- 	if (self=[super initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
-		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:_block];
-	}
-	return self;
-}
-
--(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block {
-	if (self=[super initWithBarButtonSystemItem:systemItem target:self action:@selector(tap:)]) {
-		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:_block]; // copied by @property
-	}
-	return self;
+	return button;
 }
 
 -(void)tap:(id)sender {
