@@ -129,8 +129,9 @@ RHSwitch *toggle = [[RHSwitch alloc] initWithBlock:^(BOOL state) {
 
 ## Contact
 
-[Christopher Meyer](https://github.com/chriscdn)  
-[@chriscdn](http://twitter.com/chriscdn)
+profile: [Christopher Meyer](https://github.com/chriscdn)  
+e-mail: [chris@schwiiz.org](mailto:chris@schwiiz.org)  
+twitter: [@chriscdn](http://twitter.com/chriscdn)
 
 ## License
 All source available under the MIT license. See the LICENSE file for more info.
