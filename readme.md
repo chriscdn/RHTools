@@ -1,10 +1,14 @@
 # RHTools
 
-RHTools is a collection of useful Objective-C categories and classes.  All use ARC.
+RHTools is a collection of useful Objective-C categories and classes.  All use ARC and can be globally added to your project by importing `RHTools.h` in your prefix header.
 
-## NSArray+firstObject
+## NSArray+rhextensions
 
 This category adds a `-firstObject` method to `NSArray`.  It's a convenience method to fetch the first object of an `NSArray` without having to first check if the array is empty.  Just like the `-lastObject` method, it will also return `nil` if the array is empty.
+
+## NSDictionary+rhextensions
+
+This category adds a `-objectForKey:defaultValue:` method to `NSDictionary`.  It is the same as `-objectForKey:`, but returns the `defaultValue` if the value is `[NSNull null]`, `nil`, or not found.
 
 ## NSDate+formatter
 

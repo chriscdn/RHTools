@@ -1,5 +1,5 @@
 //
-//  NSArray+firstObject.h
+//  NSDictionary+rhextensions.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,8 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface NSArray (firstObject)
+@interface NSDictionary (rhextensions)
 
--(id)firstObject;
+-(id)objectForKey:(id)aKey defaultValue:(id)defaultValue;
 
 @end

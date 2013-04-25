@@ -1,5 +1,5 @@
 //
-//  NSArray+firstObject.m
+//  NSArray+rhextensions.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,16 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "NSArray+firstObject.h"
+@interface NSArray (rhextensions)
 
-@implementation NSArray (firstObject)
-
--(id)firstObject {
-    if ([self count] == 0) {
-        return nil;
-    } else {
-        return [self objectAtIndex:0];
-    }
-}
+-(id)firstObject;
 
 @end
