@@ -169,15 +169,19 @@
 
 -(void)saveOriginalImageWithLocation:(CLLocation *)location block:(ALAssetsLibraryWriteImageCompletionBlock)_block {
 	if ([self isCameraImage]) {
-		NSMutableDictionary *_metadata = [NSMutableDictionary dictionaryWithDictionary:[self metadata]];
-		NSDictionary *geotag = [RHImagePickerController exifFromLocation:location];
-		[_metadata setObject:geotag forKey:(NSString*)kCGImagePropertyGPSDictionary];
-		[RHImagePickerController saveImage:[self originalImage] metadata:_metadata block:_block];
+		if (location) {
+			NSMutableDictionary *_metadata = [NSMutableDictionary dictionaryWithDictionary:[self metadata]];
+			NSDictionary *geotag = [RHImagePickerController exifFromLocation:location];
+			[_metadata setObject:geotag forKey:(NSString*)kCGImagePropertyGPSDictionary];
+			[RHImagePickerController saveImage:[self originalImage] metadata:_metadata block:_block];
+		} else {
+			[self saveOriginalImage:_block];
+		}
 	}
 }
 
 -(void)dealloc {
-	NSLog(@"%@", @"dealloc called rhimagepickercontroller");
+	// NSLog(@"%@", @"dealloc called rhimagepickercontroller");
 }
 
 @end
