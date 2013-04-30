@@ -1,8 +1,8 @@
 //
 //  RHImagePickerController.m
-//  Version: 0.1
+//  Version: 0.2
 //
-//  Copyright (C) 2012 by Christopher Meyer
+//  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,13 +24,16 @@
 //  THE SOFTWARE.
 
 #import "RHImagePickerController.h"
+#import <ImageIO/CGImageProperties.h>
 
 @interface RHImagePickerController ()
++(void)saveImage:(UIImage *)image metadata:(NSDictionary *)metadata block:(ALAssetsLibraryWriteImageCompletionBlock)_block;
++(NSDictionary *)exifFromLocation:(CLLocation *)location;
 @end
 
 @implementation RHImagePickerController
 @synthesize block;
-@synthesize dismissCompletionBlock;
+// @synthesize dismissCompletionBlock;
 @synthesize imageInfo;
 @synthesize popoverController;
 
@@ -47,34 +50,66 @@
 	return picker;
 }
 
+
++(void)saveImage:(UIImage *)image metadata:(NSDictionary *)metadata block:(ALAssetsLibraryWriteImageCompletionBlock)_block {
+	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+	[library writeImageToSavedPhotosAlbum:image.CGImage metadata:metadata completionBlock:_block];
+}
+
+
+// Thanks: http://masthigamerz.blogspot.ch/2012/08/save-image-with-geodata-using-alassets.html
++(NSDictionary *)exifFromLocation:(CLLocation *)location {
+	
+	NSMutableDictionary *locDict = [[NSMutableDictionary alloc] init];
+	
+	CLLocationDegrees exifLatitude = location.coordinate.latitude;
+	CLLocationDegrees exifLongitude = location.coordinate.longitude;
+	
+	[locDict setObject:location.timestamp forKey:(NSString *)kCGImagePropertyGPSTimeStamp];
+	
+	if (exifLatitude < 0.0) {
+		exifLatitude = exifLatitude*(-1);
+		[locDict setObject:@"S" forKey:(NSString *)kCGImagePropertyGPSLatitudeRef];
+	} else {
+		[locDict setObject:@"N" forKey:(NSString *)kCGImagePropertyGPSLatitudeRef];
+	}
+	
+	[locDict setObject:[NSNumber numberWithFloat:exifLatitude] forKey:(NSString *)kCGImagePropertyGPSLatitude];
+	
+	if (exifLongitude < 0.0) {
+		exifLongitude=exifLongitude*(-1);
+		[locDict setObject:@"W" forKey:(NSString *)kCGImagePropertyGPSLongitudeRef];
+	} else {
+		[locDict setObject:@"E" forKey:(NSString *)kCGImagePropertyGPSLongitudeRef];
+	}
+	
+	[locDict setObject:[NSNumber numberWithFloat:exifLongitude] forKey:(NSString *)kCGImagePropertyGPSLongitude];
+	
+	return locDict;
+}
+
 -(void)imagePickerController:(RHImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
 	self.imageInfo = info;
 	
 	if (popoverController) { // if popover is defined and then we're in an iPad app
-
+		
 		[self.popoverController dismissPopoverAnimated:YES];
 		
-		if (picker.dismissCompletionBlock) {
-			picker.dismissCompletionBlock(self);
-			self.dismissCompletionBlock = nil;
+		if (picker.block) {
+			picker.block(self);
 		}
+		picker.block = nil;
 		
 	} else {
 		[picker dismissViewControllerAnimated:YES completion:^{
-			// We need to use picker instead of self in order to retain the object in the block.
-			if (picker.dismissCompletionBlock) {
-				picker.dismissCompletionBlock(self);
-				self.dismissCompletionBlock = nil;
+			if (picker.block) {
+				picker.block(self);
 			}
+			picker.block = nil;
 		}];
 	}
 	
-	if (picker.block) {
-		picker.block(self);
-	}
-	
-	self.block = nil;
 	self.popoverController = nil;
 }
 
@@ -92,6 +127,7 @@
 #pragma mark -
 #pragma mark UIPopoverController and UIPopoverControllerDelegate
 
+// Wrap the controller in a popover, assign a delegate, and return it.
 -(UIPopoverController *)popoverController {
 	if (popoverController == nil) {
 		self.popoverController = [[UIPopoverController alloc] initWithContentViewController:self];
@@ -105,7 +141,7 @@
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	self.block = nil;
 	self.popoverController = nil;
-	self.dismissCompletionBlock = nil;
+	// self.dismissCompletionBlock = nil;
 }
 
 #pragma mark -
@@ -127,17 +163,21 @@
 
 -(void)saveOriginalImage:(ALAssetsLibraryWriteImageCompletionBlock)_block {
 	if ([self isCameraImage]) {
-		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-		UIImage *image = [self originalImage];
-		NSDictionary *metadata = [self metadata];
-		
-		[library writeImageToSavedPhotosAlbum:image.CGImage metadata:metadata completionBlock:_block];
+		[RHImagePickerController saveImage:[self originalImage] metadata:[self metadata] block:_block];
+	}
+}
+
+-(void)saveOriginalImageWithLocation:(CLLocation *)location block:(ALAssetsLibraryWriteImageCompletionBlock)_block {
+	if ([self isCameraImage]) {
+		NSMutableDictionary *_metadata = [NSMutableDictionary dictionaryWithDictionary:[self metadata]];
+		NSDictionary *geotag = [RHImagePickerController exifFromLocation:location];
+		[_metadata setObject:geotag forKey:(NSString*)kCGImagePropertyGPSDictionary];
+		[RHImagePickerController saveImage:[self originalImage] metadata:_metadata block:_block];
 	}
 }
 
 -(void)dealloc {
-	NSLog(@"%@", @"dealloc called rhimagepicker");
+	NSLog(@"%@", @"dealloc called rhimagepickercontroller");
 }
 
 @end
-

@@ -1,6 +1,6 @@
 //
-//  RHTools.h
-//  Version: 0.2
+//  UIApplication+rhextensions.m
+//  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,13 +23,31 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "NSArray+rhextensions.h"
-#import "NSDictionary+rhextensions.h"
-#import "NSDate+formatter.h"
-#import "NSDate+timesince.h"
-#import "RHActionSheet.h"
-#import "RHAlertView.h"
-#import "RHBarButtonItem.h"
-#import "RHButton.h"
-#import "RHSwitch.h"
 #import "UIApplication+rhextensions.h"
+
+@implementation UIApplication (rhextensions)
+
+//  keyboardView
+//
+//  Copyright Matt Gallagher 2009. All rights reserved.
+//
+//  Permission is given to use this source code file, free of charge, in any
+//  project, commercial or otherwise, entirely at your risk, with the condition
+//  that any redistribution (in part or whole) of source code must retain
+//  this copyright and permission notice. Attribution in compiled projects is
+//  appreciated but not required.
+-(UIView *)keyboardView {
+	NSArray *windows = [self windows];
+	for (UIWindow *window in [windows reverseObjectEnumerator]) {
+		for (UIView *view in [window subviews]) {
+            // UIPeripheralHostView is used from iOS 4.0, UIKeyboard was used in previous versions:
+			if (!strcmp(object_getClassName(view), "UIPeripheralHostView") || !strcmp(object_getClassName(view), "UIKeyboard")) {
+				return view;
+			}
+		}
+	}
+	
+	return nil;
+}
+
+@end

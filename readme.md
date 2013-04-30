@@ -131,6 +131,10 @@ RHSwitch *toggle = [[RHSwitch alloc] initWithBlock:^(BOOL state) {
 
 `RHSwitch` adds a workaround to prevent the block from being called if the switch is tapped twice in rapid succession.  The block is retained so be sure to only use weak references to `self` or `toggle` within the block.
 
+## RHImagePickerController
+
+*coming soon...*
+
 ## Contact
 
 profile: [Christopher Meyer](https://github.com/chriscdn)  

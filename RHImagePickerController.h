@@ -1,8 +1,8 @@
 //
 //  RHImagePickerController.h
-//  Version: 0.1
+//  Version: 0.2
 //
-//  Copyright (C) 2012 by Christopher Meyer
+//  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,6 +27,7 @@
 #define IsIPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface RHImagePickerController : UIImagePickerController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>
 
@@ -35,7 +36,7 @@ typedef void (^RHImagePickerControllerBlock)(RHImagePickerController *_picker);
 @property (nonatomic, strong) NSDictionary *imageInfo;
 
 @property (nonatomic, copy) RHImagePickerControllerBlock block;
-@property (nonatomic, copy) RHImagePickerControllerBlock dismissCompletionBlock;
+// @property (nonatomic, copy) RHImagePickerControllerBlock dismissCompletionBlock;
 @property (nonatomic, strong) UIPopoverController *popoverController;
 
 +(BOOL)isCameraAvailable;
@@ -47,5 +48,6 @@ typedef void (^RHImagePickerControllerBlock)(RHImagePickerController *_picker);
 -(NSDictionary *)metadata;
 
 -(void)saveOriginalImage:(ALAssetsLibraryWriteImageCompletionBlock)_block;
+-(void)saveOriginalImageWithLocation:(CLLocation *)location block:(ALAssetsLibraryWriteImageCompletionBlock)_block;
 
 @end
