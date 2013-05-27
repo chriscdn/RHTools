@@ -25,6 +25,7 @@
 
 #import "NSArray+rhextensions.h"
 #import "NSDictionary+rhextensions.h"
+#import "NSString+rhextensions.h"
 #import "NSDate+formatter.h"
 #import "NSDate+timesince.h"
 #import "RHActionSheet.h"

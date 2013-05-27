@@ -26,5 +26,6 @@
 @interface NSArray (rhextensions)
 
 -(id)firstObject;
+-(NSArray *)pluck:(NSString *)key;
 
 @end

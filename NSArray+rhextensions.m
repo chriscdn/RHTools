@@ -35,4 +35,14 @@
     }
 }
 
+-(NSArray *)pluck:(NSString *)key {
+	NSMutableArray *items = [NSMutableArray array];
+	
+	for (id item in self) {
+		[items addObject:[item valueForKey:key]];
+	}
+	
+	return items;
+}
+
 @end
