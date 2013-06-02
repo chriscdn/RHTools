@@ -1,6 +1,6 @@
 //
 //  NSDate+timesince.h
-//  Version: 0.4
+//  Version: 0.5
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -22,17 +22,6 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-
-/*
-#define kSecond 1
-#define kMinute 60
-#define kHour 3600
-#define kDay 86400
-#define kWeek 604800
-#define k4Weeks 2419200
-#define kMonth 2629744
-#define kYear 31557600
-*/
 
 typedef enum {
 	kSecond = 1,
