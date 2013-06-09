@@ -135,6 +135,12 @@ RHSwitch *toggle = [[RHSwitch alloc] initWithBlock:^(BOOL state) {
 
 *coming soon...*
 
+## RHTapGestureRecognizer
+
+`RHTapGestureRecognizer` is a subclass of `UITapGestureRecognizer` and adds block handling to the gesture.
+
+The block is retained so be sure to only use weak references within the block.
+
 ## Contact
 
 profile: [Christopher Meyer](https://github.com/chriscdn)  

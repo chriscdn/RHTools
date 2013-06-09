@@ -1,6 +1,6 @@
 //
-//  RHTools.h
-//  Version: 0.2
+//  RHTapGestureRecognizer.h
+//  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,15 +23,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "NSArray+rhextensions.h"
-#import "NSDictionary+rhextensions.h"
-#import "NSString+rhextensions.h"
-#import "NSDate+formatter.h"
-#import "NSDate+timesince.h"
-#import "RHActionSheet.h"
-#import "RHAlertView.h"
-#import "RHBarButtonItem.h"
-#import "RHButton.h"
-#import "RHSwitch.h"
-#import "UIApplication+rhextensions.h"
-#import "RHTapGestureRecognizer.h"
+typedef void (^RHTapGestureBlock)(UITapGestureRecognizer *gesture);
+
+@interface RHTapGestureRecognizer : UITapGestureRecognizer
+
+-(id)initWithBlock:(RHTapGestureBlock)_block;
+
+@end
