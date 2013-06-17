@@ -8,6 +8,7 @@
 
 @interface NSString (rhextensions)
 
++(NSString *)UUID;
 -(NSString *)firstLetter;
 
 @end

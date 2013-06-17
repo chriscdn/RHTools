@@ -10,6 +10,15 @@
 
 @implementation NSString (rhextensions)
 
++(NSString *)UUID {
+	// Returns a UUID
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    CFRelease(uuid);
+
+    return [uuidStr lowercaseString];
+}
+
 -(NSString *)firstLetter {
     if (!self.length || self.length == 1) {
         return self;
