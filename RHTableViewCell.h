@@ -1,6 +1,5 @@
 //
-//  RHTools.h
-//  Version: 0.2
+//  RHTableRow.h
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,21 +22,17 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-// RHBoringBlock is just that - no arguments and no return value
-typedef void (^RHBoringBlock)();
+@interface RHTableViewCell : UITableViewCell
 
-#import "NSArray+rhextensions.h"
-#import "NSDictionary+rhextensions.h"
-#import "NSString+rhextensions.h"
-#import "NSDate+formatter.h"
-#import "NSDate+timesince.h"
-#import "RHActionSheet.h"
-#import "RHAlertView.h"
-#import "RHBarButtonItem.h"
-#import "RHButton.h"
-#import "RHSwitch.h"
-#import "UIApplication+rhextensions.h"
-#import "RHTapGestureRecognizer.h"
-#import "RHTableViewCells.h"
-#import "RHTableView.h"
+@property (nonatomic, copy) RHBoringBlock didSelectBlock;
 
++(RHTableViewCell *)cellWithLabelText:(NSString *)labelText
+                     detailLabelText:(NSString *)detailLabelText
+                      didSelectBlock:(RHBoringBlock)block
+                               style:(UITableViewCellStyle)style
+                               image:(UIImage *)image
+                       accessoryType:(UITableViewCellAccessoryType)accessoryType;
+
+
+
+@end
