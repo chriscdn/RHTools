@@ -34,5 +34,8 @@
                        accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
 
++(RHTableViewCell *)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
+
+-(CGFloat)heightWithTableView:(UITableView *)tableView;
 
 @end

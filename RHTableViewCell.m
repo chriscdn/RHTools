@@ -24,25 +24,79 @@
 
 #import "RHTableViewCell.h"
 
+
+@interface RHTableViewCell()
+@property (nonatomic, assign) UITableViewCellStyle cellStyle;
+-(CGFloat)leftMarginForTableView:(UITableView *)tableView;
+@end
+
+
 @implementation RHTableViewCell
-@synthesize didSelectBlock;
+@synthesize cellStyle;
 
 +(RHTableViewCell *)cellWithLabelText:(NSString *)labelText
-                     detailLabelText:(NSString *)detailLabelText
-                      didSelectBlock:(RHBoringBlock)block
-                               style:(UITableViewCellStyle)style
-                               image:(UIImage *)image
-                       accessoryType:(UITableViewCellAccessoryType)accessoryType {
-    
+					  detailLabelText:(NSString *)detailLabelText
+					   didSelectBlock:(RHBoringBlock)block
+								style:(UITableViewCellStyle)style
+								image:(UIImage *)image
+						accessoryType:(UITableViewCellAccessoryType)accessoryType {
+
+	
+
     RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:style reuseIdentifier:nil];
     [cell.textLabel setText:labelText];
     [cell.detailTextLabel setText:detailLabelText];
     [cell setDidSelectBlock:block];
     [cell.imageView setImage:image];
     [cell setAccessoryType:accessoryType];
-    
-    return cell;
+	[cell setCellStyle:style]; // since it's not visible to UITableViewCell
 
+    return cell;
+}
+
++(RHTableViewCell *)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
+
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:nil style:UITableViewCellStyleValue2 image:nil accessoryType:UITableViewCellAccessoryNone];
+	[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
+	[cell.detailTextLabel setNumberOfLines:0];
+	[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    return cell;
+	
+}
+
+
+-(CGFloat)heightWithTableView:(UITableView *)tableView {
+
+	UILineBreakMode lineBreakMode = self.detailTextLabel.lineBreakMode;
+
+	if ( (self.cellStyle == UITableViewCellStyleValue2) && (lineBreakMode == NSLineBreakByWordWrapping) ) {
+		NSString *text = self.detailTextLabel.text;
+		UIFont *font   = self.detailTextLabel.font;
+
+		CGFloat width = tableView.width;
+		CGFloat margin = [self leftMarginForTableView:tableView];
+		CGFloat margins = margin * 2;
+		CGFloat detailWidth = 93; // must test this parameter with iphone
+		CGFloat detailLabelWidth = width-margins-detailWidth;
+
+		CGSize withinSize = CGSizeMake(detailLabelWidth, MAXFLOAT);
+		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+
+		return MAX(44, size.height + 22);
+	}
+
+	return 44;
+
+}
+
+-(CGFloat)leftMarginForTableView:(UITableView *)tableView {
+    if (tableView.style != UITableViewStyleGrouped) return 0;
+    CGFloat widthTable = tableView.bounds.size.width;
+    if (IsIPhone)              return (10.0f);
+    if (widthTable <= 400.0f) return (10.0f);
+    if (widthTable <= 546.0f) return (31.0f);
+    if (widthTable >= 720.0f) return (45.0f);
+    return (31.0f + ceilf((widthTable - 547.0f)/13.0f));
 }
 
 @end

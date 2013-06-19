@@ -128,6 +128,12 @@
 	return _section.footerText;
 }
 
+-(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+	RHTableViewCell *cell = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	return [cell heightWithTableView:_tableView];
+}
+
 @end
 
 
