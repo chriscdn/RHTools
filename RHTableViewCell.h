@@ -1,5 +1,5 @@
 //
-//  RHTableRow.h
+//  RHTableViewCell.h
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -25,6 +25,7 @@
 @interface RHTableViewCell : UITableViewCell
 
 @property (nonatomic, copy) RHBoringBlock didSelectBlock;
+@property (nonatomic, strong) UITextField *textField;
 
 +(RHTableViewCell *)cellWithLabelText:(NSString *)labelText
                      detailLabelText:(NSString *)detailLabelText
@@ -33,8 +34,9 @@
                                image:(UIImage *)image
                        accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
-
 +(RHTableViewCell *)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
+
++(RHTableViewCell *)cellWithInputField:(NSString *)labelText;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
 

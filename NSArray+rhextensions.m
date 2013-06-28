@@ -45,4 +45,12 @@
 	return items;
 }
 
+-(id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue {
+    if (index < [self count]) {
+        return [self objectAtIndex:index];
+    }
+    
+    return defaultValue;
+}
+
 @end

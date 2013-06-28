@@ -25,18 +25,21 @@
 #import "RHTableViewCell.h"
 #import "RHTableSection.h"
 
-@interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
+typedef void (^RHDidTapGoBlock)(NSArray *textViews);
+
+@interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tableSections;
 @property (nonatomic, strong) NSMutableArray *tableRows;
+@property (nonatomic, strong) NSMutableArray *textFields;
+@property (nonatomic, copy) RHDidTapGoBlock didTapGoBlock;
 
 -(void)addSectionWithSectionHeaderName:(NSString *)headerText;
 -(void)addSection:(RHTableSection *)section;
 
-
 -(void)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
-
-
 -(void)addCell:(RHTableViewCell *)row;
+
+-(void)hideKeyboard;
 
 @end

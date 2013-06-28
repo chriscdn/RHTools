@@ -24,19 +24,25 @@
 
 #import "RHTableView.h"
 
+@interface RHTableView()
+
+
+@end
+
+
 @implementation RHTableView
-@synthesize tableSections;
-@synthesize tableRows;
+
 
 -(id)initWithFrame:(CGRect)frame {
     if (self=[super initWithFrame:frame]) {
         self.delegate = self;
         self.dataSource = self;
-
+        
 		self.tableSections = [NSMutableArray array];
 		self.tableRows = [NSMutableArray array];
+        self.textFields = [NSMutableArray array];
     }
-
+    
     return self;
 }
 
@@ -48,20 +54,17 @@
         
 		self.tableSections = [NSMutableArray array];
 		self.tableRows = [NSMutableArray array];
+        self.textFields = [NSMutableArray array];
     }
     
     return self;
-    
-};
-
-
-
+}
 
 -(void)awakeFromNib {
     [super awakeFromNib];
     self.delegate = self;
     self.dataSource = self;
-
+    
 	self.tableSections = [NSMutableArray array];
 	self.tableRows = [NSMutableArray array];
 }
@@ -81,6 +84,18 @@
 
 -(void)addCell:(RHTableViewCell *)cell {
 	[[self.tableRows lastObject] addObject:cell];
+    
+    UITextField *textField = cell.textField;
+    
+    if (textField) {
+        [textField setReturnKeyType:UIReturnKeyGo];
+        [textField setDelegate:self];
+        
+        UITextField *lastTextField = [self.textFields lastObject];
+        [lastTextField setReturnKeyType:UIReturnKeyNext];
+        
+        [self.textFields addObject:textField];
+    }
 }
 
 -(void)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block {
@@ -90,7 +105,6 @@
                                                          style:UITableViewCellStyleSubtitle
                                                          image:nil
                                                  accessoryType:UITableViewCellAccessoryNone];
-    
     [self addCell:cell];
 }
 
@@ -108,7 +122,6 @@
 	return [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	RHTableViewCell *row = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
@@ -116,7 +129,6 @@
         row.didSelectBlock();
     }
 }
-
 
 -(NSString *)tableView:(UITableView *)_tableView titleForHeaderInSection:(NSInteger)section {
 	RHTableSection *_section = [self.tableSections objectAtIndex:section];
@@ -129,11 +141,30 @@
 }
 
 -(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
 	RHTableViewCell *cell = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	return [cell heightWithTableView:_tableView];
 }
 
+#pragma mark -
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSUInteger index = [self.textFields indexOfObject:textField];
+    
+    UITextField *nextTextField = [self.textFields objectAtIndex:index+1 defaultValue:nil];
+    
+    if (nextTextField) {
+        [nextTextField becomeFirstResponder];
+    } else if (self.didTapGoBlock) {
+        self.didTapGoBlock(self.textFields);
+    } else {
+        [self resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+-(void)hideKeyboard {
+    [self.textFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
+}
+
 @end
-
-

@@ -26,3 +26,8 @@
 @interface RHTableViewCellStyleSubtitle : UITableViewCell
 
 @end
+
+
+@interface RHTableViewCellStyleValue1 : UITableViewCell
+
+@end
