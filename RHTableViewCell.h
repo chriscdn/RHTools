@@ -22,22 +22,28 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#define kRHDetailLabelLeftMargin 83
+#define kRHTopBottomMargin 11
+#define kRHDefaultCellHeight 44
+
 @interface RHTableViewCell : UITableViewCell
 
 @property (nonatomic, copy) RHBoringBlock didSelectBlock;
 @property (nonatomic, strong) UITextField *textField;
 
-+(RHTableViewCell *)cellWithLabelText:(NSString *)labelText
++(id)cellWithLabelText:(NSString *)labelText
                      detailLabelText:(NSString *)detailLabelText
                       didSelectBlock:(RHBoringBlock)block
                                style:(UITableViewCellStyle)style
                                image:(UIImage *)image
                        accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
-+(RHTableViewCell *)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
++(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 
-+(RHTableViewCell *)cellWithInputField:(NSString *)labelText;
++(id)cellWithInputField:(NSString *)labelText;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
+-(CGFloat)leftMarginForTableView:(UITableView *)tableView;
+-(CGFloat)detailLabelWidth:(UITableView *)tableView;
 
 @end
