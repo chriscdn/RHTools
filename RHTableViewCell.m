@@ -109,7 +109,7 @@
 }
 
 -(CGFloat)detailLabelWidth:(UITableView *)tableView {
-	CGFloat width = tableView.width;
+	CGFloat width = tableView.frame.size.width;
 	CGFloat margin = [self leftMarginForTableView:tableView];
 	CGFloat margins = margin * 2;
 	CGFloat detailWidth = 93; // must test this parameter with iphone
