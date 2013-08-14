@@ -31,6 +31,21 @@
 
 @implementation RHTableView
 
+// TODO: get rid of this duplicated code
+
+-(id)init {
+    if (self=[super init]) {
+        self.delegate = self;
+        self.dataSource = self;
+        
+		self.tableSections = [NSMutableArray array];
+		self.tableRows = [NSMutableArray array];
+        self.textFields = [NSMutableArray array];
+        
+    }
+    return self;
+}
+
 -(id)initWithFrame:(CGRect)frame {
     if (self=[super initWithFrame:frame]) {
         self.delegate = self;
@@ -38,6 +53,20 @@
         
 		self.tableSections = [NSMutableArray array];
 		self.tableRows = [NSMutableArray array];
+        self.textFields = [NSMutableArray array];
+    }
+    
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    
+    if (self=[super initWithCoder:aDecoder]) {
+        self.delegate = self;
+        self.dataSource = self;
+        
+        self.tableSections = [NSMutableArray array];
+        self.tableRows = [NSMutableArray array];
         self.textFields = [NSMutableArray array];
     }
     
