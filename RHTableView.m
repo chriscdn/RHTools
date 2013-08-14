@@ -109,7 +109,7 @@
 	[self.tableRows addObject:[NSMutableArray array]];
 }
 
--(void)addCell:(RHTableViewCell *)cell {
+-(RHTableViewCell *)addCell:(RHTableViewCell *)cell {
 	[[self.tableRows lastObject] addObject:cell];
     
     UITextField *textField = cell.textField;
@@ -123,16 +123,32 @@
         
         [self.textFields addObject:textField];
     }
+    
+    return cell;
 }
 
--(void)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block {
+-(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText {
     RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
-                                               detailLabelText:nil
-                                                didSelectBlock:block
-                                                         style:UITableViewCellStyleSubtitle
+                                               detailLabelText:detailText
+                                                didSelectBlock:nil
+                                                         style:UITableViewCellStyleValue1
                                                          image:nil
                                                  accessoryType:UITableViewCellAccessoryNone];
     [self addCell:cell];
+    
+    return cell;
+}
+
+-(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block {
+    RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
+                                               detailLabelText:nil
+                                                didSelectBlock:block
+                                                         style:UITableViewCellStyleDefault
+                                                         image:nil
+                                                 accessoryType:UITableViewCellAccessoryNone];
+    [self addCell:cell];
+
+    return cell;
 }
 
 #pragma mark -
@@ -155,6 +171,8 @@
     if (row.didSelectBlock) {
         row.didSelectBlock();
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(NSString *)tableView:(UITableView *)_tableView titleForHeaderInSection:(NSInteger)section {

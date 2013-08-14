@@ -78,6 +78,17 @@
     return cell;
 }
 
+-(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
+     _didSelectBlock = didSelectBlock;
+    
+    if (didSelectBlock) {
+        [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    } else {
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    
+}
+
 -(CGFloat)heightWithTableView:(UITableView *)tableView {
 
 	UILineBreakMode lineBreakMode = self.detailTextLabel.lineBreakMode;

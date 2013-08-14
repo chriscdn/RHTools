@@ -36,8 +36,9 @@ typedef void (^RHDidTapGoBlock)(NSArray *textViews);
 
 -(void)addSectionWithSectionHeaderName:(NSString *)headerText;
 -(void)addSection:(RHTableSection *)section;
--(void)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
--(void)addCell:(RHTableViewCell *)row;
+-(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
+-(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
+-(RHTableViewCell *)addCell:(RHTableViewCell *)row;
 
 -(void)hideKeyboard;
 
