@@ -10,5 +10,7 @@
 
 +(NSString *)UUID;
 -(NSString *)firstLetter;
+-(BOOL)containsString:(NSString *)substring;
+-(NSString *)truncateToLength:(int)charLength;
 
 @end
