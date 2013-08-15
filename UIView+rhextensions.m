@@ -1,6 +1,5 @@
 //
-//  RHTableViewCell.h
-//  Version: 0.1
+//  UIApplication+rhextensions.m
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,31 +22,23 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#define kRHDetailLabelLeftMargin 83
-#define kRHTopBottomMargin 11
-#define kRHDefaultCellHeight 44
+#import "UIView+rhextensions.h"
 
-typedef void (^RHReloadCellBlock)(UITableViewCell *cell);
+@implementation UIView (rhextensions)
 
-@interface RHTableViewCell : UITableViewCell
+-(UIView *)findFirstResponder {
+	if ([self isFirstResponder]) {
+		return self;
+	}
 
-@property (nonatomic, copy) RHBoringBlock didSelectBlock;
-@property (nonatomic, copy) RHReloadCellBlock reloadCellBlock;
-@property (nonatomic, strong) UITextField *textField;
+	for (UIView * subView in self.subviews) {
+		UIView *firstResponder = [subView findFirstResponder];
+		if (firstResponder != nil) {
+			return firstResponder;
+		}
+	}
 
-+(id)cellWithLabelText:(NSString *)labelText
-                     detailLabelText:(NSString *)detailLabelText
-                      didSelectBlock:(RHBoringBlock)block
-                               style:(UITableViewCellStyle)style
-                               image:(UIImage *)image
-                       accessoryType:(UITableViewCellAccessoryType)accessoryType;
-
-+(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
-
-+(id)cellWithInputField:(NSString *)labelText;
-
--(CGFloat)heightWithTableView:(UITableView *)tableView;
--(CGFloat)leftMarginForTableView:(UITableView *)tableView;
--(CGFloat)detailLabelWidth:(UITableView *)tableView;
+	return nil;
+}
 
 @end

@@ -1,6 +1,5 @@
 //
 //  NSDate+formatter.m
-//  Version: 0.3
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/

@@ -1,5 +1,5 @@
 //
-//  RHTableViewCell.h
+//  RHKeyboardSlideView.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,31 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#define kRHDetailLabelLeftMargin 83
-#define kRHTopBottomMargin 11
-#define kRHDefaultCellHeight 44
+@interface RHKeyboardSlideView : UIView
 
-typedef void (^RHReloadCellBlock)(UITableViewCell *cell);
-
-@interface RHTableViewCell : UITableViewCell
-
-@property (nonatomic, copy) RHBoringBlock didSelectBlock;
-@property (nonatomic, copy) RHReloadCellBlock reloadCellBlock;
-@property (nonatomic, strong) UITextField *textField;
-
-+(id)cellWithLabelText:(NSString *)labelText
-                     detailLabelText:(NSString *)detailLabelText
-                      didSelectBlock:(RHBoringBlock)block
-                               style:(UITableViewCellStyle)style
-                               image:(UIImage *)image
-                       accessoryType:(UITableViewCellAccessoryType)accessoryType;
-
-+(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
-
-+(id)cellWithInputField:(NSString *)labelText;
-
--(CGFloat)heightWithTableView:(UITableView *)tableView;
--(CGFloat)leftMarginForTableView:(UITableView *)tableView;
--(CGFloat)detailLabelWidth:(UITableView *)tableView;
+-(void)scrollToMakeVisible:(UIView *)view;
 
 @end

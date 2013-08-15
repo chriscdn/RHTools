@@ -37,11 +37,11 @@
     if (self=[super init]) {
         self.delegate = self;
         self.dataSource = self;
-        
+
 		self.tableSections = [NSMutableArray array];
 		self.tableRows = [NSMutableArray array];
         self.textFields = [NSMutableArray array];
-        
+
     }
     return self;
 }
@@ -50,26 +50,26 @@
     if (self=[super initWithFrame:frame]) {
         self.delegate = self;
         self.dataSource = self;
-        
+
 		self.tableSections = [NSMutableArray array];
 		self.tableRows = [NSMutableArray array];
         self.textFields = [NSMutableArray array];
     }
-    
+
     return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
-    
+
     if (self=[super initWithCoder:aDecoder]) {
         self.delegate = self;
         self.dataSource = self;
-        
+
         self.tableSections = [NSMutableArray array];
         self.tableRows = [NSMutableArray array];
         self.textFields = [NSMutableArray array];
     }
-    
+
     return self;
 }
 
@@ -78,12 +78,12 @@
     if (self=[super initWithFrame:frame style:style]) {
         self.delegate = self;
         self.dataSource = self;
-        
+
 		self.tableSections = [NSMutableArray array];
 		self.tableRows = [NSMutableArray array];
         self.textFields = [NSMutableArray array];
     }
-    
+
     return self;
 }
 
@@ -91,7 +91,7 @@
     [super awakeFromNib];
     self.delegate = self;
     self.dataSource = self;
-    
+
 	self.tableSections = [NSMutableArray array];
 	self.tableRows = [NSMutableArray array];
 }
@@ -111,19 +111,19 @@
 
 -(RHTableViewCell *)addCell:(RHTableViewCell *)cell {
 	[[self.tableRows lastObject] addObject:cell];
-    
+
     UITextField *textField = cell.textField;
-    
+
     if (textField) {
         [textField setReturnKeyType:UIReturnKeyGo];
         [textField setDelegate:self];
-        
+
         UITextField *lastTextField = [self.textFields lastObject];
         [lastTextField setReturnKeyType:UIReturnKeyNext];
-        
+
         [self.textFields addObject:textField];
     }
-    
+
     return cell;
 }
 
@@ -135,7 +135,7 @@
                                                          image:nil
                                                  accessoryType:UITableViewCellAccessoryNone];
     [self addCell:cell];
-    
+
     return cell;
 }
 
@@ -153,6 +153,20 @@
 
 #pragma mark -
 #pragma mark UITableViewDelegate & UITableViewDataSource delegate methods
+
+-(void)reloadData {
+	[super reloadData];
+
+	for (NSArray *section in self.tableRows) {
+		for (RHTableViewCell *cell in section) {
+			if (cell.reloadCellBlock) {
+				cell.reloadCellBlock(cell);
+			}
+		}
+	}
+}
+
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return [self.tableRows count];
 }
@@ -167,11 +181,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	RHTableViewCell *row = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	
+
     if (row.didSelectBlock) {
         row.didSelectBlock();
     }
-    
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -194,9 +208,9 @@
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSUInteger index = [self.textFields indexOfObject:textField];
-    
+
     UITextField *nextTextField = [self.textFields objectAtIndex:index+1 defaultValue:nil];
-    
+
     if (nextTextField) {
         [nextTextField becomeFirstResponder];
     } else if (self.didTapGoBlock) {
@@ -204,7 +218,7 @@
     } else {
         [self resignFirstResponder];
     }
-    
+
     return YES;
 }
 

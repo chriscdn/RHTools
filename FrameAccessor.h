@@ -1,9 +1,9 @@
 //
-//  NSString+rhextensions.h
-//  Version: 0.2
+//  FrameAccessor.h
+//  FrameAccessor
 //
-//  Copyright (C) 2013 by Christopher Meyer
-//  http://schwiiz.org/
+//  Created by Alex Denisov on 18.03.12.
+//  Copyright (c) 2013 okolodev.org. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,12 +23,32 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface NSString (rhextensions)
+#if (TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE)
+#import <UIKit/UIKit.h>
+#define View UIView
+#else
+#import <Foundation/Foundation.h>
+#define View NSView
+#endif
 
-+(NSString *)UUID;
--(NSString *)firstLetter;
--(BOOL)containsString:(NSString *)substring;
--(NSString *)truncateToLength:(int)charLength;
--(NSString *)trim;
+@interface View (FrameAccessor)
+
+- (CGPoint)origin;
+- (void)setOrigin:(CGPoint)newOrigin;
+- (CGSize)size;
+- (void)setSize:(CGSize)newSize;
+
+- (CGFloat)x;
+- (void)setX:(CGFloat)newX;
+- (CGFloat)y;
+- (void)setY:(CGFloat)newY;
+
+- (CGFloat)height;
+- (void)setHeight:(CGFloat)newHeight;
+- (CGFloat)width;
+- (void)setWidth:(CGFloat)newWidth;
+
+- (CGFloat)bottom;
+- (CGFloat)right;
 
 @end

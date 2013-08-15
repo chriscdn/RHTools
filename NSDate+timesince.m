@@ -1,6 +1,5 @@
 //
 //  NSDate+timesince.m
-//  Version: 0.5
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/

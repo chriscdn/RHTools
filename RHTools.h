@@ -1,6 +1,6 @@
 //
 //  RHTools.h
-//  Version: 0.2
+//  Version: 0.3
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -48,4 +48,6 @@ typedef void (^RHBoringBlock)();
 #import "RHTapGestureRecognizer.h"
 #import "RHTableViewCells.h"
 #import "RHTableView.h"
-
+#import "RHKeyboardSlideView.h"
+#import "UIView+rhextensions.h"
+#import "FrameAccessor.h"

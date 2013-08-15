@@ -32,6 +32,7 @@ typedef void (^RHAlertBlock)(void);
 -(id)initWithTitle:(NSString *)title message:(NSString *)message;
 -(NSInteger)addButtonWithTitle:(NSString *)title block:(RHAlertBlock)block;
 -(NSInteger)addOKButton;
+-(NSInteger)addOKButtonWithBlock:(RHAlertBlock)block;
 -(NSInteger)addCancelButton;
 -(NSInteger)addCancelButtonWithTitle:(NSString *)title;
 

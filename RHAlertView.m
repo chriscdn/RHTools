@@ -1,6 +1,5 @@
 //
 //  RHAlertView.m
-//  Version: 0.2
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -68,7 +67,11 @@
 }
 
 -(NSInteger)addOKButton {
-	return [self addButtonWithTitle:NSLocalizedString(@"OK", nil) block:nil];
+	return [self addOKButtonWithBlock:nil];
+}
+
+-(NSInteger)addOKButtonWithBlock:(RHAlertBlock)block {
+	return [self addButtonWithTitle:NSLocalizedString(@"OK", nil) block:block];
 }
 
 -(NSInteger)addCancelButton {

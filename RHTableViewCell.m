@@ -30,7 +30,6 @@
 @end
 
 @implementation RHTableViewCell
-@synthesize cellStyle;
 
 +(id)cellWithLabelText:(NSString *)labelText
 	   detailLabelText:(NSString *)detailLabelText
@@ -106,7 +105,6 @@
 	}
 
 	return 44;
-
 }
 
 -(CGFloat)leftMarginForTableView:(UITableView *)tableView {
