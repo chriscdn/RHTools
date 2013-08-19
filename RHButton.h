@@ -1,5 +1,5 @@
 //
-//  RHButton
+//  RHButton.h
 //  Version: 0.2
 //
 //  Copyright (C) 2013 by Christopher Meyer

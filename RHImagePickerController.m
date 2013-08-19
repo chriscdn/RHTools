@@ -1,6 +1,5 @@
 //
 //  RHImagePickerController.m
-//  Version: 0.2
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/

@@ -1,5 +1,5 @@
 //
-//  RHButton
+//  RHButton.m
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
