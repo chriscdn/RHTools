@@ -36,7 +36,7 @@ typedef void (^RHDidTapGoBlock)(NSArray *textViews);
 @property (nonatomic, copy) RHDidTapGoBlock didTapGoBlock;
 
 -(void)addSectionWithSectionHeaderName:(NSString *)headerText;
--(void)addSection:(RHTableSection *)section;
+
 -(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
 -(RHTableViewCell *)addCell:(RHTableViewCell *)row;

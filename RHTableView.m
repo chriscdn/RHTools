@@ -25,7 +25,7 @@
 #import "RHTableView.h"
 
 @interface RHTableView()
-
+-(void)addSection:(RHTableSection *)section;
 @end
 
 
@@ -94,6 +94,7 @@
 
 	self.tableSections = [NSMutableArray array];
 	self.tableRows = [NSMutableArray array];
+	self.textFields = [NSMutableArray array];
 }
 
 #pragma mark -
