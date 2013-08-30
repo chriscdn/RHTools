@@ -32,7 +32,6 @@
 
 @implementation RHImagePickerController
 @synthesize block;
-// @synthesize dismissCompletionBlock;
 @synthesize imageInfo;
 @synthesize popoverController;
 
@@ -91,7 +90,7 @@
 	
 	self.imageInfo = info;
 	
-	if (popoverController) { // if popover is defined and then we're in an iPad app
+	if (self.popoverController) { // if popover is defined then we're in an iPad app
 		
 		[self.popoverController dismissPopoverAnimated:YES];
 		
