@@ -27,4 +27,6 @@ typedef void (^RHButtonBlock)(void);
 
 @interface RHButton : UIButton
 
++(id)buttonWithType:(UIButtonType)buttonType block:(RHButtonBlock)_block;
+
 @end

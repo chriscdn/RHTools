@@ -90,7 +90,7 @@
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView {
 
-	UILineBreakMode lineBreakMode = self.detailTextLabel.lineBreakMode;
+	NSLineBreakMode lineBreakMode = self.detailTextLabel.lineBreakMode;
 
 	if ( (self.cellStyle == UITableViewCellStyleValue2) && (lineBreakMode == NSLineBreakByWordWrapping) ) {
 		NSString *text = self.detailTextLabel.text;

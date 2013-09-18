@@ -39,6 +39,10 @@
     return [[self alloc] initWithBarButtonSystemItem:systemItem block:_block];
 }
 
++(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block {
+	return [[self alloc] initWithImage:image block:_block];
+}
+
 -(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block {
  	if (self=[super initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
 		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
@@ -49,6 +53,14 @@
 
 -(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block {
 	if (self=[super initWithBarButtonSystemItem:systemItem target:self action:@selector(tap:)]) {
+		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
+		[self setBlock:_block]; // copied by @property
+	}
+	return self;
+}
+
+-(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block {
+	if (self=[super initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
 		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
 		[self setBlock:_block]; // copied by @property
 	}

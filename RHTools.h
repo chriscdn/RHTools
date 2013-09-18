@@ -27,6 +27,7 @@
 
 #define IsIPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IsIPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IsIOS61orEarlier (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
 
 #define RGB(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define RGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]

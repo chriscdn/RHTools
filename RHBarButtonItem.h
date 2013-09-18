@@ -1,6 +1,6 @@
 //
 //  RHBarButtonItem.h
-//  Version: 0.2
+//  Version: 0.3
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -29,9 +29,10 @@ typedef void (^RHBarButtonItemBlock)(void);
 
 +(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block;
 +(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block;
++(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block;
 
 -(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block;
 -(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block;
-
+-(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block;
 
 @end
