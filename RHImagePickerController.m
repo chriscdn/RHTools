@@ -31,8 +31,6 @@
 @end
 
 @implementation RHImagePickerController
-@synthesize block;
-@synthesize imageInfo;
 @synthesize popoverController;
 
 +(BOOL)isCameraAvailable {
@@ -89,8 +87,9 @@
 -(void)imagePickerController:(RHImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
 	self.imageInfo = info;
-	
-	if (self.popoverController) { // if popover is defined then we're in an iPad app
+
+	// do not use self.popoverController here!
+	if (popoverController) { // if popover is defined then we're in an iPad app
 		
 		[self.popoverController dismissPopoverAnimated:YES];
 		
@@ -114,7 +113,7 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	[self dismissViewControllerAnimated:YES completion:nil];
 	
-	if ([popoverController isPopoverVisible]) {
+	if ([self.popoverController isPopoverVisible]) {
 		[self.popoverController dismissPopoverAnimated:YES];
 	}
 	
@@ -159,21 +158,21 @@
 	return [self.imageInfo objectForKey:UIImagePickerControllerMediaMetadata];
 }
 
--(void)saveOriginalImage:(ALAssetsLibraryWriteImageCompletionBlock)_block {
+-(void)saveOriginalImage:(ALAssetsLibraryWriteImageCompletionBlock)block {
 	if ([self isCameraImage]) {
-		[RHImagePickerController saveImage:[self originalImage] metadata:[self metadata] block:_block];
+		[RHImagePickerController saveImage:[self originalImage] metadata:[self metadata] block:block];
 	}
 }
 
--(void)saveOriginalImageWithLocation:(CLLocation *)location block:(ALAssetsLibraryWriteImageCompletionBlock)_block {
+-(void)saveOriginalImageWithLocation:(CLLocation *)location block:(ALAssetsLibraryWriteImageCompletionBlock)block {
 	if ([self isCameraImage]) {
 		if (location) {
 			NSMutableDictionary *_metadata = [NSMutableDictionary dictionaryWithDictionary:[self metadata]];
 			NSDictionary *geotag = [RHImagePickerController exifFromLocation:location];
 			[_metadata setObject:geotag forKey:(NSString*)kCGImagePropertyGPSDictionary];
-			[RHImagePickerController saveImage:[self originalImage] metadata:_metadata block:_block];
+			[RHImagePickerController saveImage:[self originalImage] metadata:_metadata block:block];
 		} else {
-			[self saveOriginalImage:_block];
+			[self saveOriginalImage:block];
 		}
 	}
 }

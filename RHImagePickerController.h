@@ -31,7 +31,6 @@
 typedef void (^RHImagePickerControllerBlock)(RHImagePickerController *_picker);
 
 @property (nonatomic, strong) NSDictionary *imageInfo;
-
 @property (nonatomic, copy) RHImagePickerControllerBlock block;
 @property (nonatomic, strong) UIPopoverController *popoverController;
 
