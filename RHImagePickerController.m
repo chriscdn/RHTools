@@ -31,7 +31,7 @@
 @end
 
 @implementation RHImagePickerController
-@synthesize popoverController;
+// @synthesize pickerPopoverController;
 
 +(BOOL)isCameraAvailable {
 	return [self isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
@@ -87,11 +87,11 @@
 -(void)imagePickerController:(RHImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
 	self.imageInfo = info;
-
-	// do not use self.popoverController here!
-	if (popoverController) { // if popover is defined then we're in an iPad app
+    
+	// do not use self.pickerPopoverController here!
+	if (_pickerPopoverController) { // if popover is defined then we're in an iPad app
 		
-		[self.popoverController dismissPopoverAnimated:YES];
+		[self.pickerPopoverController dismissPopoverAnimated:YES];
 		
 		if (picker.block) {
 			picker.block(self);
@@ -107,37 +107,40 @@
 		}];
 	}
 	
-	self.popoverController = nil;
+	self.pickerPopoverController = nil;
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	[self dismissViewControllerAnimated:YES completion:nil];
 	
-	if ([self.popoverController isPopoverVisible]) {
-		[self.popoverController dismissPopoverAnimated:YES];
-	}
+    if (_pickerPopoverController) {
+        if ([self.pickerPopoverController isPopoverVisible]) {
+            [self.pickerPopoverController dismissPopoverAnimated:YES];
+        }
+    }
 	
 	self.block = nil;
-	self.popoverController = nil;
+	self.pickerPopoverController = nil;
 }
 
 #pragma mark -
-#pragma mark UIPopoverController and UIPopoverControllerDelegate
+#pragma mark UIpickerPopoverController and UIpickerPopoverControllerDelegate
 
 // Wrap the controller in a popover, assign a delegate, and return it.
--(UIPopoverController *)popoverController {
-	if (popoverController == nil) {
-		self.popoverController = [[UIPopoverController alloc] initWithContentViewController:self];
-		[popoverController setDelegate:self];
+-(UIPopoverController *)pickerPopoverController {
+	if ( IsIPad && (_pickerPopoverController == nil) ) {
+		self.pickerPopoverController = [[UIPopoverController alloc] initWithContentViewController:self];
+		[_pickerPopoverController setDelegate:self];
 	}
-	return popoverController;
+    
+	return _pickerPopoverController;
 }
 
 // From the Apple Docs:
 // The popover controller does not call this method in response to programmatic calls to the dismissPopoverAnimated: method.
--(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+-(void)pickerPopoverControllerDidDismissPopover:(UIPopoverController *)pickerPopoverController {
 	self.block = nil;
-	self.popoverController = nil;
+	self.pickerPopoverController = nil;
 	// self.dismissCompletionBlock = nil;
 }
 

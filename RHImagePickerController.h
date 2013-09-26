@@ -32,7 +32,7 @@ typedef void (^RHImagePickerControllerBlock)(RHImagePickerController *_picker);
 
 @property (nonatomic, strong) NSDictionary *imageInfo;
 @property (nonatomic, copy) RHImagePickerControllerBlock block;
-@property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong) UIPopoverController *pickerPopoverController;
 
 +(BOOL)isCameraAvailable;
 +(RHImagePickerController *)imagePickerControllerWithSource:(UIImagePickerControllerSourceType)_source block:(RHImagePickerControllerBlock)_block;
