@@ -27,10 +27,8 @@ The formatter is configured with defaults that you may or may not like, but you 
 
 There are also methods to format the date without the time component.  For example:
 
-``` objective-c
-NSString *day    = [[NSDate date] formatWithLocalTimeZoneWithoutTime];   // "Today"
-NSString *utcday = [[NSDate date] formatWithUTCTimeZoneWithoutTime];     // "Yesterday" (assuming GMT+2 just after midnight)
-```
+	NSString *day = [[NSDate date] formatWithLocalTimeZoneWithoutTime];   // "Today"
+	NSString *utcday = [[NSDate date] formatWithUTCTimeZoneWithoutTime];     // "Yesterday" (assuming GMT+2 just after midnight)
 
 Similarily, you can access the formatter directly to change the formatter properties:
 

@@ -32,7 +32,6 @@
 
 @end
 
-
 @implementation RHTableViewCellStyleValue1
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

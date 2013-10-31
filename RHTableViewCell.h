@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#define kRHDetailLabelLeftMargin 83
+#define kRHDetailLabelLeftMargin IsIOS61orEarlier ? 83 : 112
 #define kRHTopBottomMargin 11
 #define kRHDefaultCellHeight 44
 

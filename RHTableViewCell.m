@@ -55,6 +55,7 @@
 	[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
 	[cell.detailTextLabel setNumberOfLines:0];
 	[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
+
     return cell;
 }
 
@@ -140,6 +141,22 @@
                                           self.contentView.bounds.size.width - FORM_CELL_PAD_RIGHT - FORM_CELL_PAD_LEFT_IPHONE,
                                           TEXTFIELD_HEIGHT);
     }
+}
+
+@end
+
+
+@implementation RHTableSection
+@synthesize headerText;
+@synthesize footerText;
+
+-(id)init {
+	if (self=[super init]) {
+		self.headerText = @"";
+		self.footerText = @"";
+	}
+
+	return self;
 }
 
 @end

@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 #import "RHTableViewCell.h"
-#import "RHTableSection.h"
+// #import "RHTableSection.h"
 
 typedef void (^RHDidTapGoBlock)(NSArray *textViews);
 
@@ -42,5 +42,14 @@ typedef void (^RHDidTapGoBlock)(NSArray *textViews);
 -(RHTableViewCell *)addCell:(RHTableViewCell *)row;
 
 -(void)hideKeyboard;
+
+@end
+
+
+
+@interface RHTableSection : NSObject
+
+@property (nonatomic, strong) NSString *headerText;
+@property (nonatomic, strong) NSString *footerText;
 
 @end
