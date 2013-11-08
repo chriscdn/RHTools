@@ -1,5 +1,5 @@
 //
-//  UIApplication+rhextensions.h
+//  UITableView+rhextensions.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,9 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface UIView (rhextensions)
+@interface UITableView (rhextensions)
 
--(UIView *)findFirstResponder;
--(void)stackSubviews;
+-(void)applyiOS7SettingsStyleGrouping:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  UIApplication+rhextensions.h
+//  RHSegmentedControl.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,9 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface UIView (rhextensions)
+typedef void (^RHSegmentedControlBlock)(NSInteger selectedIndex);
 
--(UIView *)findFirstResponder;
--(void)stackSubviews;
+@interface RHSegmentedControl : UISegmentedControl
+
+@property (nonatomic, copy) RHSegmentedControlBlock block;
+
+-(void)fireBlockWithIndex:(NSInteger)index;
 
 @end

@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "RHTableViewCell.h"
+// #import "RHTableViewCell.h"
 // #import "RHTableSection.h"
 
 typedef void (^RHDidTapGoBlock)(NSArray *textViews);
@@ -42,6 +42,8 @@ typedef void (^RHDidTapGoBlock)(NSArray *textViews);
 -(RHTableViewCell *)addCell:(RHTableViewCell *)row;
 
 -(void)hideKeyboard;
+
+-(void)reset;
 
 @end
 

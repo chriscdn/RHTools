@@ -35,60 +35,40 @@
 
 -(id)init {
     if (self=[super init]) {
-        self.delegate = self;
-        self.dataSource = self;
-
-		self.tableSections = [NSMutableArray array];
-		self.tableRows = [NSMutableArray array];
-        self.textFields = [NSMutableArray array];
-
+		[self reset];
     }
     return self;
 }
 
 -(id)initWithFrame:(CGRect)frame {
     if (self=[super initWithFrame:frame]) {
-        self.delegate = self;
-        self.dataSource = self;
-
-		self.tableSections = [NSMutableArray array];
-		self.tableRows = [NSMutableArray array];
-        self.textFields = [NSMutableArray array];
+		[self reset];
     }
-
     return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 
     if (self=[super initWithCoder:aDecoder]) {
-        self.delegate = self;
-        self.dataSource = self;
-
-        self.tableSections = [NSMutableArray array];
-        self.tableRows = [NSMutableArray array];
-        self.textFields = [NSMutableArray array];
+		[self reset];
     }
-
     return self;
 }
 
 
 -(id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self=[super initWithFrame:frame style:style]) {
-        self.delegate = self;
-        self.dataSource = self;
-
-		self.tableSections = [NSMutableArray array];
-		self.tableRows = [NSMutableArray array];
-        self.textFields = [NSMutableArray array];
+		[self reset];
     }
-
     return self;
 }
 
 -(void)awakeFromNib {
     [super awakeFromNib];
+    [self reset];
+}
+
+-(void)reset {
     self.delegate = self;
     self.dataSource = self;
 

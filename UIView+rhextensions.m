@@ -41,4 +41,24 @@
 	return nil;
 }
 
+-(void)stackSubviews {
+
+
+	UIView *view = [self.subviews firstObject];
+	NSArray *remainingItems = [self.subviews subarrayWithRange:NSMakeRange(1, ([self.subviews count]-1))];
+
+	CGFloat y = view.y;
+	CGFloat h = view.height;
+
+	for (UIView* view in remainingItems) {
+		if (!view.hidden) {
+			[view setY:h+y+10];
+			y = view.y;
+			h = view.height;
+		}
+
+
+	}
+}
+
 @end

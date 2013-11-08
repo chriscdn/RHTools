@@ -1,5 +1,5 @@
 //
-//  RHTableViewCell.m
+//  RHTableViewCells.m
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/

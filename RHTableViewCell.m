@@ -98,7 +98,6 @@
 		UIFont *font   = self.detailTextLabel.font;
 
 		CGFloat detailLabelWidth = [self detailLabelWidth:tableView];
-
 		CGSize withinSize = CGSizeMake(detailLabelWidth, MAXFLOAT);
 		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
 
@@ -106,6 +105,7 @@
 	}
 
 	return 44;
+	
 }
 
 -(CGFloat)leftMarginForTableView:(UITableView *)tableView {

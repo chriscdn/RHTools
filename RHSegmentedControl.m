@@ -1,5 +1,5 @@
 //
-//  UIApplication+rhextensions.h
+//  RHSegmentedControl.m
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,9 +23,40 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface UIView (rhextensions)
+#import "RHSegmentedControl.h"
 
--(UIView *)findFirstResponder;
--(void)stackSubviews;
+@implementation RHSegmentedControl
 
+-(id)init {
+    if (self=[super init]) {
+		[self addTarget:self action:@selector(segmentedControlAction:) forControlEvents:UIControlEventValueChanged];
+    }
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame {
+    if (self=[super initWithFrame:frame]) {
+		[self addTarget:self action:@selector(segmentedControlAction:) forControlEvents:UIControlEventValueChanged];
+    }
+
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    if (self=[super initWithCoder:aDecoder]) {
+		[self addTarget:self action:@selector(segmentedControlAction:) forControlEvents:UIControlEventValueChanged];
+    }
+
+    return self;
+}
+
+-(void)fireBlockWithIndex:(NSInteger)index {
+	if (self.block) {
+		self.block([self selectedSegmentIndex]);
+	}
+}
+
+-(void)segmentedControlAction:(UISegmentedControl *)sender {
+	[self fireBlockWithIndex:[sender selectedSegmentIndex]];
+}
 @end
