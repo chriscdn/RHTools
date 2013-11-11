@@ -56,8 +56,21 @@
     return formatterWithoutTime;
 }
 
++(NSDateFormatter *)formatterWithoutDate {
+
+	static NSDateFormatter *formatterWithoutDate = nil;
+	static dispatch_once_t oncePredicate;
+
+    dispatch_once(&oncePredicate, ^{
+		formatterWithoutDate = [[NSDate formatter] copy];
+		[formatterWithoutDate setDateStyle:NSDateFormatterNoStyle];
+    });
+
+    return formatterWithoutDate;
+}
+
 #pragma mark -
-#pragma mark Formatter with time
+#pragma mark Formatter with date & time
 -(NSString *)formatWithUTCTimeZone {
     return [self formatWithTimeZoneOffset:0];
 }
@@ -92,6 +105,25 @@
 
 -(NSString *)formatWithTimeZoneWithoutTime:(NSTimeZone *)timezone {
     NSDateFormatter *formatter = [NSDate formatterWithoutTime];
+    [formatter setTimeZone:timezone];
+    return [formatter stringFromDate:self];
+}
+
+#pragma mark -
+#pragma mark Formatter without date
+-(NSString *)formatWithUTCWithoutDate {
+    return [self formatTimeWithTimeZone:0];
+}
+-(NSString *)formatWithLocalTimeWithoutDate {
+    return [self formatTimeWithTimeZone:[NSTimeZone localTimeZone]];
+}
+
+-(NSString *)formatWithTimeZoneOffsetWithoutDate:(NSTimeInterval)offset {
+    return [self formatTimeWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:offset]];
+}
+
+-(NSString *)formatTimeWithTimeZone:(NSTimeZone *)timezone {
+    NSDateFormatter *formatter = [NSDate formatterWithoutDate];
     [formatter setTimeZone:timezone];
     return [formatter stringFromDate:self];
 }

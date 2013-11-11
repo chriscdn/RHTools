@@ -27,6 +27,7 @@
 
 +(NSDateFormatter *)formatter;
 +(NSDateFormatter *)formatterWithoutTime;
++(NSDateFormatter *)formatterWithoutDate;
 
 -(NSString *)formatWithUTCTimeZone;
 -(NSString *)formatWithLocalTimeZone;
@@ -37,5 +38,10 @@
 -(NSString *)formatWithLocalTimeZoneWithoutTime;
 -(NSString *)formatWithTimeZoneOffsetWithoutTime:(NSTimeInterval)offset;
 -(NSString *)formatWithTimeZoneWithoutTime:(NSTimeZone *)timezone;
+
+-(NSString *)formatWithUTCWithoutDate;
+-(NSString *)formatWithLocalTimeWithoutDate;
+-(NSString *)formatWithTimeZoneOffsetWithoutDate:(NSTimeInterval)offset;
+-(NSString *)formatTimeWithTimeZone:(NSTimeZone *)timezone;
 
 @end

@@ -30,5 +30,6 @@
 -(BOOL)containsString:(NSString *)substring;
 -(NSString *)truncateToLength:(int)charLength;
 -(NSString *)trim;
+-(NSNumber *)toNumber;
 
 @end

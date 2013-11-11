@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 
 #import "NSArray+rhextensions.h"
+#import <objc/message.h>
 
 @implementation NSArray (rhextensions)
 
@@ -36,11 +37,11 @@
 
 -(NSArray *)pluck:(NSString *)key {
 	NSMutableArray *items = [NSMutableArray array];
-	
+
 	for (id item in self) {
 		[items addObject:[item valueForKey:key]];
 	}
-	
+
 	return items;
 }
 
@@ -48,8 +49,21 @@
     if (index < [self count]) {
         return [self objectAtIndex:index];
     }
-    
+
     return defaultValue;
+}
+
+-(NSArray *)arrayByPerformingSelector:(SEL)selector {
+    NSMutableArray * results = [NSMutableArray array];
+
+    for (id object in self) {
+        // id result = [object performSelector:selector];
+		 id result = objc_msgSend(object, selector);
+
+		[results addObject:result];
+    }
+
+    return results;
 }
 
 @end

@@ -185,6 +185,12 @@
 	return [cell heightWithTableView:_tableView];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (self.willDisplayCellBlock) {
+		self.willDisplayCellBlock(tableView, cell, indexPath);
+	}
+}
+
 #pragma mark -
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
