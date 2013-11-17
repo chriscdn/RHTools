@@ -1,5 +1,5 @@
 //
-//  RHTableViewCells.h
+//  RHTextField+rhextensions.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,11 +23,14 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface RHTableViewCellStyleSubtitle : RHTableViewCell
-@end
+@interface RHTextField : UITextField<UITextFieldDelegate>
 
-@interface RHTableViewCellStyleSubtitleLighterDetail : RHTableViewCell
-@end
+@property (nonatomic, copy)BOOL(^shouldBeginEditingBlock)(RHTextField *textField);
+@property (nonatomic, copy)void(^didBeginEditingBlock)(RHTextField *textField);
 
-@interface RHTableViewCellStyleValue1 : UITableViewCell
+@property (nonatomic, copy)BOOL(^shouldEndEditingBlock)(RHTextField *textField);
+@property (nonatomic, copy)void(^didEndEditingBlock)(RHTextField *textField);
+
+@property (nonatomic, copy)BOOL(^shouldReturnBlock)(RHTextField *textField);
+
 @end

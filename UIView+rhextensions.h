@@ -27,5 +27,7 @@
 
 -(UIView *)findFirstResponder;
 -(void)stackSubviews;
+-(void)stackSubviewsWithSpace:(CGFloat)space;
+-(UIView *)superViewWithClass:(NSString *)klass;
 
 @end

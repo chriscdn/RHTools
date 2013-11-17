@@ -37,6 +37,7 @@ typedef enum {
 @interface NSDate (timesince)
 
 -(NSString *)timesince;
+-(NSString *)timesince1;
 -(NSString *)timesinceWithDepth:(int)depth;
 -(NSString *)timesinceDate:(NSDate *)date withDepth:(int)depth;
 

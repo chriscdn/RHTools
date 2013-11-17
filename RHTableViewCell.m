@@ -46,54 +46,163 @@
     [cell setAccessoryType:accessoryType];
 	[cell setCellStyle:style]; // since it's not visible to UITableViewCell
 
-    return cell;
+	return cell;
 }
 
+// A style for a cell with a label on the left side of the cell with text that is right-aligned and blue; on the right side of the cell is another
+// label with smaller text that is left-aligned and black. The Phone/Contacts application uses cells in this style.
+
+// This cell style automatically grows to accomodate long text.
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
 
     RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:nil style:UITableViewCellStyleValue2 image:nil accessoryType:UITableViewCellAccessoryNone];
-	[cell.detailTextLabel setFont:[UIFont systemFontOfSize:13]];
+
 	[cell.detailTextLabel setNumberOfLines:0];
 	[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
 
     return cell;
 }
 
++(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:nil style:UITableViewCellStyleSubtitle image:nil accessoryType:UITableViewCellAccessoryNone];
+
+	[cell.detailTextLabel setNumberOfLines:0];
+	[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
+
+    return cell;
+}
+
+// Left aligned label with form input field.
 +(id)cellWithInputField:(NSString *)labelText {
 
-    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleDefault image:nil accessoryType:UITableViewCellAccessoryNone];
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue1 image:nil accessoryType:UITableViewCellAccessoryNone];
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
-    cell.textField = [[UITextField alloc] initWithFrame:CGRectZero];
+    cell.textField = [[RHTextField alloc] initWithFrame:CGRectZero];
     cell.textField.text = @"";
     cell.textField.adjustsFontSizeToFitWidth = YES;
     cell.textField.minimumFontSize = 12;
     cell.textField.textColor = [UIColor colorWithRed:0.196 green:0.31 blue:0.522 alpha:1.0 ];
     cell.textField.returnKeyType = UIReturnKeyDone;
     cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+	cell.textField.layer.cornerRadius = 4.0f;
+	cell.textField.layer.masksToBounds = YES;
+	cell.textField.backgroundColor = RGB(245, 245, 245);
+
+	// http://stackoverflow.com/questions/3727068/set-padding-for-uitextfield-with-uitextborderstylenone
+	UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+	cell.textField.leftView = paddingView;
+	cell.textField.leftViewMode = UITextFieldViewModeAlways;
 
     [cell.contentView addSubview:cell.textField];
 
     return cell;
 }
 
+// Right aligned label with form input field.
++(id)cellWithInputField2:(NSString *)labelText {
+
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue2 image:nil accessoryType:UITableViewCellAccessoryNone];
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+    cell.textField = [[RHTextField alloc] initWithFrame:CGRectZero];
+    cell.textField.text = @"";
+    cell.textField.adjustsFontSizeToFitWidth = YES;
+	cell.textField.minimumFontSize = 12;
+    cell.textField.textColor = [UIColor colorWithRed:0.196 green:0.31 blue:0.522 alpha:1.0 ];
+    cell.textField.returnKeyType = UIReturnKeyDone;
+    cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+	cell.textField.layer.cornerRadius = 4.0f;
+	cell.textField.layer.masksToBounds = YES;
+	cell.textField.backgroundColor = RGB(245, 245, 245);
+
+	// http://stackoverflow.com/questions/3727068/set-padding-for-uitextfield-with-uitextborderstylenone
+	UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+	cell.textField.leftView = paddingView;
+	cell.textField.leftViewMode = UITextFieldViewModeAlways;
+
+    [cell.contentView addSubview:cell.textField];
+
+    return cell;
+}
+
+
+// Right aligned label with larger form textarea field.
++(id)cellWithTextView:(NSString *)labelText {
+
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue1 image:nil accessoryType:UITableViewCellAccessoryNone];
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+	cell.textView = [[UITextView alloc] initWithFrame:CGRectZero];
+	cell.textView.text = @"";
+	[cell.textView.layer setCornerRadius:4.0f];
+	[cell.textView.layer setMasksToBounds:YES];
+	[cell.textView setBackgroundColor:RGB(245, 245, 245)];
+
+    [cell.contentView addSubview:cell.textView];
+
+    return cell;
+}
+
+// Right aligned label with larger form textarea field.
++(id)cellWithTextView2:(NSString *)labelText {
+
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue2 image:nil accessoryType:UITableViewCellAccessoryNone];
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+	cell.textView = [[UITextView alloc] initWithFrame:CGRectZero];
+	cell.textView.text = @"";
+	[cell.textView.layer setCornerRadius:4.0f];
+	[cell.textView.layer setMasksToBounds:YES];
+	[cell.textView setBackgroundColor:RGB(245, 245, 245)];
+
+    [cell.contentView addSubview:cell.textView];
+
+    return cell;
+}
+
++(id)cellWithSwitch:(NSString *)labelText block:(RHSwitchBlock)block state:(BOOL)state {
+	RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+	[cell.textLabel setText:labelText];
+	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+	RHSwitch *switcher = [[RHSwitch alloc] initWithBlock:block state:state];
+	[cell setAccessoryView:switcher];
+	return cell;
+}
+
 -(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
-     _didSelectBlock = didSelectBlock;
-    
+	_didSelectBlock = didSelectBlock;
+
     if (didSelectBlock) {
         [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
     } else {
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
-    
 }
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView {
 
 	NSLineBreakMode lineBreakMode = self.detailTextLabel.lineBreakMode;
 
-	if ( (self.cellStyle == UITableViewCellStyleValue2) && (lineBreakMode == NSLineBreakByWordWrapping) ) {
+	if ( (self.cellStyle == UITableViewCellStyleSubtitle) && (lineBreakMode == NSLineBreakByWordWrapping) ) {
+
+		NSString *text = self.detailTextLabel.text;
+		UIFont *font   = self.detailTextLabel.font;
+
+//		CGFloat detailLabelWidth = [self detailLabelWidth:tableView];
+		CGFloat widthTable = tableView.bounds.size.width;
+		CGSize withinSize = CGSizeMake(widthTable, MAXFLOAT);
+		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+
+		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*4);
+
+	} else if ( (self.cellStyle == UITableViewCellStyleValue2) && (lineBreakMode == NSLineBreakByWordWrapping) ) {
+
 		NSString *text = self.detailTextLabel.text;
 		UIFont *font   = self.detailTextLabel.font;
 
@@ -102,10 +211,15 @@
 		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
 
 		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*2);
+
+	} else if (self.textView) {
+
+		return 100;
+
 	}
 
-	return 44;
-	
+	return kRHDefaultCellHeight;
+
 }
 
 -(CGFloat)leftMarginForTableView:(UITableView *)tableView {
@@ -122,16 +236,20 @@
 	CGFloat width = tableView.frame.size.width;
 	CGFloat margin = [self leftMarginForTableView:tableView];
 	CGFloat margins = margin * 2;
-	CGFloat detailWidth = 93; // must test this parameter with iphone
+	// The assumption is a subtitle otherwise
+	CGFloat detailWidth = (self.cellStyle == UITableViewCellStyleValue2) ? 93 : 0;
 	return width-margins-detailWidth;
 }
 
 -(void)layoutSubviews {
 	[super layoutSubviews];
-    if ( self.textField ) {
 
-		static CGFloat FORM_CELL_PAD_LEFT_IPHONE = 124;
-		static CGFloat FORM_CELL_PAD_RIGHT = 10;
+	static CGFloat FORM_CELL_PAD_LEFT_IPHONE = 110;
+	static CGFloat FORM_CELL_PAD_RIGHT = 10;
+
+	if ( self.textField ) {
+
+		// With a default 44 pixel cell we have a 10px margin top and bottom
 		static CGFloat TEXTFIELD_HEIGHT = 24;
 
         [self.contentView bringSubviewToFront:self.textField];
@@ -140,7 +258,22 @@
                                           round(self.contentView.bounds.size.height/2 - TEXTFIELD_HEIGHT/2),
                                           self.contentView.bounds.size.width - FORM_CELL_PAD_RIGHT - FORM_CELL_PAD_LEFT_IPHONE,
                                           TEXTFIELD_HEIGHT);
-    }
+    } else if (self.textView) {
+
+		// With a default 100 pixel cell we have a 10px margin top and bottom
+		static CGFloat TEXTVIEW_HEIGHT = 80;
+
+		[self.contentView bringSubviewToFront:self.textView];
+
+		self.textView.frame = CGRectMake( FORM_CELL_PAD_LEFT_IPHONE,
+										 round(self.contentView.bounds.size.height/2 - TEXTVIEW_HEIGHT/2),
+										 self.contentView.bounds.size.width - FORM_CELL_PAD_RIGHT - FORM_CELL_PAD_LEFT_IPHONE,
+										 TEXTVIEW_HEIGHT);
+	}
+}
+
+-(void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
@@ -155,7 +288,7 @@
 		self.headerText = @"";
 		self.footerText = @"";
 	}
-
+	
 	return self;
 }
 

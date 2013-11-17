@@ -1,6 +1,5 @@
 //
-//  RHTableViewCells.h
-//  Version: 0.1
+//  UIViewController+rhextensions.m
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,11 +22,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface RHTableViewCellStyleSubtitle : RHTableViewCell
-@end
+#import "UIViewController+rhextensions.h"
 
-@interface RHTableViewCellStyleSubtitleLighterDetail : RHTableViewCell
-@end
+@implementation UIViewController (rhextensions)
 
-@interface RHTableViewCellStyleValue1 : UITableViewCell
+-(UINavigationController *)wrapInNavigationController {
+	return [[UINavigationController alloc] initWithRootViewController:self];
+}
+
 @end

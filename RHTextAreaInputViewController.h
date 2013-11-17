@@ -1,5 +1,5 @@
 //
-//  RHTableViewCells.h
+//  RHTextAreaInputViewController.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,11 +23,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface RHTableViewCellStyleSubtitle : RHTableViewCell
+typedef void(^RHDidSaveTextBlock)(NSString *text);
+
+@interface RHTextAreaInputViewController : UIViewController<UITextViewDelegate>
+
+@property (strong, nonatomic) UITextView *textView;
+@property (assign, nonatomic) BOOL hasChanges;
+@property (strong, nonatomic) UISwipeGestureRecognizer *swipeGesture;
+
+-(NSMutableArray *)toolbarItems;
+-(void)applyToolbarItems;
+-(UIView *)keyboardView;
+-(void)hideKeyboard;
+
 @end
 
-@interface RHTableViewCellStyleSubtitleLighterDetail : RHTableViewCell
-@end
 
-@interface RHTableViewCellStyleValue1 : UITableViewCell
+@interface RHTextAreaInputForNavigationViewController : RHTextAreaInputViewController
+
+@property (nonatomic, copy) RHDidSaveTextBlock didSaveTextBlock;
+
++(UINavigationController *)controllerWithTitle:(NSString *)title text:(NSString *)text didSaveTextBlock:(RHDidSaveTextBlock)didSaveTextBlock;
+
 @end

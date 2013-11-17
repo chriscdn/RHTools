@@ -32,6 +32,16 @@
 
 @end
 
+@implementation RHTableViewCellStyleSubtitleLighterDetail
+
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+	UITableViewCell *cell = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+	[cell.detailTextLabel setTextColor:[UIColor darkGrayColor]];
+	return (id)cell;
+}
+
+@end
+
 @implementation RHTableViewCellStyleValue1
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

@@ -29,21 +29,20 @@
 @end
 
 @implementation RHSwitch
-@synthesize block;
-@synthesize state;
+@synthesize state=_state;
 
--(id)initWithBlock:(RHSwitchBlock)_block state:(BOOL)_state {
+-(id)initWithBlock:(RHSwitchBlock)block state:(BOOL)state {
     if (self=[self init]) {
         [self addTarget:self action:@selector(eventValueChanged:) forControlEvents:UIControlEventValueChanged];
-		[self setBlock:_block];  // copied by @property
-		[self setOn:_state];
+		[self setBlock:block];  // copied by @property
+		[self setOn:state];
     }
     
     return self;
 }
 
--(id)initWithBlock:(RHSwitchBlock)_block {
-	return [self initWithBlock:_block state:NO];
+-(id)initWithBlock:(RHSwitchBlock)block {
+	return [self initWithBlock:block state:NO];
 }
 
 -(void)setOn:(BOOL)on animated:(BOOL)animated {

@@ -1,5 +1,5 @@
 //
-//  RHTableViewCells.h
+//  UIViewController+rhextensions.h
 //  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
@@ -23,11 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface RHTableViewCellStyleSubtitle : RHTableViewCell
-@end
+@interface UIViewController (rhextensions)
 
-@interface RHTableViewCellStyleSubtitleLighterDetail : RHTableViewCell
-@end
+-(UINavigationController *)wrapInNavigationController;
 
-@interface RHTableViewCellStyleValue1 : UITableViewCell
 @end

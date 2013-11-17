@@ -27,13 +27,16 @@
 #define kRHTopBottomMargin 11
 #define kRHDefaultCellHeight 44
 
-typedef void (^RHReloadCellBlock)(UITableViewCell *cell);
+#import "RHTextField.h"
 
 @interface RHTableViewCell : UITableViewCell
 
+typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
+
 @property (nonatomic, copy) RHBoringBlock didSelectBlock;
 @property (nonatomic, copy) RHReloadCellBlock reloadCellBlock;
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) RHTextField *textField;
+@property (nonatomic, strong) UITextView *textView;
 
 +(id)cellWithLabelText:(NSString *)labelText
                      detailLabelText:(NSString *)detailLabelText
@@ -43,8 +46,12 @@ typedef void (^RHReloadCellBlock)(UITableViewCell *cell);
                        accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
-
++(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellWithInputField:(NSString *)labelText;
++(id)cellWithInputField2:(NSString *)labelText;
++(id)cellWithTextView:(NSString *)labelText;
++(id)cellWithTextView2:(NSString *)labelText;
++(id)cellWithSwitch:(NSString *)labelText block:(RHSwitchBlock)block state:(BOOL)state;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
 -(CGFloat)leftMarginForTableView:(UITableView *)tableView;

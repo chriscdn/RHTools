@@ -41,9 +41,7 @@
 	return nil;
 }
 
--(void)stackSubviews {
-
-
+-(void)stackSubviewsWithSpace:(CGFloat)space {
 	UIView *view = [self.subviews firstObject];
 	NSArray *remainingItems = [self.subviews subarrayWithRange:NSMakeRange(1, ([self.subviews count]-1))];
 
@@ -52,13 +50,29 @@
 
 	for (UIView* view in remainingItems) {
 		if (!view.hidden) {
-			[view setY:h+y+10];
+			[view setY:h+y+space];
 			y = view.y;
 			h = view.height;
 		}
-
-
 	}
+}
+
+-(void)stackSubviews {
+	[self stackSubviewsWithSpace:10];
+}
+
+-(UIView *)superViewWithClass:(NSString *)className {
+	UIView *view = self;
+
+	while (view) {
+		if ([view isKindOfClass:NSClassFromString(className)]) {
+			return view;
+		}
+		view = [view superview];
+	}
+
+	return nil;
+
 }
 
 @end

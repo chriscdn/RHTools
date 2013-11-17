@@ -25,6 +25,7 @@
 #import "RHTableView.h"
 
 @interface RHTableView()
+@property (nonatomic, strong) NSMutableArray *inputFields;
 -(void)addSection:(RHTableSection *)section;
 @end
 
@@ -55,7 +56,6 @@
     return self;
 }
 
-
 -(id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self=[super initWithFrame:frame style:style]) {
 		[self reset];
@@ -75,13 +75,26 @@
 	self.tableSections = [NSMutableArray array];
 	self.tableRows = [NSMutableArray array];
 	self.textFields = [NSMutableArray array];
+	self.textViews = [NSMutableArray array];
+	self.inputFields = [NSMutableArray array];
+
+}
+
+-(void)observeKeyboard {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark -
 
--(void)addSectionWithSectionHeaderName:(NSString *)headerText {
+-(void)addSectionWithSectionHeaderText:(NSString *)headerText {
+	return [self addSectionWithSectionHeaderText:headerText footerText:nil];
+}
+
+-(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText {
 	RHTableSection *section = [[RHTableSection alloc] init];
 	section.headerText = headerText;
+	section.footerText = footerText;
 	[self addSection:section];
 }
 
@@ -91,45 +104,53 @@
 }
 
 -(RHTableViewCell *)addCell:(RHTableViewCell *)cell {
+
 	[[self.tableRows lastObject] addObject:cell];
+	// [[self.textFields lastObject] setReturnKeyType:UIReturnKeyNext];
 
-    UITextField *textField = cell.textField;
+	if (cell.textField) {
 
-    if (textField) {
-        [textField setReturnKeyType:UIReturnKeyGo];
-        [textField setDelegate:self];
+		RHTextField *textField = cell.textField;
 
-        UITextField *lastTextField = [self.textFields lastObject];
-        [lastTextField setReturnKeyType:UIReturnKeyNext];
+		__weak RHTableView *bself = self;
+		[textField setDidBeginEditingBlock:^(RHTextField *textField) {
+			 [bself scrollToView:textField];
+		}];
 
-        [self.textFields addObject:textField];
-    }
+		[self.textFields addObject:textField];
+		[self.inputFields addObject:textField];
 
-    return cell;
+	} else if (cell.textView) {
+		// [cell.textView setDelegate:self];
+		[self.textViews addObject:cell.textView];
+		[self.inputFields addObject:cell.textView];
+	}
+
+	return cell;
 }
 
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText {
-    RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
-                                               detailLabelText:detailText
-                                                didSelectBlock:nil
-                                                         style:UITableViewCellStyleValue1
-                                                         image:nil
-                                                 accessoryType:UITableViewCellAccessoryNone];
-    [self addCell:cell];
+	RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
+											   detailLabelText:detailText
+												didSelectBlock:nil
+														 style:UITableViewCellStyleValue1
+														 image:nil
+												 accessoryType:UITableViewCellAccessoryNone];
+	[self addCell:cell];
 
-    return cell;
+	return cell;
 }
 
 -(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block {
-    RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
-                                               detailLabelText:nil
-                                                didSelectBlock:block
-                                                         style:UITableViewCellStyleDefault
-                                                         image:nil
-                                                 accessoryType:UITableViewCellAccessoryNone];
-    [self addCell:cell];
+	RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
+											   detailLabelText:nil
+												didSelectBlock:block
+														 style:UITableViewCellStyleDefault
+														 image:nil
+												 accessoryType:UITableViewCellAccessoryNone];
+	[self addCell:cell];
 
-    return cell;
+	return cell;
 }
 
 #pragma mark -
@@ -147,7 +168,6 @@
 	}
 }
 
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return [self.tableRows count];
 }
@@ -163,26 +183,26 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	RHTableViewCell *row = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 
-    if (row.didSelectBlock) {
-        row.didSelectBlock();
-    }
+	if (row.didSelectBlock) {
+		row.didSelectBlock();
+	}
 
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(NSString *)tableView:(UITableView *)_tableView titleForHeaderInSection:(NSInteger)section {
-	RHTableSection *_section = [self.tableSections objectAtIndex:section];
-	return _section.headerText;
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	RHTableSection *rhsection = [self.tableSections objectAtIndex:section];
+	return rhsection.headerText;
 }
 
--(NSString *)tableView:(UITableView *)_tableView titleForFooterInSection:(NSInteger)section {
-	RHTableSection *_section = [self.tableSections objectAtIndex:section];
-	return _section.footerText;
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	RHTableSection *rhsection = [self.tableSections objectAtIndex:section];
+	return rhsection.footerText;
 }
 
--(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	RHTableViewCell *cell = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	return [cell heightWithTableView:_tableView];
+	return [cell heightWithTableView:tableView];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -192,31 +212,73 @@
 }
 
 #pragma mark -
-#pragma mark UITextFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSUInteger index = [self.textFields indexOfObject:textField];
+-(void)advanceFirstResponder:(UIView *)textFieldorTextView {
+	NSUInteger index = [self.inputFields indexOfObject:textFieldorTextView];
 
-    UITextField *nextTextField = [self.textFields objectAtIndex:index+1 defaultValue:nil];
+	id nextTextFieldorTextView = [self.inputFields objectAtIndex:index+1 defaultValue:nil];
 
-    if (nextTextField) {
-        [nextTextField becomeFirstResponder];
-    } else if (self.didTapGoBlock) {
-        self.didTapGoBlock(self.textFields);
-    } else {
-        [self resignFirstResponder];
-    }
+	if (nextTextFieldorTextView) {
+		[nextTextFieldorTextView becomeFirstResponder];
+	} else {
+		[self hideKeyboard];
+	}
+}
 
-    return YES;
+-(void)scrollToView:(UIView *)view {
+	UITableViewCell *cell = (UITableViewCell *)[view superViewWithClass:@"UITableViewCell"];
+	NSIndexPath *indexPath = [self indexPathForCell:cell];
+	[self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+
+-(void)setTextFieldsKeyboardReturnToNext {
+	__weak RHTableView *bself = self;
+	for (RHTextField *textField in self.textFields) {
+
+		[textField setReturnKeyType:UIReturnKeyNext];
+
+		[textField setShouldReturnBlock:^BOOL(RHTextField *textField) {
+			[bself advanceFirstResponder:textField];
+			return YES;
+		}];
+		
+	}
+}
+
+
+#pragma mark -
+-(void)keyboardWillShow:(NSNotification *)notification {
+
+	NSDictionary *userInfo = [notification userInfo];
+
+	CGRect keyboardEndFrame;
+	[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+
+	// This is the relative position of the keyboard within our tableView
+	CGRect keyboardFrame = [self convertRect:keyboardEndFrame fromView:nil];
+	CGFloat viewHeight = keyboardFrame.origin.y;
+	CGFloat contentHeight = self.contentSize.height;
+
+	UIEdgeInsets newInset = self.contentInset;
+	newInset.bottom = MAX(contentHeight + self.contentInset.top - viewHeight, 0);
+
+	self.contentInset = newInset;
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification {
+	UIEdgeInsets insets = self.contentInset;
+	insets.bottom = 0;
+	self.contentInset = insets;
 }
 
 -(void)hideKeyboard {
-    [self.textFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
+	[self.inputFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
+}
+
+// -(BOOL)disablesAutomaticKeyboardDismissal { return NO; }
+
+-(void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
-
-
-
-
-
-

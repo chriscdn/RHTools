@@ -25,23 +25,38 @@
 #import "RHKeyboardSlideView.h"
 
 @interface RHKeyboardSlideView()
-
 @property (nonatomic, assign) CGRect keyboardFrame;
 @property (nonatomic, assign) NSTimeInterval animationDuration;
 @property (nonatomic, assign) UIViewAnimationOptions animationCurve;
+
+-(void)setupNotfications;
+
 @end
 
 @implementation RHKeyboardSlideView
 
--(id)initWithCoder:(NSCoder *)aDecoder {
 
-	if (self = [super initWithCoder:aDecoder]) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+-(id)init {
+	if (self = [super init]) {
+		[self setupNotfications];
 	}
 
 	return self;
+}
+
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+	if (self = [super initWithCoder:aDecoder]) {
+		[self setupNotfications];
+	}
+
+	return self;
+}
+
+-(void)setupNotfications {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidBeginEditingNotification object:nil];
 }
 
 -(void)keyboardWillShow:(NSNotification *)_notification {

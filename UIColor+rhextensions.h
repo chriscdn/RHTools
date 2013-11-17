@@ -1,6 +1,6 @@
 //
-//  RHTableViewCells.h
-//  Version: 0.1
+//  UIColor+rhextensions.h
+//  Version: 0.2
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,11 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface RHTableViewCellStyleSubtitle : RHTableViewCell
-@end
+#define RGB(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define RGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface RHTableViewCellStyleSubtitleLighterDetail : RHTableViewCell
-@end
+@interface UIColor (rhextensions)
 
-@interface RHTableViewCellStyleValue1 : UITableViewCell
++(UIColor *)colorFromHexString:(NSString *)hexString;
+
 @end

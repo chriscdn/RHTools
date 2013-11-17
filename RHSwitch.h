@@ -29,7 +29,7 @@ typedef void (^RHSwitchBlock)(BOOL state);
 
 @property (nonatomic, copy) RHSwitchBlock block;
 
--(id)initWithBlock:(RHSwitchBlock)_block state:(BOOL)_state;
--(id)initWithBlock:(RHSwitchBlock)_block;
+-(id)initWithBlock:(RHSwitchBlock)block state:(BOOL)state;
+-(id)initWithBlock:(RHSwitchBlock)block;
 
 @end

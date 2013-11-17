@@ -23,19 +23,21 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-typedef void (^RHDidTapGoBlock)(NSArray *textViews);
+typedef void (^RHDidTapGoBlock)(NSArray *textFields, NSArray *textViews);
 
 #import "RHFetchedResultsManager.h"
 
-@interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *tableSections;
 @property (nonatomic, strong) NSMutableArray *tableRows;
 @property (nonatomic, strong) NSMutableArray *textFields;
+@property (nonatomic, strong) NSMutableArray *textViews;
 @property (nonatomic, copy) RHDidTapGoBlock didTapGoBlock;
 @property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;
 
--(void)addSectionWithSectionHeaderName:(NSString *)headerText;
+-(void)addSectionWithSectionHeaderText:(NSString *)headerText;
+-(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText;
 
 -(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
@@ -43,6 +45,11 @@ typedef void (^RHDidTapGoBlock)(NSArray *textViews);
 
 -(void)hideKeyboard;
 -(void)reset;
+-(void)observeKeyboard;
+
+-(void)advanceFirstResponder:(UIView *)textFieldorTextView;
+-(void)scrollToView:(UIView *)view;
+-(void)setTextFieldsKeyboardReturnToNext;
 
 @end
 

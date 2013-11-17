@@ -77,6 +77,10 @@ static NSArray *_unitValues;
 	return [self timesinceWithDepth:2];
 }
 
+-(NSString *)timesince1 {
+	return [self timesinceWithDepth:1];
+}
+
 -(NSString *)timesinceWithDepth:(int)depth {
     return [self timesinceDate:[NSDate date] withDepth:depth];
 }

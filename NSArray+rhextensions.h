@@ -29,5 +29,6 @@
 -(NSArray *)pluck:(NSString *)key;
 -(id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue;
 -(NSArray *)arrayByPerformingSelector:(SEL)selector;
+-(NSArray *)arrayByRemovingObject:(id)anObject;
 
 @end

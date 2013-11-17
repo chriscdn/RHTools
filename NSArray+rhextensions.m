@@ -66,4 +66,10 @@
     return results;
 }
 
+-(NSArray *)arrayByRemovingObject:(id)anObject {
+	NSMutableArray *mutarray = [NSMutableArray arrayWithArray:self];
+	[mutarray removeObject:anObject];
+	return mutarray;
+}
+
 @end
