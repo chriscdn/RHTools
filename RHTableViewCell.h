@@ -47,14 +47,15 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
-+(id)cellWithInputField:(NSString *)labelText;
-+(id)cellWithInputField2:(NSString *)labelText;
++(id)cellWithTextField:(NSString *)labelText;
++(id)cellWithTextField2:(NSString *)labelText;
 +(id)cellWithTextView:(NSString *)labelText;
 +(id)cellWithTextView2:(NSString *)labelText;
-+(id)cellWithSwitch:(NSString *)labelText block:(RHSwitchBlock)block state:(BOOL)state;
++(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
 -(CGFloat)leftMarginForTableView:(UITableView *)tableView;
 -(CGFloat)detailLabelWidth:(UITableView *)tableView;
+
 
 @end

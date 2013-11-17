@@ -114,7 +114,7 @@
 
 		__weak RHTableView *bself = self;
 		[textField setDidBeginEditingBlock:^(RHTextField *textField) {
-			 [bself scrollToView:textField];
+			[bself scrollToView:textField];
 		}];
 
 		[self.textFields addObject:textField];
@@ -241,7 +241,7 @@
 			[bself advanceFirstResponder:textField];
 			return YES;
 		}];
-		
+
 	}
 }
 

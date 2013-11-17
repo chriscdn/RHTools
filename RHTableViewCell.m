@@ -73,7 +73,7 @@
 }
 
 // Left aligned label with form input field.
-+(id)cellWithInputField:(NSString *)labelText {
++(id)cellWithTextField:(NSString *)labelText {
 
     RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue1 image:nil accessoryType:UITableViewCellAccessoryNone];
 
@@ -101,7 +101,7 @@
 }
 
 // Right aligned label with form input field.
-+(id)cellWithInputField2:(NSString *)labelText {
++(id)cellWithTextField2:(NSString *)labelText {
 
     RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue2 image:nil accessoryType:UITableViewCellAccessoryNone];
 
@@ -165,7 +165,7 @@
     return cell;
 }
 
-+(id)cellWithSwitch:(NSString *)labelText block:(RHSwitchBlock)block state:(BOOL)state {
++(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block{
 	RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 	[cell.textLabel setText:labelText];
 	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
