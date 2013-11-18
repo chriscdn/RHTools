@@ -23,8 +23,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-typedef void (^RHDidTapGoBlock)(NSArray *textFields, NSArray *textViews);
-
 #import "RHFetchedResultsManager.h"
 
 @interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
@@ -33,7 +31,6 @@ typedef void (^RHDidTapGoBlock)(NSArray *textFields, NSArray *textViews);
 @property (nonatomic, strong) NSMutableArray *tableRows;
 @property (nonatomic, strong) NSMutableArray *textFields;
 @property (nonatomic, strong) NSMutableArray *textViews;
-@property (nonatomic, copy) RHDidTapGoBlock didTapGoBlock;
 @property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;
 
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText;
