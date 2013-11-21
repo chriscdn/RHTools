@@ -47,10 +47,14 @@
 		[self.textView setDelegate:self];
 
 		[self.view addSubview:self.textView];
-
     }
     
     return self;
+}
+
+-(void)viewDidLoad {
+	[super viewDidLoad];
+	[self.textView becomeFirstResponder];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -62,7 +66,6 @@
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self setHasChanges:NO];
-	[self.textView becomeFirstResponder];
 }
 
 -(void)applyToolbarItems {
