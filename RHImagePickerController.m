@@ -37,11 +37,11 @@
 	return [self isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 
-+(RHImagePickerController *)imagePickerControllerWithSource:(UIImagePickerControllerSourceType)_source block:(RHImagePickerControllerBlock)_block {
++(RHImagePickerController *)imagePickerControllerWithSource:(UIImagePickerControllerSourceType)source block:(RHImagePickerControllerBlock)block {
 	RHImagePickerController *picker = [[RHImagePickerController alloc] init];
 	[picker setDelegate:picker];
-	[picker setBlock:_block];
-	[picker setSourceType:_source];
+	[picker setBlock:block];
+	[picker setSourceType:source];
 	
 	return picker;
 }

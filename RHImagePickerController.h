@@ -35,7 +35,7 @@ typedef void (^RHImagePickerControllerBlock)(RHImagePickerController *_picker);
 @property (nonatomic, strong) UIPopoverController *pickerPopoverController;
 
 +(BOOL)isCameraAvailable;
-+(RHImagePickerController *)imagePickerControllerWithSource:(UIImagePickerControllerSourceType)_source block:(RHImagePickerControllerBlock)_block;
++(RHImagePickerController *)imagePickerControllerWithSource:(UIImagePickerControllerSourceType)source block:(RHImagePickerControllerBlock)block;
 
 -(BOOL)isCameraImage;
 -(UIImage *)originalImage;
