@@ -197,7 +197,15 @@
 //		CGFloat detailLabelWidth = [self detailLabelWidth:tableView];
 		CGFloat widthTable = tableView.bounds.size.width;
 		CGSize withinSize = CGSizeMake(widthTable, MAXFLOAT);
-		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+		// CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+
+		CGRect textRect = [text boundingRectWithSize:withinSize
+											 options:NSStringDrawingUsesLineFragmentOrigin
+										  attributes:@{NSFontAttributeName:font}
+											 context:nil];
+
+		CGSize size = textRect.size;
+
 
 		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*4);
 
@@ -208,7 +216,14 @@
 
 		CGFloat detailLabelWidth = [self detailLabelWidth:tableView];
 		CGSize withinSize = CGSizeMake(detailLabelWidth, MAXFLOAT);
-		CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+		// CGSize size = [text sizeWithFont:font constrainedToSize:withinSize lineBreakMode:lineBreakMode];
+
+		CGRect textRect = [text boundingRectWithSize:withinSize
+											 options:NSStringDrawingUsesLineFragmentOrigin
+										  attributes:@{NSFontAttributeName:font}
+											 context:nil];
+
+		CGSize size = textRect.size;
 
 		return MAX(kRHDefaultCellHeight, size.height + kRHTopBottomMargin*2);
 
