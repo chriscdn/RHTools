@@ -31,29 +31,25 @@
     if (self=[super init]) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-		
-		if IsIPhone {
-			// Swiping down keyboard only works with iPhone
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];	
-		}
+	}
 
-
-		[self.view setBackgroundColor:[UIColor whiteColor]];
-
-		[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
-		[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-		[self.textView setFont:[UIFont systemFontOfSize:18]];
-		[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
-		[self.textView setDelegate:self];
-
-		[self.view addSubview:self.textView];
-    }
-    
     return self;
 }
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
+
+	[self.view setBackgroundColor:[UIColor whiteColor]];
+
+	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
+	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+	[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
+	[self.textView setDelegate:self];
+
+	[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
+
+	[self.view addSubview:self.textView];
+
 	[self.textView becomeFirstResponder];
 }
 
@@ -70,12 +66,11 @@
 
 -(void)applyToolbarItems {
 	NSArray *toolbarItems = [self toolbarItems];
-	
+
 	if (toolbarItems) {
 		UIToolbar *toolbar = [[UIToolbar alloc] init];
-		[toolbar setBarStyle:UIBarStyleBlackTranslucent];
 		[toolbar sizeToFit];
-		
+
 		CGRect frame = toolbar.frame;
 		frame.size.height = 30;
 		[toolbar setFrame:frame];
@@ -99,7 +94,7 @@
 	[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
 
 	CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame fromView:nil];
-	CGFloat textViewWidth = self.view.frame.size.width;
+	CGFloat textViewWidth = self.view.bounds.size.width;
 
     /* Animation Block */
 	[UIView beginAnimations:nil context:nil];
@@ -109,18 +104,7 @@
 	[UIView commitAnimations];
 }
 
--(void)keyboardDidShow:(NSNotification *)notification {
-	UIView *keyboardView = [self keyboardView];
-	self.swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self.textView action:@selector(resignFirstResponder)];
-	self.swipeGesture.direction = UISwipeGestureRecognizerDirectionDown;
-	[keyboardView addGestureRecognizer:self.swipeGesture];
-}
-
 -(void)keyboardWillHide:(NSNotification *)notification {
-    UIView *keyboardView = [self keyboardView];
-    [keyboardView removeGestureRecognizer:self.swipeGesture];
-    
-    /*********/
 	NSDictionary  *userInfo = [notification userInfo];
 	NSTimeInterval animationDuration;
 	UIViewAnimationCurve animationCurve;
@@ -128,13 +112,13 @@
 	[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
 	[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
 	[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-		
+
     /* Animation Block */
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:animationDuration];
 	[UIView setAnimationCurve:animationCurve];
-	self.textView.frame = self.view.frame;
-	[UIView commitAnimations];	
+	self.textView.frame = self.view.bounds;
+	[UIView commitAnimations];
 }
 
 -(void)hideKeyboard {
@@ -142,26 +126,18 @@
 }
 
 #pragma mark TextView Delegate Methods
+
+-(void)textViewDidChangeSelection:(UITextView *)textView {
+	// This gets around a bug in iOS7 that doesn't properly scroll.
+	[textView scrollRangeToVisible:textView.selectedRange];
+}
+
 -(void)textViewDidChange:(UITextView *)textView {
 	self.hasChanges = YES;
 }
 
 #pragma mark -
 #pragma mark Keyboard View
-//  keyboardView
-//
-//  Copyright Matt Gallagher 2009. All rights reserved.
-//
-//  Permission is given to use this source code file, free of charge, in any
-//  project, commercial or otherwise, entirely at your risk, with the condition
-//  that any redistribution (in part or whole) of source code must retain
-//  this copyright and permission notice. Attribution in compiled projects is
-//  appreciated but not required.
--(UIView *)keyboardView; {
-	return [[UIApplication sharedApplication] keyboardView];
-}
-
-#pragma mark -
 
 -(void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -178,7 +154,7 @@
 	[controller setTitle:title];
 	[controller.textView setText:text];
 	[controller setDidSaveTextBlock:didSaveTextBlock];
-	
+
 	return [controller wrapInNavigationController];
 }
 

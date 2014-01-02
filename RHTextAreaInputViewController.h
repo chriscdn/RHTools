@@ -29,11 +29,9 @@ typedef void(^RHDidSaveTextBlock)(NSString *text);
 
 @property (strong, nonatomic) UITextView *textView;
 @property (assign, nonatomic) BOOL hasChanges;
-@property (strong, nonatomic) UISwipeGestureRecognizer *swipeGesture;
 
 -(NSMutableArray *)toolbarItems;
 -(void)applyToolbarItems;
--(UIView *)keyboardView;
 -(void)hideKeyboard;
 
 @end

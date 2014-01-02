@@ -58,5 +58,6 @@ typedef void (^RHBoringBlock)();
 #import "UIColor+rhextensions.h"
 #import "RHTextAreaInputViewController.h"
 #import "RHTextField.h"
+#import "UIScrollView+rhextensions.h"
 
 // #import "NSIndexPath+rhextensions.h"

@@ -68,7 +68,6 @@
 		testView.backgroundColor = UIColor.clearColor;
 		cell.backgroundView = testView;
 	}
-
 }
 
 @end
