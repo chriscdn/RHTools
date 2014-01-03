@@ -50,13 +50,14 @@
 
 	[self.view addSubview:self.textView];
 
-	[self.textView becomeFirstResponder];
+[self.textView becomeFirstResponder];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[self applyToolbarItems];
 	[self textViewDidChange:self.textView];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
