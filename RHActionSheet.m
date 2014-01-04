@@ -76,7 +76,7 @@
 }
 
 -(NSInteger)addCancelButton {
-	return [self addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+	return [self addCancelButtonWithTitle:kCancel];
 }
 
 -(void)dismiss {

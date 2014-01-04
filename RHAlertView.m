@@ -71,11 +71,11 @@
 }
 
 -(NSInteger)addOKButtonWithBlock:(RHAlertBlock)block {
-	return [self addButtonWithTitle:NSLocalizedString(@"OK", nil) block:block];
+	return [self addButtonWithTitle:kOK block:block];
 }
 
 -(NSInteger)addCancelButton {
-	return [self addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+	return [self addCancelButtonWithTitle:kCancel];
 }
 
 -(NSInteger)addCancelButtonWithTitle:(NSString *)title {
