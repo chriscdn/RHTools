@@ -49,3 +49,11 @@
 }
 
 @end
+
+@implementation RHTableViewCellStyleValue2
+
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+	return [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:reuseIdentifier];
+}
+
+@end

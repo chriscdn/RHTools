@@ -31,3 +31,6 @@
 
 @interface RHTableViewCellStyleValue1 : UITableViewCell
 @end
+
+@interface RHTableViewCellStyleValue2 : UITableViewCell
+@end
