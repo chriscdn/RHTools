@@ -51,12 +51,13 @@
 	[super viewWillAppear:animated];
 	[self applyToolbarItems];
 	[self textViewDidChange:self.textView];
-	[self.textView becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self setHasChanges:NO];
+    
 }
 
 -(void)applyToolbarItems {
