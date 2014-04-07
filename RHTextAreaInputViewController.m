@@ -31,33 +31,27 @@
     if (self=[super init]) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+		[self.view setBackgroundColor:[UIColor whiteColor]];
+
+		[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
+		[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+		[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
+		[self.textView setDelegate:self];
+
+		[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
+
+		[self.view addSubview:self.textView];
 	}
 
     return self;
-}
-
--(void)viewDidLoad {
-	[super viewDidLoad];
-
-	[self.view setBackgroundColor:[UIColor whiteColor]];
-
-	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
-	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-	[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
-	[self.textView setDelegate:self];
-
-	[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
-
-	[self.view addSubview:self.textView];
-
-[self.textView becomeFirstResponder];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[self applyToolbarItems];
 	[self textViewDidChange:self.textView];
-
+	[self.textView becomeFirstResponder];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

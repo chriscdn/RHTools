@@ -50,13 +50,14 @@
     return self;
 }
 
--(void)fireBlockWithIndex:(NSInteger)index {
+-(void)fireBlockWithSelectedIndex {
 	if (self.block) {
 		self.block([self selectedSegmentIndex]);
 	}
 }
 
 -(void)segmentedControlAction:(UISegmentedControl *)sender {
-	[self fireBlockWithIndex:[sender selectedSegmentIndex]];
+	[self fireBlockWithSelectedIndex];
 }
+
 @end

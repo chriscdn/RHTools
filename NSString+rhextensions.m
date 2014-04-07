@@ -41,7 +41,7 @@
     if (!self.length || self.length == 1) {
         return self;
 	}
-	
+
     return [self substringToIndex:1];
 }
 
@@ -66,6 +66,21 @@
 
 -(NSNumber *)toNumber {
 	return [NSNumber numberWithInt:self.intValue];
+}
+
+-(NSAttributedString *)htmlToAttributedString {
+	return [[NSAttributedString alloc] initWithData:[self dataUsingEncoding:NSUTF8StringEncoding]
+											options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+								 documentAttributes:nil
+											  error:nil];
+}
+
+-(NSString *)stripHTML {
+		NSRange r;
+		NSString *s = [self copy];
+		while ((r = [s rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+			s = [s stringByReplacingCharactersInRange:r withString:@""];
+		return s;
 }
 
 @end

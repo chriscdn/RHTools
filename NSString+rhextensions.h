@@ -31,5 +31,7 @@
 -(NSString *)truncateToLength:(int)charLength;
 -(NSString *)trim;
 -(NSNumber *)toNumber;
+-(NSAttributedString *)htmlToAttributedString;
+-(NSString *)stripHTML;
 
 @end

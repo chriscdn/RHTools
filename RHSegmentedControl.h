@@ -29,6 +29,6 @@ typedef void (^RHSegmentedControlBlock)(NSInteger selectedIndex);
 
 @property (nonatomic, copy) RHSegmentedControlBlock block;
 
--(void)fireBlockWithIndex:(NSInteger)index;
+-(void)fireBlockWithSelectedIndex;
 
 @end
