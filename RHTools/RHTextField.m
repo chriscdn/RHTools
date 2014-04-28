@@ -25,52 +25,92 @@
 
 #import "RHTextField.h"
 
+/**
+ * This odd implementation is required since setting the UITextField delegate to itself causes an infinite loop.
+ * This is well documented in various blogs and forums online.
+ */
+
+@interface RHTextFieldBlockDelegate : NSObject<UITextFieldDelegate>
+
+@property (nonatomic, copy) BOOL(^shouldBeginEditingBlock)(RHTextField *textField);
+@property (nonatomic, copy) void(^didBeginEditingBlock)(RHTextField *textField);
+@property (nonatomic, copy) BOOL(^shouldEndEditingBlock)(RHTextField *textField);
+@property (nonatomic, copy) void(^didEndEditingBlock)(RHTextField *textField);
+@property (nonatomic, copy) BOOL(^shouldReturnBlock)(RHTextField *textField);
+
+@end
+
+@implementation RHTextFieldBlockDelegate
+
+-(BOOL)textFieldShouldBeginEditing:(RHTextField *)textField {
+	if (self.shouldBeginEditingBlock) {
+		return self.shouldBeginEditingBlock(textField);
+	}
+	return YES;
+}
+
+-(void)textFieldDidBeginEditing:(RHTextField *)textField {
+	if (self.didBeginEditingBlock) {
+		self.didBeginEditingBlock(textField);
+	}
+}
+
+-(BOOL)textFieldShouldEndEditing:(RHTextField *)textField {
+	if (self.shouldEndEditingBlock) {
+		return self.shouldEndEditingBlock(textField);
+	}
+	return YES;
+}
+
+-(void)textFieldDidEndEditing:(RHTextField *)textField {
+	if (self.didEndEditingBlock) {
+		self.didEndEditingBlock(textField);
+	}
+}
+
+-(BOOL)textFieldShouldReturn:(RHTextField *)textField {
+	if (self.shouldReturnBlock) {
+		return self.shouldReturnBlock(textField);
+	}
+	return YES;
+}
+
+@end
+
+
+@interface RHTextField()
+@property (nonatomic, strong) RHTextFieldBlockDelegate* powerDelegate;
+@end
+
 @implementation RHTextField
 
 -(id)initWithFrame:(CGRect)frame {
 	if (self=[super initWithFrame:frame]) {
-		self.delegate = self;
-
-		// Seems to be a bug in iOS that can cause some infinite loops unless this is set.
-		// I believe it's related to using self as the delegate.  Tip taken from:
-		// http://stackoverflow.com/questions/10292568/iphone-simulator-crash-with-exc-bad-access-when-uitextfield-delegator-is-calle
-		[self setAutocorrectionType:UITextAutocorrectionTypeNo];
+		self.powerDelegate = [RHTextFieldBlockDelegate new];
+		self.delegate = self.powerDelegate;
 	}
 
 	return self;
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-	if (self.shouldBeginEditingBlock) {
-		return self.shouldBeginEditingBlock(self);
-	}
-	return YES;
+-(void)setShouldBeginEditingBlock:(BOOL (^)(RHTextField *))shouldBeginEditingBlock {
+	[self.powerDelegate setShouldBeginEditingBlock:shouldBeginEditingBlock ];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-	if (self.didBeginEditingBlock) {
-		self.didBeginEditingBlock(self);
-	}
+-(void)setDidBeginEditingBlock:(void (^)(RHTextField *))didBeginEditingBlock {
+	[self.powerDelegate setDidBeginEditingBlock:didBeginEditingBlock];
 }
 
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	if (self.shouldEndEditingBlock) {
-		return self.shouldEndEditingBlock(self);
-	}
-	return YES;
+-(void)setShouldEndEditingBlock:(BOOL (^)(RHTextField *))shouldEndEditingBlock {
+	[self.powerDelegate setShouldEndEditingBlock:shouldEndEditingBlock];
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField {
-	if (self.didEndEditingBlock) {
-		self.didEndEditingBlock(self);
-	}
+-(void)setDidEndEditingBlock:(void (^)(RHTextField *))didEndEditingBlock {
+	[self.powerDelegate setDidEndEditingBlock:didEndEditingBlock];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-	if (self.shouldReturnBlock) {
-		return self.shouldReturnBlock(self);
-	}
-	return YES;
+-(void)setShouldReturnBlock:(BOOL (^)(RHTextField *))shouldReturnBlock {
+	[self.powerDelegate setShouldReturnBlock:shouldReturnBlock];
 }
 
 @end

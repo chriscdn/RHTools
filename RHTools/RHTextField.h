@@ -23,14 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface RHTextField : UITextField<UITextFieldDelegate>
+@interface RHTextField : UITextField
 
-@property (nonatomic, copy)BOOL(^shouldBeginEditingBlock)(RHTextField *textField);
-@property (nonatomic, copy)void(^didBeginEditingBlock)(RHTextField *textField);
-
-@property (nonatomic, copy)BOOL(^shouldEndEditingBlock)(RHTextField *textField);
-@property (nonatomic, copy)void(^didEndEditingBlock)(RHTextField *textField);
-
-@property (nonatomic, copy)BOOL(^shouldReturnBlock)(RHTextField *textField);
+@property (nonatomic, assign) BOOL(^shouldBeginEditingBlock)(RHTextField *textField);
+@property (nonatomic, assign) void(^didBeginEditingBlock)(RHTextField *textField);
+@property (nonatomic, assign) BOOL(^shouldEndEditingBlock)(RHTextField *textField);
+@property (nonatomic, assign) void(^didEndEditingBlock)(RHTextField *textField);
+@property (nonatomic, assign) BOOL(^shouldReturnBlock)(RHTextField *textField);
 
 @end
