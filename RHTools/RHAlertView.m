@@ -60,7 +60,7 @@
 -(NSInteger)addButtonWithTitle:(NSString *)title block:(RHAlertBlock)block {
 	NSInteger index = [self addButtonWithTitle:title];
 	if (block) {
-		NSNumber *key = [NSNumber numberWithInt:index];
+		NSNumber *key = [NSNumber numberWithInteger:index];
 		[self.actions setObject:[block copy] forKey:key];
 	}
 	return index;
@@ -85,7 +85,7 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	NSNumber *key = [NSNumber numberWithInt:buttonIndex];
+	NSNumber *key = [NSNumber numberWithInteger:buttonIndex];
 	RHAlertBlock block = [self.actions objectForKey:key];
 	
 	if (block) {
