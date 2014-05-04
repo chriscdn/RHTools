@@ -1,6 +1,5 @@
 //
 //  UITableView+rhextensions.h
-//  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/

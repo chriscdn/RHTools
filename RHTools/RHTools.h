@@ -23,8 +23,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-// RHBoringBlock is just that - no arguments and no return value
-
 #define IsIPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IsIPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IsIOS61orEarlier (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
@@ -32,6 +30,7 @@
 #define kOK NSLocalizedString(@"OK", nil)
 #define kCancel NSLocalizedString(@"Cancel", nil)
 
+// RHBoringBlock is just that - no arguments and no return value
 typedef void (^RHBoringBlock)();
 
 #import "FrameAccessor.h"

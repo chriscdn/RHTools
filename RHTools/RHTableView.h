@@ -1,6 +1,5 @@
 //
 //  RHTableView.h
-//  Version: 0.1
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,7 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "RHFetchedResultsManager.h"
+typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 @interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
 

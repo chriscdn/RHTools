@@ -1,7 +1,7 @@
 //
-//  UIApplication+rhextensions.h
+//  NSObject+KVOBlocks.h
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2014 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,11 +22,27 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@interface UIView (rhextensions)
+// This class is based on NSObject+KVOBlocks (MIT licensed) by Stephan Leroux.
+// See here: https://github.com/sleroux/KVO-Blocks
 
--(UIView *)findFirstResponder;
--(void)stackSubviews;
--(void)stackSubviewsWithSpace:(CGFloat)space;
--(UIView *)superViewWithClass:(NSString *)klass;
+typedef void (^KVOBlock)(NSDictionary *change, void *context);
+
+@interface NSObject (KVOBlocks)
+
+- (void)addObserver:(NSObject *)observer
+         forKeyPath:(NSString *)keyPath
+            options:(NSKeyValueObservingOptions)options
+            context:(void *)context
+          withBlock:(KVOBlock)block;
+
+-(void)removeBlockObserver:(NSObject *)observer
+                 forKeyPath:(NSString *)keyPath;
+
+-(void)addObserverForKeyPath:(NSString *)keyPath
+                      options:(NSKeyValueObservingOptions)options
+                      context:(void *)context
+                    withBlock:(KVOBlock)block;
+
+-(void)removeBlockObserverForKeyPath:(NSString *)keyPath;
 
 @end
