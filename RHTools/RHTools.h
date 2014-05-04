@@ -34,6 +34,7 @@
 
 typedef void (^RHBoringBlock)();
 
+#import "FrameAccessor.h"
 #import "NSArray+rhextensions.h"
 #import "NSDictionary+rhextensions.h"
 #import "NSString+rhextensions.h"
@@ -50,7 +51,6 @@ typedef void (^RHBoringBlock)();
 #import "RHTableView.h"
 #import "RHKeyboardSlideView.h"
 #import "UIView+rhextensions.h"
-#import "FrameAccessor.h"
 #import "RHSegmentedControl.h"
 #import "UITableView+rhextensions.h"
 #import "UIViewController+rhextensions.h"
@@ -59,5 +59,3 @@ typedef void (^RHBoringBlock)();
 #import "RHTextAreaInputViewController.h"
 #import "RHTextField.h"
 #import "UIScrollView+rhextensions.h"
-
-// #import "NSIndexPath+rhextensions.h"
