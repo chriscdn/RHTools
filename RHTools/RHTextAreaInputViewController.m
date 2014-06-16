@@ -30,20 +30,25 @@
     if (self=[super init]) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
-		[self.view setBackgroundColor:[UIColor whiteColor]];
-
-		[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
-		[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-		[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
-		[self.textView setDelegate:self];
-
-		[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
-
-		[self.view addSubview:self.textView];
 	}
 
     return self;
+}
+
+-(void)viewDidLoad {
+	[super viewDidLoad];
+
+	// we don't want this in init... since self.view will cause the view to load
+	[self.view setBackgroundColor:[UIColor whiteColor]];
+
+	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
+	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+	[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
+	[self.textView setDelegate:self];
+
+	[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
+
+	[self.view addSubview:self.textView];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
