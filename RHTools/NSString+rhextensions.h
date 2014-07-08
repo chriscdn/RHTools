@@ -33,5 +33,6 @@
 -(NSNumber *)toNumber;
 -(NSAttributedString *)htmlToAttributedString;
 -(NSString *)stripHTML;
+- (BOOL)isEmailAddress;
 
 @end
