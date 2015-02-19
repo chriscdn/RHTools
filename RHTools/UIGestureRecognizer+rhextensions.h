@@ -1,7 +1,7 @@
 //
-//  RHTapGestureRecognizer.m
+//  UIGestureRecognizer+rhextensions.h
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,27 +22,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "RHTapGestureRecognizer.h"
+#import <UIKit/UIGestureRecognizer.h>
 
-@interface RHTapGestureRecognizer()
-@property (nonatomic, copy) RHTapGestureBlock block;
-@end
+typedef void (^RHGestureBlock)(UIGestureRecognizer *gesture);
 
-@implementation RHTapGestureRecognizer
-@synthesize block;
+@interface UIGestureRecognizer (rhextensions)
 
--(id)initWithBlock:(RHTapGestureBlock)_block {
-    if (self=[self initWithTarget:self action:@selector(gesturePerformed:)]) {
-        [self setBlock:_block];  // copied by @property
-    }
-    
-    return self;
-}
-
--(void)gesturePerformed:(UITapGestureRecognizer *)gesture {
-    if (self.block) {
-        self.block(gesture);
-    }
-}
+-(id)initWithBlock:(RHGestureBlock)block;
 
 @end

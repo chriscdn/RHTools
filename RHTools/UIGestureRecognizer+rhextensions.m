@@ -1,8 +1,7 @@
 //
-//  RHTapGestureRecognizer.h
-//  Version: 0.1
+//  UIGestureRecognizer+rhextensions.m
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,10 +22,38 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-typedef void (^RHTapGestureBlock)(UITapGestureRecognizer *gesture);
+#import "UIGestureRecognizer+rhextensions.h"
+#import <objc/runtime.h>
 
-@interface RHTapGestureRecognizer : UITapGestureRecognizer
+@interface UIGestureRecognizer (rhextensionsprivate)
+@property (nonatomic, copy) void (^block) (UIGestureRecognizer* gesture);
+@end
 
--(id)initWithBlock:(RHTapGestureBlock)_block;
+@implementation UIGestureRecognizer (rhextensions)
+
+static NSString const *key = @"f94993c0-987a-41a6-84ab-c1f94e28dfb8";
+
+-(id)initWithBlock:(RHGestureBlock)block {
+    if ((self = [self initWithTarget:self action:@selector(gesturePerformed:)])) {
+        [self setBlock:block];
+    }
+    
+    return self;
+}
+
+-(void)gesturePerformed:(UIGestureRecognizer *)gesture {
+    RHGestureBlock block = [self block];
+    if (block) {
+        block(gesture);
+    }
+}
+
+-(RHGestureBlock)block {
+    return objc_getAssociatedObject(self, &key);
+}
+
+-(void)setBlock:(RHGestureBlock)block {
+    objc_setAssociatedObject(self, &key, block, OBJC_ASSOCIATION_COPY);
+}
 
 @end

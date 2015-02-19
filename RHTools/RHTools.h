@@ -44,7 +44,6 @@ typedef void (^RHBoringBlock)();
 #import "RHButton.h"
 #import "RHSwitch.h"
 #import "UIApplication+rhextensions.h"
-#import "RHTapGestureRecognizer.h"
 #import "RHTableViewCell.h"
 #import "RHTableViewCells.h"
 #import "RHTableView.h"
@@ -58,3 +57,5 @@ typedef void (^RHBoringBlock)();
 #import "RHTextAreaInputViewController.h"
 #import "RHTextField.h"
 #import "UIScrollView+rhextensions.h"
+#import "UIGestureRecognizer+rhextensions.h"
+#import "CLLocation+rhextensions.h"
