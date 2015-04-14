@@ -54,12 +54,14 @@
 }
 
 -(NSArray *)arrayByPerformingSelector:(SEL)selector {
+    
     NSMutableArray * results = [NSMutableArray array];
-
+    
+    // http://stackoverflow.com/questions/24922913/too-many-arguments-to-function-call-expected-0-have-3
+    id (*typed_msgSend)(id, SEL) = (void *)objc_msgSend;
+   
     for (id object in self) {
-        // id result = [object performSelector:selector];
-		 id result = objc_msgSend(object, selector);
-
+        id result = typed_msgSend(object, selector);
 		[results addObject:result];
     }
 

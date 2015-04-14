@@ -275,8 +275,6 @@
 	[self.inputFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
 }
 
-// -(BOOL)disablesAutomaticKeyboardDismissal { return NO; }
-
 -(void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

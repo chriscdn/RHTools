@@ -88,7 +88,7 @@
     cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	cell.textField.layer.cornerRadius = 4.0f;
 	cell.textField.layer.masksToBounds = YES;
-	// cell.textField.backgroundColor = RGB(245, 245, 245);
+    cell.textField.backgroundColor = RGB(245, 245, 245);
 
 	// http://stackoverflow.com/questions/3727068/set-padding-for-uitextfield-with-uitextborderstylenone
 	UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];

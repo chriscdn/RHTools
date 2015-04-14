@@ -90,7 +90,7 @@ static NSArray *_unitValues;
     NSArray *units_plural = [NSDate unitsPlural];
 	NSArray *values = [NSDate unitValues];
 	
-	int delta = abs([self timeIntervalSinceDate:date]);
+	int delta = fabs([self timeIntervalSinceDate:date]);
 	
 	if ( delta < 60 ) {
         // return "0 minutes" if the difference is less than a minute ago
