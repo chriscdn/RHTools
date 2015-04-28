@@ -28,5 +28,7 @@
 -(void)stackSubviews;
 -(void)stackSubviewsWithSpace:(CGFloat)space;
 -(UIView *)superViewWithClass:(NSString *)klass;
+-(void)sendToBack;
+-(void)bringToFront;
 
 @end

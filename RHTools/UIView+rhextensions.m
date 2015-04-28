@@ -72,7 +72,16 @@
 	}
 
 	return nil;
+}
 
+-(void)sendToBack {
+    UIView *superView = [self superview];
+    [superView sendSubviewToBack:self];
+}
+
+-(void)bringToFront {
+    UIView *superView = [self superview];
+    [superView bringSubviewToFront:self];
 }
 
 @end

@@ -59,3 +59,4 @@ typedef void (^RHBoringBlock)();
 #import "UIScrollView+rhextensions.h"
 #import "UIGestureRecognizer+rhextensions.h"
 #import "CLLocation+rhextensions.h"
+#import "RHPopoverController.h"
