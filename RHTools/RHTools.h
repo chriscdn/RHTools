@@ -23,8 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
+// http://stackoverflow.com/questions/25780283/ios-how-to-detect-iphone-6-plus-iphone-6-iphone-5-by-macro
+
 #define IsIPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IsIPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IsIPhone6Plus (IsIPhone && [[UIScreen mainScreen] nativeScale] == 3.0f)
 #define IsIOS61orEarlier (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
 
 #define kOK NSLocalizedString(@"OK", nil)
@@ -60,3 +64,4 @@ typedef void (^RHBoringBlock)();
 #import "UIGestureRecognizer+rhextensions.h"
 #import "CLLocation+rhextensions.h"
 #import "RHPopoverController.h"
+#import "NSObject+KVOBlocks.h"
