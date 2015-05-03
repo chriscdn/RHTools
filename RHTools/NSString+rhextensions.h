@@ -32,7 +32,8 @@
 -(NSString *)trim;
 -(NSNumber *)toNumber;
 -(NSAttributedString *)htmlToAttributedString;
+-(NSAttributedString *)htmlToAttributedStringWithFont:(UIFont *)font;
 -(NSString *)stripHTML;
-- (BOOL)isEmailAddress;
+-(BOOL)isEmailAddress;
 
 @end

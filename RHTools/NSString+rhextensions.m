@@ -69,10 +69,18 @@
 }
 
 -(NSAttributedString *)htmlToAttributedString {
-	return [[NSAttributedString alloc] initWithData:[self dataUsingEncoding:NSUTF8StringEncoding]
+	return [[NSAttributedString alloc] initWithData:[[self trim] dataUsingEncoding:NSUTF8StringEncoding]
 											options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
 								 documentAttributes:nil
 											  error:nil];
+}
+
+-(NSAttributedString *)htmlToAttributedStringWithFont:(UIFont *)font {
+    
+    NSString *newString = [NSString stringWithFormat:@"<span style=\"font-family: %@; font-size: %f\";>%@</span>", font.fontName, font.pointSize, [self trim]];
+    
+    return [newString htmlToAttributedString];
+    
 }
 
 -(NSString *)stripHTML {
