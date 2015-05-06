@@ -35,5 +35,6 @@
 -(NSAttributedString *)htmlToAttributedStringWithFont:(UIFont *)font;
 -(NSString *)stripHTML;
 -(BOOL)isEmailAddress;
+-(BOOL)isEmpty;
 
 @end

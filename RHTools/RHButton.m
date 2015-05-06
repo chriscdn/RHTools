@@ -30,10 +30,10 @@
 
 @implementation RHButton
 
-+(id)buttonWithType:(UIButtonType)buttonType block:(RHButtonBlock)_block {
++(id)buttonWithType:(UIButtonType)buttonType block:(RHButtonBlock)block {
 	RHButton *button = [RHButton buttonWithType:buttonType];
 	[button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-	[button setBlock:_block];
+	[button setBlock:block];
 
 	return button;
 }

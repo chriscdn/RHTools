@@ -29,19 +29,19 @@
 @implementation NSString (rhextensions)
 
 +(NSString *)UUID {
-	// Returns a UUID
+    // Returns a UUID
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
     CFRelease(uuid);
-
+    
     return [uuidStr lowercaseString];
 }
 
 -(NSString *)firstLetter {
     if (!self.length || self.length == 1) {
         return self;
-	}
-
+    }
+    
     return [self substringToIndex:1];
 }
 
@@ -52,58 +52,59 @@
 }
 
 -(NSString *)truncateToLength:(int)charLength {
-	if ( self.length > charLength ) {
-		NSRange range = {0, charLength-kEllipsis.length};
-		return [[self substringWithRange:range] stringByAppendingFormat:kEllipsis];
-	} else {
-		return self;
-	}
+    if ( self.length > charLength ) {
+        NSRange range = {0, charLength-kEllipsis.length};
+        return [[self substringWithRange:range] stringByAppendingFormat:kEllipsis];
+    } else {
+        return self;
+    }
 }
 
 -(NSString *)trim {
-	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 -(NSNumber *)toNumber {
-	return [NSNumber numberWithInt:self.intValue];
+    return [NSNumber numberWithInt:self.intValue];
 }
 
 -(NSAttributedString *)htmlToAttributedString {
-	return [[NSAttributedString alloc] initWithData:[[self trim] dataUsingEncoding:NSUTF8StringEncoding]
-											options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-								 documentAttributes:nil
-											  error:nil];
+    return [[NSAttributedString alloc] initWithData:[[self trim] dataUsingEncoding:NSUTF8StringEncoding]
+                                            options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                 documentAttributes:nil
+                                              error:nil];
 }
 
 -(NSAttributedString *)htmlToAttributedStringWithFont:(UIFont *)font {
-    
     NSString *newString = [NSString stringWithFormat:@"<span style=\"font-family: %@; font-size: %f\";>%@</span>", font.fontName, font.pointSize, [self trim]];
-    
     return [newString htmlToAttributedString];
-    
 }
 
 -(NSString *)stripHTML {
-		NSRange r;
-		NSString *s = [self copy];
-		while ((r = [s rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-			s = [s stringByReplacingCharactersInRange:r withString:@""];
-		return s;
+    NSRange r;
+    NSString *s = [self copy];
+    while ((r = [s rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        s = [s stringByReplacingCharactersInRange:r withString:@""];
+    return s;
 }
 
 -(BOOL)isEmailAddress {
     NSString *emailRegex =
-	@"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
-	@"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
-	@"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
-	@"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
-	@"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
-	@"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
-	@"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-
-	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
-
+    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
+    
     return [emailTest evaluateWithObject:self];
+}
+
+-(BOOL)isEmpty {
+    return (self.length == 0);
 }
 
 @end

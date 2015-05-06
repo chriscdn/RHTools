@@ -59,9 +59,9 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidBeginEditingNotification object:nil];
 }
 
--(void)keyboardWillShow:(NSNotification *)_notification {
+-(void)keyboardWillShow:(NSNotification *)notification {
 
-	NSDictionary  *userInfo = [_notification userInfo];
+	NSDictionary  *userInfo = [notification userInfo];
 
 	NSTimeInterval animationDuration;
 	UIViewAnimationOptions animationCurve;
@@ -80,9 +80,9 @@
 
 }
 
--(void)keyboardWillHide:(NSNotification *)_notification {
+-(void)keyboardWillHide:(NSNotification *)notification {
 
-	NSDictionary  *userInfo = [_notification userInfo];
+	NSDictionary  *userInfo = [notification userInfo];
 
 	NSTimeInterval animationDuration;
 	UIViewAnimationOptions animationCurve;
@@ -112,10 +112,10 @@
 	
 }
 
--(void)textFieldChanged:(NSNotification *)_notification {
+-(void)textFieldChanged:(NSNotification *)notification {
 	if ( !CGRectIsNull(self.keyboardFrame) ) {
 		[UIView animateWithDuration:self.animationDuration delay:0 options:self.animationCurve animations:^{
-			[self scrollToMakeVisible:[_notification object]];
+			[self scrollToMakeVisible:[notification object]];
 		} completion:nil];
 	}
 }

@@ -1,6 +1,5 @@
 //
-//  CLLocation+rhextensions.h
-//  Version: 0.1
+//  AttributedStringScrollableViewController.m
 //
 //  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
@@ -23,13 +22,31 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <CoreLocation/CoreLocation.h>
+#import "AttributedStringScrollableViewController.h"
 
-typedef void (^RHLocationBlock)(NSDictionary *change, void *context);
+@interface AttributedStringScrollableViewController ()
+@property (nonatomic, strong) NSAttributedString *attributedString;
+@end
 
-@interface CLLocation (rhextensions)
+@implementation AttributedStringScrollableViewController
 
--(id)initWithCoordinates:(CLLocationCoordinate2D)coordinates;
--(void)timeZoneWithBlock:(void (^)(NSTimeZone *timezone))block;
+
++(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html {
+    return [self controllerWithHTML:html font:[UIFont systemFontOfSize:18.0f]];
+}
+
++(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html font:(UIFont *)font {
+    
+    AttributedStringScrollableViewController *controller = [[self alloc] initWithNibName:@"AttributedStringScrollableViewController" bundle:nil];
+    
+    [controller setAttributedString:[html htmlToAttributedStringWithFont:font]];
+    
+    return controller;
+}
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    [self.label setAttributedText:self.attributedString];
+}
 
 @end

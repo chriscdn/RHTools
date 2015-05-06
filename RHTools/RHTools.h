@@ -33,6 +33,8 @@
 
 #define kOK NSLocalizedString(@"OK", nil)
 #define kCancel NSLocalizedString(@"Cancel", nil)
+#define kYes NSLocalizedString(@"Yes", nil)
+#define kNo NSLocalizedString(@"No", nil)
 
 // RHBoringBlock is just that - no arguments and no return value
 typedef void (^RHBoringBlock)();

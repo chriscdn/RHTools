@@ -1,5 +1,5 @@
 //
-//  CLLocation+rhextensions.h
+//  AttributedStringScrollableViewController.h
 //  Version: 0.1
 //
 //  Copyright (C) 2015 by Christopher Meyer
@@ -23,13 +23,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <CoreLocation/CoreLocation.h>
+@interface AttributedStringScrollableViewController : UIViewController
 
-typedef void (^RHLocationBlock)(NSDictionary *change, void *context);
+@property (strong, nonatomic) IBOutlet UILabel *label;
 
-@interface CLLocation (rhextensions)
-
--(id)initWithCoordinates:(CLLocationCoordinate2D)coordinates;
--(void)timeZoneWithBlock:(void (^)(NSTimeZone *timezone))block;
++(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html;
++(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html font:(UIFont *)font;
 
 @end

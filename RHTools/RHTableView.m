@@ -27,8 +27,8 @@
 @interface RHTableView()
 @property (nonatomic, strong) NSMutableArray *inputFields;
 @property (nonatomic, assign) CGFloat bottomInsetWithoutKeyboard;
--(void)addSection:(RHTableSection *)section;
 
+-(void)addSection:(RHTableSection *)section;
 @end
 
 
