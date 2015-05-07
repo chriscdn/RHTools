@@ -26,5 +26,6 @@
 
 -(void)autoContentSize;
 -(void)scrollToBottomAnimated:(BOOL)animated;
+-(void)observeKeyboard;
 
 @end

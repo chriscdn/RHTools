@@ -27,7 +27,6 @@
 @interface RHTableView()
 @property (nonatomic, strong) NSMutableArray *inputFields;
 @property (nonatomic, assign) CGFloat bottomInsetWithoutKeyboard;
-
 -(void)addSection:(RHTableSection *)section;
 @end
 
@@ -81,12 +80,14 @@
     self.inputFields = [NSMutableArray array];
 }
 
+/*
 -(void)observeKeyboard {
     // UIKeyboardWillChangeFrameNotification doesn't seem to really know the end frame of the keyboard in iOS8.  We therefore follow-up with
     // UIKeyboardDidChangeFrameNotification to make sure our bases our covered.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
 }
+ */
 
 #pragma mark -
 
@@ -251,6 +252,7 @@
 
 #pragma mark -
 
+/*
 -(void)keyboardDidChangeFrame:(NSNotification *)notification {
     // We never know what the original bottom inset is...  We save it here for later.
     if (self.bottomInsetWithoutKeyboard == 0) {
@@ -285,10 +287,11 @@
                          self.scrollIndicatorInsets = newInset;
                      }
                      completion:nil];
-
-
-
 }
+*/
+
+
+
 
 /**
  * iOS8.3 seems to have trouble with the "will" notifications in that the

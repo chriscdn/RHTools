@@ -57,4 +57,47 @@
 	[self setContentOffset:bottomOffset animated:animated];
 }
 
+-(void)observeKeyboard {
+    // UIKeyboardWillChangeFrameNotification doesn't seem to really know the end frame of the keyboard in iOS8.  We therefore follow-up with
+    // UIKeyboardDidChangeFrameNotification to make sure our bases our covered.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+}
+
+-(void)keyboardDidChangeFrame:(NSNotification *)notification {
+    // We never know what the original bottom inset is...  We save it here for later.
+   // if (self.bottomInsetWithoutKeyboard == 0) {
+   //     [self setBottomInsetWithoutKeyboard:self.contentInset.bottom];
+   // }
+    
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // This is the relative position of the keyboard within our tableView
+    CGRect keyboardFrame = [self convertRect:keyboardEndFrame fromView:nil];
+    CGFloat viewHeight = keyboardFrame.origin.y;
+    CGFloat adjustedViewHeight = viewHeight - self.contentOffsetY;
+    
+    // NOTE: self.contentOffsetY is the same as self.bounds.size.
+    
+    UIEdgeInsets newInset = self.contentInset;
+    newInset.bottom = MAX(self.height - adjustedViewHeight, 0);
+    
+    //    self.contentInset = newInset;
+    //   self.scrollIndicatorInsets = newInset;
+    
+    
+    NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationOptions animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
+    
+    [UIView animateWithDuration:animationDuration
+                          delay:0
+                        options:animationCurve
+                     animations:^{
+                         self.contentInset = newInset;
+                         self.scrollIndicatorInsets = newInset;
+                     }
+                     completion:nil];
+}
+
 @end

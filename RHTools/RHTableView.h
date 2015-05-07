@@ -41,7 +41,7 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 
 -(void)hideKeyboard;
 -(void)reset;
--(void)observeKeyboard;
+// -(void)observeKeyboard;
 
 -(void)advanceFirstResponder:(UIView *)textFieldorTextView;
 -(void)scrollToView:(UIView *)view;

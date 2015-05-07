@@ -1,5 +1,5 @@
 //
-//  UIApplication+rhextensions.h
+//  UIView+rhextensions.h
 //
 //  Copyright (C) 2013 by Christopher Meyer
 //  http://schwiiz.org/
