@@ -48,6 +48,7 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellWithTextField:(NSString *)labelText;
++(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue;
 +(id)cellWithTextField2:(NSString *)labelText;
 +(id)cellWithTextView:(NSString *)labelText;
 +(id)cellWithTextView2:(NSString *)labelText;
@@ -56,6 +57,5 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
 -(CGFloat)leftMarginForTableView:(UITableView *)tableView;
 -(CGFloat)detailLabelWidth:(UITableView *)tableView;
-
 
 @end

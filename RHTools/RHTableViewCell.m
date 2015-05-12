@@ -74,13 +74,17 @@
 
 // Left aligned label with form input field.
 +(id)cellWithTextField:(NSString *)labelText {
+    return [self cellWithTextField:labelText initialValue:nil];
+}
+
++(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue {
 
     RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleValue1 image:nil accessoryType:UITableViewCellAccessoryNone];
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     cell.textField = [[RHTextField alloc] initWithFrame:CGRectZero];
-    cell.textField.text = @"";
+    cell.textField.text = initialValue;
     cell.textField.adjustsFontSizeToFitWidth = YES;
     cell.textField.minimumFontSize = 12;
     cell.textField.textColor = [UIColor colorWithRed:0.196 green:0.31 blue:0.522 alpha:1.0 ];

@@ -26,7 +26,6 @@
 
 @interface RHTableView()
 @property (nonatomic, strong) NSMutableArray *inputFields;
-@property (nonatomic, assign) CGFloat bottomInsetWithoutKeyboard;
 -(void)addSection:(RHTableSection *)section;
 @end
 
@@ -78,16 +77,8 @@
     self.textFields = [NSMutableArray array];
     self.textViews = [NSMutableArray array];
     self.inputFields = [NSMutableArray array];
+    self.deselectRowAfterSelect = YES;
 }
-
-/*
--(void)observeKeyboard {
-    // UIKeyboardWillChangeFrameNotification doesn't seem to really know the end frame of the keyboard in iOS8.  We therefore follow-up with
-    // UIKeyboardDidChangeFrameNotification to make sure our bases our covered.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
-}
- */
 
 #pragma mark -
 
@@ -186,12 +177,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RHTableViewCell *row = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    
+
     if (row.didSelectBlock) {
         row.didSelectBlock();
     }
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.deselectRowAfterSelect) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -249,119 +242,7 @@
     }
 }
 
-
 #pragma mark -
-
-/*
--(void)keyboardDidChangeFrame:(NSNotification *)notification {
-    // We never know what the original bottom inset is...  We save it here for later.
-    if (self.bottomInsetWithoutKeyboard == 0) {
-        [self setBottomInsetWithoutKeyboard:self.contentInset.bottom];
-    }
-    
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    // This is the relative position of the keyboard within our tableView
-    CGRect keyboardFrame = [self convertRect:keyboardEndFrame fromView:nil];
-    CGFloat viewHeight = keyboardFrame.origin.y;
-    CGFloat adjustedViewHeight = viewHeight - self.contentOffsetY;
-    
-    // NOTE: self.contentOffsetY is the same as self.bounds.size.
-    
-    UIEdgeInsets newInset = self.contentInset;
-    newInset.bottom = MAX(self.height - adjustedViewHeight, self.bottomInsetWithoutKeyboard);
-    
-    //    self.contentInset = newInset;
-    //   self.scrollIndicatorInsets = newInset;
-    
-    
-    NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
-    
-    [UIView animateWithDuration:animationDuration
-                          delay:0
-                        options:animationCurve
-                     animations:^{
-                         self.contentInset = newInset;
-                         self.scrollIndicatorInsets = newInset;
-                     }
-                     completion:nil];
-}
-*/
-
-
-
-
-/**
- * iOS8.3 seems to have trouble with the "will" notifications in that the
- * converted keyboard frame to the table won't always be initially correct.
- *
- * This may need to be revisited in the future, but this seems to work on all devices in all orientations
- * with or without that auto suggest keyboard thing.
- */
-
-/*
- -(void)keyboardWillShow:(NSNotification *)notification {
- 
- NSDictionary *userInfo = [notification userInfo];
- 
- CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
- 
- // This is the relative position of the keyboard within our tableView
- CGRect keyboardFrame = [self convertRect:keyboardEndFrame fromView:nil];
- CGFloat viewHeight = keyboardFrame.origin.y;
- CGFloat adjustedViewHeight = viewHeight - self.contentOffsetY;
- 
- //  CGFloat contentHeight = self.contentSize.height;
- 
- NSLog(@"%@", @"-------");
- 
- NSLog(@"Keyboard Original FRAME: %@", NSStringFromCGRect(keyboardEndFrame));
- NSLog(@"Keyboard Converted FRAME: %@", NSStringFromCGRect(keyboardFrame));
- NSLog(@"Table Bounds:: %@", NSStringFromCGRect(self.bounds));
- 
- //  NSLog(@"** Content Height: %f", contentHeight);
- NSLog(@"** Content Offset Y: %f", self.contentOffsetY);
- // NSLog(@"Original Keyboard Height: %f", keyboardEndFrame.size.height);
- NSLog(@"** Keyboard Height: %f", viewHeight);
- 
- // UIEdgeInsets adfadf = self.scrollIndicatorInsets;
- 
- UIEdgeInsets newInset = self.contentInset;
- // newInset.bottom = MAX(contentHeight + self.contentInset.top - self.bounds.origin.y - viewHeight, 0);
- 
- 
- NSLog(@"Adjusted maybe?: %f", adjustedViewHeight);
- 
- NSLog(@"Height: %f", self.height);
- NSLog(@"Bound Height: %f", self.bounds.size.height);
- 
- UIEdgeInsets zzz = self.contentInset;
- 
- newInset.bottom = MAX(self.height - adjustedViewHeight, 0);
- 
- 
- // newInset.bottom = MAX(viewHeight, 0);2
- 
- 
- NSLog(@"New Bottom: %f", newInset.bottom);
- 
- self.contentInset = newInset;
- self.scrollIndicatorInsets = newInset;
- 
- }
- 
- -(void)keyboardWillHide:(NSNotification *)notification {
- UIEdgeInsets newInset = self.contentInset;
- newInset.bottom = 0;
- self.contentInset = newInset;
- self.scrollIndicatorInsets = newInset;
- 
- // self.height = [self superview].bounds.size.height;
- }
- */
-
 -(void)hideKeyboard {
     [self.inputFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
 }

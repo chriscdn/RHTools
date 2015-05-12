@@ -68,3 +68,4 @@ typedef void (^RHBoringBlock)();
 #import "RHPopoverController.h"
 #import "NSObject+KVOBlocks.h"
 #import "UIImage+rhextensions.h"
+#import "RHRefreshControl.h"

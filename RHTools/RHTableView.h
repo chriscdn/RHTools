@@ -30,7 +30,8 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 @property (nonatomic, strong) NSMutableArray *tableRows;
 @property (nonatomic, strong) NSMutableArray *textFields;
 @property (nonatomic, strong) NSMutableArray *textViews;
-@property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;
+@property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock __attribute__((deprecated));
+@property (nonatomic, assign) BOOL deselectRowAfterSelect;
 
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText;
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText;
@@ -41,7 +42,6 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 
 -(void)hideKeyboard;
 -(void)reset;
-// -(void)observeKeyboard;
 
 -(void)advanceFirstResponder:(UIView *)textFieldorTextView;
 -(void)scrollToView:(UIView *)view;
