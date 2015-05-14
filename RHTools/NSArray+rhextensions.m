@@ -27,6 +27,7 @@
 
 @implementation NSArray (rhextensions)
 
+/*
 -(id)firstObject {
     if ([self count] == 0) {
         return nil;
@@ -34,6 +35,7 @@
         return [self objectAtIndex:0];
     }
 }
+ */
 
 -(NSArray *)pluck:(NSString *)key {
 	NSMutableArray *items = [NSMutableArray array];

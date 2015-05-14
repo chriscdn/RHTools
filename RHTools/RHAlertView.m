@@ -29,7 +29,6 @@
 @end
 
 @implementation RHAlertView
-@synthesize actions;
 
 +(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message {
 	return [[self alloc] initWithTitle:title message:message];

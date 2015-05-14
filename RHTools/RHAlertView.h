@@ -27,9 +27,13 @@ typedef void (^RHAlertBlock)(void);
 
 @interface RHAlertView : UIAlertView<UIAlertViewDelegate>
 
+// @property (nonatomic, strong) RHAlertBlock willPresentBlock;
+// @property (nonatomic, strong) RHAlertBlock willDismissBlock;
+
 +(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message;
 +(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message;
 -(id)initWithTitle:(NSString *)title message:(NSString *)message;
+
 -(NSInteger)addButtonWithTitle:(NSString *)title block:(RHAlertBlock)block;
 -(NSInteger)addOKButton;
 -(NSInteger)addOKButtonWithBlock:(RHAlertBlock)block;
