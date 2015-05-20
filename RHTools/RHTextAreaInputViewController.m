@@ -24,15 +24,18 @@
 
 #import "RHTextAreaInputViewController.h"
 
+static UIFont *_font = nil;
+
 @implementation RHTextAreaInputViewController
 
--(id)init {
-    if (self=[super init]) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-	}
++(void)setFont:(UIFont *)font {
+    _font = font;
+}
 
-    return self;
++(void)initialize {
+    if(self == [RHTextAreaInputViewController class]){
+        [self setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
+    }
 }
 
 -(void)viewDidLoad {
@@ -43,11 +46,12 @@
 
 	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
 	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-	[self.textView setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
+    
+    [self.textView setFont:_font];
 	[self.textView setDelegate:self];
-
 	[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
-
+    [self.textView observeKeyboard];
+    
 	[self.view addSubview:self.textView];
 }
 
@@ -61,7 +65,6 @@
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self setHasChanges:NO];
-    
 }
 
 -(void)applyToolbarItems {
@@ -71,9 +74,10 @@
 		UIToolbar *toolbar = [[UIToolbar alloc] init];
 		[toolbar sizeToFit];
 
-		CGRect frame = toolbar.frame;
-		frame.size.height = 30;
-		[toolbar setFrame:frame];
+		// CGRect frame = toolbar.frame;
+		// frame.size.height = 30;
+		// [toolbar setFrame:frame];
+        [toolbar setHeight:30.0f];
 		[toolbar setItems:toolbarItems];
 		[self.textView setInputAccessoryView:toolbar];
 	}
@@ -83,54 +87,18 @@
 	return nil;
 }
 
--(void)keyboardWillShow:(NSNotification *)notification {
-	NSDictionary  *userInfo = [notification userInfo];
-
-	NSTimeInterval animationDuration;
-	UIViewAnimationCurve animationCurve;
-	CGRect keyboardEndFrame;
-	[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-	[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-	[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-
-	CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame fromView:nil];
-	CGFloat textViewWidth = self.view.bounds.size.width;
-
-    /* Animation Block */
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:animationDuration];
-	[UIView setAnimationCurve:animationCurve];
-	self.textView.frame = CGRectMake(0, 0, textViewWidth, keyboardFrame.origin.y);
-	[UIView commitAnimations];
-}
-
--(void)keyboardWillHide:(NSNotification *)notification {
-	NSDictionary  *userInfo = [notification userInfo];
-	NSTimeInterval animationDuration;
-	UIViewAnimationCurve animationCurve;
-	CGRect keyboardEndFrame;
-	[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-	[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-	[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-
-    /* Animation Block */
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:animationDuration];
-	[UIView setAnimationCurve:animationCurve];
-	self.textView.frame = self.view.bounds;
-	[UIView commitAnimations];
-}
-
 -(void)hideKeyboard {
 	[self.textView resignFirstResponder];
 }
 
 #pragma mark TextView Delegate Methods
 
+/*
 -(void)textViewDidChangeSelection:(UITextView *)textView {
 	// This gets around a bug in iOS7 that doesn't properly scroll.
 	[textView scrollRangeToVisible:textView.selectedRange];
 }
+*/
 
 -(void)textViewDidChange:(UITextView *)textView {
 	self.hasChanges = YES;

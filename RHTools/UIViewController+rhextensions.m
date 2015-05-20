@@ -27,7 +27,7 @@
 @implementation UIViewController (rhextensions)
 
 -(UINavigationController *)wrapInNavigationController {
-	return [[UINavigationController alloc] initWithRootViewController:self];
+    return [[UINavigationController alloc] initWithRootViewController:self];
 }
 
 @end

@@ -29,13 +29,14 @@ typedef void(^RHDidSaveTextBlock)(NSString *text);
 
 @property (strong, nonatomic) UITextView *textView;
 @property (assign, nonatomic) BOOL hasChanges;
+@property (strong, nonatomic) UIFont *inputFont UI_APPEARANCE_SELECTOR;
 
++(void)setFont:(UIFont *)font;
 -(NSMutableArray *)toolbarItems;
 -(void)applyToolbarItems;
 -(void)hideKeyboard;
 
 @end
-
 
 @interface RHTextAreaInputForNavigationViewController : RHTextAreaInputViewController
 

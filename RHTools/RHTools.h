@@ -31,6 +31,9 @@
 #define IsIPhone6Plus (IsIPhone && [[UIScreen mainScreen] nativeScale] == 3.0f)
 #define IsIOS61orEarlier (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
 
+#define async(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ })
+#define async_main(...) dispatch_async(dispatch_get_main_queue(), ^{ __VA_ARGS__ })
+
 #define kOK NSLocalizedString(@"OK", nil)
 #define kCancel NSLocalizedString(@"Cancel", nil)
 #define kYes NSLocalizedString(@"Yes", nil)

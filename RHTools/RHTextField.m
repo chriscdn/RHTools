@@ -92,6 +92,15 @@
 	return self;
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    if (self=[super initWithCoder:aDecoder]) {
+        self.powerDelegate = [RHTextFieldBlockDelegate new];
+        self.delegate = self.powerDelegate;
+    }
+    
+    return self;
+}
+
 -(void)setShouldBeginEditingBlock:(BOOL (^)(RHTextField *))shouldBeginEditingBlock {
 	[self.powerDelegate setShouldBeginEditingBlock:shouldBeginEditingBlock ];
 }
