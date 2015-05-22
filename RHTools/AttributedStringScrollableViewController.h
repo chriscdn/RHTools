@@ -28,6 +28,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
 +(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html;
-+(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html font:(UIFont *)font;
+// +(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html font:(UIFont *)font;
 
 @end

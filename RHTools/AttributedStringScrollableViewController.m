@@ -30,7 +30,13 @@
 
 @implementation AttributedStringScrollableViewController
 
++(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html {
+    AttributedStringScrollableViewController *controller = [[self alloc] initWithNibName:@"AttributedStringScrollableViewController" bundle:nil];
+    [controller setAttributedString:[html htmlToAttributedString]];
+    return controller;
+}
 
+/*
 +(AttributedStringScrollableViewController *)controllerWithHTML:(NSString *)html {
     return [self controllerWithHTML:html font:[UIFont systemFontOfSize:18.0f]];
 }
@@ -39,14 +45,24 @@
     
     AttributedStringScrollableViewController *controller = [[self alloc] initWithNibName:@"AttributedStringScrollableViewController" bundle:nil];
     
-    [controller setAttributedString:[html htmlToAttributedStringWithFont:font]];
+    //  [controller setAttributedString:[html htmlToAttributedStringWithFont:font]];
+    
+    
+    [controller setAttributedString:[html htmlToAttributedString]];
     
     return controller;
 }
+ */
 
+// http://stackoverflow.com/questions/13802241/setting-custom-font-in-uitextview-with-attributed-string
 -(void)viewDidLoad {
     [super viewDidLoad];
-    [self.label setAttributedText:self.attributedString];
+    
+    NSMutableAttributedString *mutableString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedString];
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:self.label.font, NSFontAttributeName, nil];
+    [mutableString addAttributes:attrs range:NSMakeRange(0, [mutableString length])];
+    
+    [self.label setAttributedText:mutableString];
 }
 
 @end

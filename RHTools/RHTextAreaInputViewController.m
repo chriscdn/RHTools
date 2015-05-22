@@ -26,6 +26,12 @@
 
 static UIFont *_font = nil;
 
+
+@interface RHTextAreaInputViewController()
+@property (nonatomic, strong) NSString *initialText;
+@end
+
+
 @implementation RHTextAreaInputViewController
 
 +(void)setFont:(UIFont *)font {
@@ -47,6 +53,7 @@ static UIFont *_font = nil;
 	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
 	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
+    [self.textView setText:self.initialText];
     [self.textView setFont:_font];
 	[self.textView setDelegate:self];
 	[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
@@ -93,23 +100,12 @@ static UIFont *_font = nil;
 
 #pragma mark TextView Delegate Methods
 
-/*
--(void)textViewDidChangeSelection:(UITextView *)textView {
-	// This gets around a bug in iOS7 that doesn't properly scroll.
-	[textView scrollRangeToVisible:textView.selectedRange];
-}
-*/
-
 -(void)textViewDidChange:(UITextView *)textView {
 	self.hasChanges = YES;
 }
 
-#pragma mark -
-#pragma mark Keyboard View
-
 -(void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.textView setDelegate:nil];
+    [self.textView stopObservingKeyboard];
 }
 
 @end
@@ -119,8 +115,8 @@ static UIFont *_font = nil;
 
 +(UINavigationController *)controllerWithTitle:(NSString *)title text:(NSString *)text didSaveTextBlock:(RHDidSaveTextBlock)didSaveTextBlock {
 	RHTextAreaInputForNavigationViewController *controller = [[RHTextAreaInputForNavigationViewController alloc] init];
-	[controller setTitle:title];
-	[controller.textView setText:text];
+    [controller setTitle:title];
+    [controller setInitialText:text];
 	[controller setDidSaveTextBlock:didSaveTextBlock];
 
 	return [controller wrapInNavigationController];
@@ -136,8 +132,8 @@ static UIFont *_font = nil;
 	}];
 
 	self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemSave block:^{
-		if (self.didSaveTextBlock) {
-			self.didSaveTextBlock(self.textView.text);
+		if (bself.didSaveTextBlock) {
+			bself.didSaveTextBlock(bself.textView.text);
 		}
 		[bself dismissViewControllerAnimated:YES completion:nil];
 	}];

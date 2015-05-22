@@ -59,6 +59,11 @@
 
 	[cell.detailTextLabel setNumberOfLines:0];
 	[cell.detailTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    
+    [cell.textLabel setFont:[UIFont systemFontOfSize:[UIFont systemFontSize]+1]];
+    [cell.detailTextLabel setFont:[UIFont systemFontOfSize:[UIFont systemFontSize]+1]];
+    
+  //  cell.textLabel.width += 50.0f;
 
     return cell;
 }

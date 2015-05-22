@@ -27,34 +27,34 @@
 @implementation UIScrollView (rhextensions)
 
 -(void)autoContentSize {
-
-	self.showsHorizontalScrollIndicator = NO;
-	self.showsVerticalScrollIndicator = NO;
-
-	CGFloat scrollViewHeight = 0.0f;
+    
+    self.showsHorizontalScrollIndicator = NO;
+    self.showsVerticalScrollIndicator = NO;
+    
+    CGFloat scrollViewHeight = 0.0f;
     CGFloat scrollViewWidth = 0.0f;
-
-	for (UIView* view in self.subviews) {
-		if (!view.hidden) {
-			CGFloat y = view.frame.origin.y;
-			CGFloat h = view.frame.size.height;
-			CGFloat x = view.frame.origin.x;
+    
+    for (UIView* view in self.subviews) {
+        if (!view.hidden) {
+            CGFloat y = view.frame.origin.y;
+            CGFloat h = view.frame.size.height;
+            CGFloat x = view.frame.origin.x;
             CGFloat w = view.frame.size.width;
-
-			scrollViewHeight = MAX(scrollViewHeight, h+y);
+            
+            scrollViewHeight = MAX(scrollViewHeight, h+y);
             scrollViewWidth  = MAX(scrollViewWidth, x+w);
-		}
-	}
-
-	[self setContentSize:(CGSizeMake(scrollViewWidth, scrollViewHeight+10))];
-
-	self.showsHorizontalScrollIndicator = YES;
-	self.showsVerticalScrollIndicator = YES;
+        }
+    }
+    
+    [self setContentSize:(CGSizeMake(scrollViewWidth, scrollViewHeight+10))];
+    
+    self.showsHorizontalScrollIndicator = YES;
+    self.showsVerticalScrollIndicator = YES;
 }
 
 -(void)scrollToBottomAnimated:(BOOL)animated {
-	CGPoint bottomOffset = CGPointMake(0, self.contentSize.height - self.bounds.size.height);
-	[self setContentOffset:bottomOffset animated:animated];
+    CGPoint bottomOffset = CGPointMake(0, self.contentSize.height - self.bounds.size.height);
+    [self setContentOffset:bottomOffset animated:animated];
 }
 
 -(void)observeKeyboard {
@@ -64,11 +64,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
 }
 
+-(void)stopObservingKeyboard {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+}
+
 -(void)keyboardDidChangeFrame:(NSNotification *)notification {
     // We never know what the original bottom inset is...  We save it here for later.
-   // if (self.bottomInsetWithoutKeyboard == 0) {
-   //     [self setBottomInsetWithoutKeyboard:self.contentInset.bottom];
-   // }
+    // if (self.bottomInsetWithoutKeyboard == 0) {
+    //     [self setBottomInsetWithoutKeyboard:self.contentInset.bottom];
+    // }
     
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
