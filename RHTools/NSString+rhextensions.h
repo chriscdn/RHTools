@@ -36,5 +36,6 @@
 -(NSString *)stripHTML;
 -(BOOL)isEmailAddress;
 -(BOOL)isEmpty;
+-(NSArray *)whitespaceTokenize;
 
 @end

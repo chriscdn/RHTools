@@ -30,4 +30,10 @@
     return [[UINavigationController alloc] initWithRootViewController:self];
 }
 
+-(UINavigationController *)wrapInNavigationControllerWithPresentationStyle:(UIModalPresentationStyle)modalPresentationStyle {
+    UINavigationController *navController = [self wrapInNavigationController];
+    [navController setModalPresentationStyle:modalPresentationStyle];
+    return navController;
+}
+
 @end

@@ -25,5 +25,6 @@
 @interface UIViewController (rhextensions)
 
 -(UINavigationController *)wrapInNavigationController;
+-(UINavigationController *)wrapInNavigationControllerWithPresentationStyle:(UIModalPresentationStyle)modalPresentationStyle;
 
 @end

@@ -107,4 +107,9 @@
     return (self.length == 0);
 }
 
+-(NSArray *)whitespaceTokenize {
+    NSArray *array = [self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    return [array filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
+}
+
 @end
