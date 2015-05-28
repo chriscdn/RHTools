@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.3'
   s.requires_arc = true
 
-  s.source_files = 'RHTools/*.{h,m}'
-  s.resources = 'RHTools/*.xib'
+  s.source_files = 'RHTools/**/*.{h,m}'
+  s.resources = 'RHTools/**/*.xib'
   s.dependency 'FrameAccessor'
   
   s.prefix_header_contents = '#import "RHTools.h"'
