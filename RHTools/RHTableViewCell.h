@@ -23,8 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#define kRHDetailLabelLeftMargin IsIOS61orEarlier ? 83 : 112
-#define kRHTopBottomMargin 11
+// #define kRHDetailLabelLeftMargin IsIOS61orEarlier ? 83 : 112
+// #define kRHTopBottomMargin 11
 #define kRHDefaultCellHeight 44
 
 #import "RHTextField.h"
@@ -32,11 +32,18 @@
 @interface RHTableViewCell : UITableViewCell
 
 typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
+// typedef CGFloat (^RHHeightBlock)();
 
 @property (nonatomic, copy) RHBoringBlock didSelectBlock;
+// @property (nonatomic, copy) RHHeightBlock heightBlock;
 @property (nonatomic, copy) RHReloadCellBlock reloadCellBlock;
-@property (nonatomic, strong) RHTextField *textField;
-@property (nonatomic, strong) UITextView *textView;
+
+@property (strong, nonatomic) IBOutlet UILabel *largeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *leftLabel;
+@property (strong, nonatomic) IBOutlet RHTextField *textField;
+@property (strong, nonatomic) IBOutlet UITextView *textView;
+
+@property (strong, nonatomic) IBOutlet UIView *labelSeparatorView;
 
 +(id)cellWithLabelText:(NSString *)labelText
                      detailLabelText:(NSString *)detailLabelText
@@ -47,15 +54,18 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
+
+
 +(id)cellWithTextField:(NSString *)labelText;
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue;
-+(id)cellWithTextField2:(NSString *)labelText;
 +(id)cellWithTextView:(NSString *)labelText;
-+(id)cellWithTextView2:(NSString *)labelText;
++(id)cellWithSingleLabel:(NSString *)labelText;
++(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText;
 +(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block;
 
++(void)setLeftLabelTextAlignment:(NSTextAlignment)textLabelAlignment;
++(void)setSeparatorColour:(UIColor *)separatorColour;
+
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
--(CGFloat)leftMarginForTableView:(UITableView *)tableView;
--(CGFloat)detailLabelWidth:(UITableView *)tableView;
 
 @end

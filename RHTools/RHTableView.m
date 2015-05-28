@@ -74,10 +74,14 @@
     
     self.tableSections = [NSMutableArray array];
     self.tableRows = [NSMutableArray array];
+    self.textLabels = [NSMutableArray array];
     self.textFields = [NSMutableArray array];
     self.textViews = [NSMutableArray array];
     self.inputFields = [NSMutableArray array];
     self.deselectRowAfterSelect = YES;
+    
+    [self setEstimatedRowHeight:44.0f];
+    [self setRowHeight:UITableViewAutomaticDimension];
 }
 
 #pragma mark -
@@ -99,9 +103,7 @@
 }
 
 -(RHTableViewCell *)addCell:(RHTableViewCell *)cell {
-    
     [[self.tableRows lastObject] addObject:cell];
-    // [[self.textFields lastObject] setReturnKeyType:UIReturnKeyNext];
     
     if (cell.textField) {
         
@@ -121,7 +123,30 @@
         [self.inputFields addObject:cell.textView];
     }
     
+    if (cell.leftLabel) {
+        [self.textLabels addObject:cell.leftLabel];
+    }
+    
     return cell;
+}
+
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat labelWidth = 0;
+    
+    // get the max label width
+    for (UILabel *label in self.textLabels) {
+        CGSize labelSize = [label sizeThatFits:CGSizeMake(CGFLOAT_MAX, label.height)];
+        labelWidth = fmaxf(labelSize.width, labelWidth);
+    }
+
+    // apply it
+    for (UILabel *label in self.textLabels) {
+        [[label constraintForAttribute:NSLayoutAttributeWidth] setConstant:labelWidth];
+    }
+
 }
 
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText {
@@ -226,7 +251,6 @@
     NSIndexPath *indexPath = [self indexPathForCell:cell];
     [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
-
 
 -(void)setTextFieldsKeyboardReturnToNext {
     __weak RHTableView *bself = self;

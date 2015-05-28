@@ -30,9 +30,7 @@
 
 @implementation RHRefreshControl
 
-
 +(RHRefreshControl *)refreshControlWithBlock:(RHRefreshControlBlock)block {
-    
     RHRefreshControl *refreshControl = [[RHRefreshControl alloc] init];
     [refreshControl setBlock:block];
     [refreshControl addTarget:refreshControl action:@selector(refresh) forControlEvents:UIControlEventValueChanged];

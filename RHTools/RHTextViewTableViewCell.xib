@@ -7,8 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="KGk-i7-Jjw" customClass="RHTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="140" id="KGk-i7-Jjw" customClass="RHTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -24,37 +24,38 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwJ-CP-hVf">
-                        <rect key="frame" x="116" y="8" width="1" height="27"/>
+                        <rect key="frame" x="116" y="8" width="1" height="123"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="EST-JS-rfO"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eni-BI-bxD">
-                        <rect key="frame" x="125" y="8" width="187" height="27"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ur7-fa-mvU">
+                        <rect key="frame" x="125" y="8" width="187" height="123"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="ur7-fa-mvU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3Hg-ji-Cpu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="nwJ-CP-hVf" secondAttribute="bottom" id="7K6-lz-fth"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="PAp-Cj-jzM" secondAttribute="bottom" id="Cco-Pf-Hyh"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ur7-fa-mvU" secondAttribute="bottom" id="FVa-Sf-g54"/>
                     <constraint firstItem="nwJ-CP-hVf" firstAttribute="leading" secondItem="PAp-Cj-jzM" secondAttribute="trailing" constant="8" id="IM7-3X-j0U"/>
-                    <constraint firstItem="Eni-BI-bxD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Nvr-P1-irj"/>
                     <constraint firstItem="PAp-Cj-jzM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OLy-Tb-kZG"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Eni-BI-bxD" secondAttribute="bottom" id="QRv-9h-QwX"/>
                     <constraint firstItem="PAp-Cj-jzM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="fOE-bP-lkG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Eni-BI-bxD" secondAttribute="trailing" id="hEW-dJ-mOm"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ur7-fa-mvU" secondAttribute="trailing" id="jPt-jt-YMh"/>
                     <constraint firstItem="nwJ-CP-hVf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="oLG-yj-XNc"/>
-                    <constraint firstItem="Eni-BI-bxD" firstAttribute="leading" secondItem="nwJ-CP-hVf" secondAttribute="trailing" constant="8" id="zbp-HU-Jo2"/>
+                    <constraint firstItem="ur7-fa-mvU" firstAttribute="leading" secondItem="nwJ-CP-hVf" secondAttribute="trailing" constant="8" id="rpk-R8-LOj"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="labelSeparatorView" destination="nwJ-CP-hVf" id="Xkv-Hf-H3v"/>
-                <outlet property="largeLabel" destination="Eni-BI-bxD" id="1vP-wq-Lew"/>
-                <outlet property="leftLabel" destination="PAp-Cj-jzM" id="3Nu-nh-cBM"/>
+                <outlet property="labelSeparatorView" destination="nwJ-CP-hVf" id="Jg9-C4-cbI"/>
+                <outlet property="leftLabel" destination="PAp-Cj-jzM" id="1N1-B7-7Uz"/>
+                <outlet property="textView" destination="ur7-fa-mvU" id="XqU-Xw-JwR"/>
             </connections>
-            <point key="canvasLocation" x="181" y="-186"/>
+            <point key="canvasLocation" x="294" y="303"/>
         </tableViewCell>
     </objects>
 </document>

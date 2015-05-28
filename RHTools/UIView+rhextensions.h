@@ -24,11 +24,16 @@
 
 @interface UIView (rhextensions)
 
++(id)viewFromNib;
++(id)viewFromNibNamed:(NSString *)nibName;
+
 -(UIView *)findFirstResponder;
 -(void)stackSubviews;
 -(void)stackSubviewsWithSpace:(CGFloat)space;
 -(UIView *)superViewWithClass:(NSString *)klass;
 -(void)sendToBack;
 -(void)bringToFront;
+-(NSArray *)constaintsForAttribute:(NSLayoutAttribute)attribute;
+-(NSLayoutConstraint *)constraintForAttribute:(NSLayoutAttribute)attribute;
 
 @end

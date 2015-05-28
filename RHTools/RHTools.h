@@ -72,4 +72,3 @@ typedef void (^RHBoringBlock)();
 #import "NSObject+KVOBlocks.h"
 #import "UIImage+rhextensions.h"
 #import "RHRefreshControl.h"
-#import "RHLabelTableViewCell.h"

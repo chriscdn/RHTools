@@ -27,21 +27,11 @@
 
 @implementation NSArray (rhextensions)
 
-/*
--(id)firstObject {
-    if ([self count] == 0) {
-        return nil;
-    } else {
-        return [self objectAtIndex:0];
-    }
-}
- */
-
 -(NSArray *)pluck:(NSString *)key {
 	NSMutableArray *items = [NSMutableArray array];
 
 	for (id item in self) {
-		[items addObject:[item valueForKey:key]];
+		[items addObject:[item valueForKeyPath:key]];
 	}
 
 	return items;

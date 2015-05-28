@@ -26,52 +26,60 @@
 
 @implementation UIView (rhextensions)
 
++(id)viewFromNib {
+    return [self viewFromNibNamed:NSStringFromClass(self)];
+}
+
++(id)viewFromNibNamed:(NSString *)nibName {
+    return [[[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil] objectAtIndex:0];
+}
+
 -(UIView *)findFirstResponder {
-	if ([self isFirstResponder]) {
-		return self;
-	}
-
-	for (UIView * subView in self.subviews) {
-		UIView *firstResponder = [subView findFirstResponder];
-		if (firstResponder != nil) {
-			return firstResponder;
-		}
-	}
-
-	return nil;
+    if ([self isFirstResponder]) {
+        return self;
+    }
+    
+    for (UIView * subView in self.subviews) {
+        UIView *firstResponder = [subView findFirstResponder];
+        if (firstResponder != nil) {
+            return firstResponder;
+        }
+    }
+    
+    return nil;
 }
 
 -(void)stackSubviewsWithSpace:(CGFloat)space {
-	UIView *view = [self.subviews firstObject];
-	NSArray *remainingItems = [self.subviews subarrayWithRange:NSMakeRange(1, ([self.subviews count]-1))];
-
-	CGFloat y = view.y;
-	CGFloat h = view.height;
-
-	for (UIView* view in remainingItems) {
-		if (!view.hidden) {
-			[view setY:h+y+space];
-			y = view.y;
-			h = view.height;
-		}
-	}
+    UIView *view = [self.subviews firstObject];
+    NSArray *remainingItems = [self.subviews subarrayWithRange:NSMakeRange(1, ([self.subviews count]-1))];
+    
+    CGFloat y = view.y;
+    CGFloat h = view.height;
+    
+    for (UIView* view in remainingItems) {
+        if (!view.hidden) {
+            [view setY:h+y+space];
+            y = view.y;
+            h = view.height;
+        }
+    }
 }
 
 -(void)stackSubviews {
-	[self stackSubviewsWithSpace:10];
+    [self stackSubviewsWithSpace:10];
 }
 
 -(UIView *)superViewWithClass:(NSString *)className {
-	UIView *view = self;
-
-	while (view) {
-		if ([view isKindOfClass:NSClassFromString(className)]) {
-			return view;
-		}
-		view = [view superview];
-	}
-
-	return nil;
+    UIView *view = self;
+    
+    while (view) {
+        if ([view isKindOfClass:NSClassFromString(className)]) {
+            return view;
+        }
+        view = [view superview];
+    }
+    
+    return nil;
 }
 
 -(void)sendToBack {
@@ -83,5 +91,16 @@
     UIView *superView = [self superview];
     [superView bringSubviewToFront:self];
 }
+
+
+-(NSArray *)constaintsForAttribute:(NSLayoutAttribute)attribute {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", attribute];
+    return [[self constraints] filteredArrayUsingPredicate:predicate];
+}
+
+-(NSLayoutConstraint *)constraintForAttribute:(NSLayoutAttribute)attribute {
+    return [[self constaintsForAttribute:attribute] firstObject];
+}
+
 
 @end

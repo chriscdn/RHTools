@@ -28,6 +28,7 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 
 @property (nonatomic, strong) NSMutableArray *tableSections;
 @property (nonatomic, strong) NSMutableArray *tableRows;
+@property (nonatomic, strong) NSMutableArray *textLabels;
 @property (nonatomic, strong) NSMutableArray *textFields;
 @property (nonatomic, strong) NSMutableArray *textViews;
 @property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;

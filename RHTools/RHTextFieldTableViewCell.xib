@@ -29,32 +29,31 @@
                             <constraint firstAttribute="width" constant="1" id="EST-JS-rfO"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eni-BI-bxD">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iok-pX-tar" customClass="RHTextField">
                         <rect key="frame" x="125" y="8" width="187" height="27"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="iok-pX-tar" firstAttribute="leading" secondItem="nwJ-CP-hVf" secondAttribute="trailing" constant="8" id="3sA-b6-9at"/>
                     <constraint firstAttribute="bottomMargin" secondItem="nwJ-CP-hVf" secondAttribute="bottom" id="7K6-lz-fth"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="PAp-Cj-jzM" secondAttribute="bottom" id="Cco-Pf-Hyh"/>
                     <constraint firstItem="nwJ-CP-hVf" firstAttribute="leading" secondItem="PAp-Cj-jzM" secondAttribute="trailing" constant="8" id="IM7-3X-j0U"/>
-                    <constraint firstItem="Eni-BI-bxD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Nvr-P1-irj"/>
                     <constraint firstItem="PAp-Cj-jzM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OLy-Tb-kZG"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Eni-BI-bxD" secondAttribute="bottom" id="QRv-9h-QwX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="iok-pX-tar" secondAttribute="trailing" id="asM-CJ-Ky7"/>
+                    <constraint firstItem="iok-pX-tar" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="cBO-n3-cwq"/>
                     <constraint firstItem="PAp-Cj-jzM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="fOE-bP-lkG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Eni-BI-bxD" secondAttribute="trailing" id="hEW-dJ-mOm"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="iok-pX-tar" secondAttribute="bottom" id="ff2-8n-UrK"/>
                     <constraint firstItem="nwJ-CP-hVf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="oLG-yj-XNc"/>
-                    <constraint firstItem="Eni-BI-bxD" firstAttribute="leading" secondItem="nwJ-CP-hVf" secondAttribute="trailing" constant="8" id="zbp-HU-Jo2"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="labelSeparatorView" destination="nwJ-CP-hVf" id="Xkv-Hf-H3v"/>
-                <outlet property="largeLabel" destination="Eni-BI-bxD" id="1vP-wq-Lew"/>
                 <outlet property="leftLabel" destination="PAp-Cj-jzM" id="3Nu-nh-cBM"/>
+                <outlet property="textField" destination="iok-pX-tar" id="iSv-3N-zbb"/>
             </connections>
-            <point key="canvasLocation" x="181" y="-186"/>
+            <point key="canvasLocation" x="294" y="255"/>
         </tableViewCell>
     </objects>
 </document>
