@@ -21,18 +21,19 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 #import "RHTableView.h"
 
 @interface RHTableView()
-@property (nonatomic, strong) NSMutableArray *inputFields;
+
 -(void)addSection:(RHTableSection *)section;
+-(void)scrollToView:(UIView *)view;
+
 @end
 
 
 @implementation RHTableView
-
-// TODO: get rid of this duplicated code
 
 -(id)init {
     if (self=[super init]) {
@@ -49,7 +50,6 @@
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
-    
     if (self=[super initWithCoder:aDecoder]) {
         [self reset];
     }
@@ -80,8 +80,15 @@
     self.inputFields = [NSMutableArray array];
     self.deselectRowAfterSelect = YES;
     
-    [self setEstimatedRowHeight:44.0f];
+    [self setEstimatedRowHeight:100.0f];
     [self setRowHeight:UITableViewAutomaticDimension];
+}
+
+-(RHTableViewCellLayout *)tableViewCellLayout {
+    if (_tableViewCellLayout == nil) {
+        _tableViewCellLayout = [RHTableViewCellLayout new];
+    }
+    return _tableViewCellLayout;
 }
 
 #pragma mark -
@@ -126,27 +133,8 @@
     if (cell.leftLabel) {
         [self.textLabels addObject:cell.leftLabel];
     }
-    
+  
     return cell;
-}
-
-
--(void)layoutSubviews {
-    [super layoutSubviews];
-    
-    CGFloat labelWidth = 0;
-    
-    // get the max label width
-    for (UILabel *label in self.textLabels) {
-        CGSize labelSize = [label sizeThatFits:CGSizeMake(CGFLOAT_MAX, label.height)];
-        labelWidth = fmaxf(labelSize.width, labelWidth);
-    }
-
-    // apply it
-    for (UILabel *label in self.textLabels) {
-        [[label constraintForAttribute:NSLayoutAttributeWidth] setConstant:labelWidth];
-    }
-
 }
 
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText {
@@ -177,8 +165,24 @@
 #pragma mark UITableViewDelegate & UITableViewDataSource delegate methods
 
 -(void)reloadData {
-    [super reloadData];
     
+    
+    
+    CGFloat labelWidth = 0;
+    
+    // get the max label width
+    for (UILabel *label in self.textLabels) {
+        CGSize labelSize = [label sizeThatFits:CGSizeMake(CGFLOAT_MAX, label.height)];
+        labelWidth = fmaxf(labelSize.width, labelWidth);
+    }
+    
+    for (NSArray *section in self.tableRows) {
+        for (RHTableViewCell *cell in section) {
+            [[cell.leftLabel constraintForAttribute:NSLayoutAttributeWidth] setConstant:labelWidth];
+            [self.tableViewCellLayout applyToTableViewCell:cell];
+        }
+    }
+
     for (NSArray *section in self.tableRows) {
         for (RHTableViewCell *cell in section) {
             if (cell.reloadCellBlock) {
@@ -186,6 +190,11 @@
             }
         }
     }
+    
+    [super reloadData];
+    
+   // [self layoutIfNeeded];
+
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -196,7 +205,7 @@
     return [[self.tableRows objectAtIndex:section] count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 }
 

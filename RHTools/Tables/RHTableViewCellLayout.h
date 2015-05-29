@@ -1,8 +1,7 @@
 //
-//  RHTextAreaInputViewController.h
-//  Version: 0.1
+//  RHTableViewCellLayout.h
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,25 +21,22 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-typedef void(^RHDidSaveTextBlock)(NSString *text);
+@interface RHTableViewCellLayout : NSObject
 
-@interface RHTextAreaInputViewController : UIViewController<UITextViewDelegate>
+@property (nonatomic, strong) UIFont *leftLabelFont;
+@property (nonatomic, strong) UIColor *leftLabelTextColor;
+@property (nonatomic, assign) NSTextAlignment leftLabelTextAlignment;
 
-@property (strong, nonatomic) UITextView *textView;
-@property (assign, nonatomic) BOOL hasChanges;
-@property (strong, nonatomic) UIFont *inputFont;
+@property (nonatomic, strong) UIColor *separatorViewColor;
 
--(NSMutableArray *)toolbarItems;
--(void)applyToolbarItems;
--(void)hideKeyboard;
+@property (nonatomic, strong) UIFont *largeLabelFont;
+@property (nonatomic, strong) UIColor *largeLabelTextColor;
+@property (nonatomic, assign) NSTextAlignment largeLabelTextAlignment;
 
-@end
++(RHTableViewCellLayout *)formLayout;
 
-@interface RHTextAreaInputForNavigationViewController : RHTextAreaInputViewController
-
-@property (nonatomic, copy) RHDidSaveTextBlock didSaveTextBlock;
-
-+(UINavigationController *)controllerWithTitle:(NSString *)title text:(NSString *)text didSaveTextBlock:(RHDidSaveTextBlock)didSaveTextBlock;
+-(void)applyToTableViewCell:(RHTableViewCell *)cell;
 
 @end

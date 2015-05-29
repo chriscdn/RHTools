@@ -53,9 +53,8 @@ typedef void (^RHBoringBlock)();
 #import "RHButton.h"
 #import "RHSwitch.h"
 #import "UIApplication+rhextensions.h"
-#import "RHTableViewCell.h"
-#import "RHTableViewCells.h"
-#import "RHTableView.h"
+
+
 #import "RHKeyboardSlideView.h"
 #import "UIView+rhextensions.h"
 #import "RHSegmentedControl.h"
@@ -72,3 +71,8 @@ typedef void (^RHBoringBlock)();
 #import "NSObject+KVOBlocks.h"
 #import "UIImage+rhextensions.h"
 #import "RHRefreshControl.h"
+
+#import "RHTableView.h"
+#import "RHTableViewCell.h"
+#import "RHTableViewCells.h"
+#import "RHTableViewCellLayout.h"

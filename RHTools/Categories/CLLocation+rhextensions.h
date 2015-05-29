@@ -1,6 +1,5 @@
 //
 //  CLLocation+rhextensions.h
-//  Version: 0.1
 //
 //  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
@@ -22,10 +21,9 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 #import <CoreLocation/CoreLocation.h>
-
-typedef void (^RHLocationBlock)(NSDictionary *change, void *context);
 
 @interface CLLocation (rhextensions)
 

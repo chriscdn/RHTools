@@ -32,18 +32,17 @@
 @interface RHTableViewCell : UITableViewCell
 
 typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
-// typedef CGFloat (^RHHeightBlock)();
 
 @property (nonatomic, copy) RHBoringBlock didSelectBlock;
-// @property (nonatomic, copy) RHHeightBlock heightBlock;
 @property (nonatomic, copy) RHReloadCellBlock reloadCellBlock;
 
-@property (strong, nonatomic) IBOutlet UILabel *largeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *leftLabel;
-@property (strong, nonatomic) IBOutlet RHTextField *textField;
-@property (strong, nonatomic) IBOutlet UITextView *textView;
 
 @property (strong, nonatomic) IBOutlet UIView *labelSeparatorView;
+
+@property (strong, nonatomic) IBOutlet UILabel *largeLabel;
+@property (strong, nonatomic) IBOutlet RHTextField *textField;
+@property (strong, nonatomic) IBOutlet UITextView *textView;
 
 +(id)cellWithLabelText:(NSString *)labelText
                      detailLabelText:(NSString *)detailLabelText
@@ -52,9 +51,9 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
                                image:(UIImage *)image
                        accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
++(id)cellStyle1WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
-
 
 +(id)cellWithTextField:(NSString *)labelText;
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue;
@@ -62,9 +61,6 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 +(id)cellWithSingleLabel:(NSString *)labelText;
 +(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText;
 +(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block;
-
-+(void)setLeftLabelTextAlignment:(NSTextAlignment)textLabelAlignment;
-+(void)setSeparatorColour:(UIColor *)separatorColour;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
 

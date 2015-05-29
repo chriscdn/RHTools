@@ -22,26 +22,14 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-static UIColor *_separatorColour = nil;
-static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
+
 
 #import "RHTableViewCell.h"
 
 @interface RHTableViewCell()
-// @property (nonatomic, assign) UITableViewCellStyle cellStyle;
-// -(CGFloat)leftMarginForTableView:(UITableView *)tableView;
 @end
 
 @implementation RHTableViewCell
-
-
-+(void)setLeftLabelTextAlignment:(NSTextAlignment)textLabelAlignment {
-    _textLabelAlignment = textLabelAlignment;
-}
-
-+(void)setSeparatorColour:(UIColor *)separatorColour {
-    _separatorColour = separatorColour;
-}
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText
@@ -56,7 +44,6 @@ static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
     [cell.detailTextLabel setText:detailLabelText];
     [cell setAccessoryType:accessoryType];
     [cell setDidSelectBlock:block];
-    //  [cell setCellStyle:style]; // since it's not visible to UITableViewCell
     
     return cell;
 }
@@ -64,7 +51,10 @@ static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
 // A style for a cell with a label on the left side of the cell with text that is right-aligned and blue; on the right side of the cell is another
 // label with smaller text that is left-aligned and black. The Phone/Contacts application uses cells in this style.
 
-// This cell style automatically grows to accomodate long text.
++(id)cellStyle1WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
+    return [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:nil style:UITableViewCellStyleValue1 image:nil accessoryType:UITableViewCellAccessoryNone];
+}
+
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
     return [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:nil style:UITableViewCellStyleValue2 image:nil accessoryType:UITableViewCellAccessoryNone];
 }
@@ -79,7 +69,7 @@ static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
 }
 
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue {
-    RHTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"RHTextFieldTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextFieldTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHTextFieldTableViewCell" owner:nil options:nil] objectAtIndex:0];
     cell.leftLabel.text = labelText;
     cell.textField.text = initialValue;
     cell.textField.adjustsFontSizeToFitWidth = YES;
@@ -91,22 +81,20 @@ static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
     return cell;
 }
 
-// Right aligned label with larger form textarea field.
 +(id)cellWithTextView:(NSString *)labelText {
-    RHTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"RHTextViewTableViewCell" owner:nil options:nil] objectAtIndex:0];
-    //  cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textView.text = @"";
-    // cell.textView.layer.cornerRadius = 4.0f;
-    // cell.textView.layer.masksToBounds = YES;
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextViewTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHTextViewTableViewCell" owner:nil options:nil] objectAtIndex:0];
+
+    cell.leftLabel.text = labelText;
+    // give the textview a light gray background
     cell.textView.backgroundColor = RGB(245, 245, 245);
+   // cell.textView.text = nil;
     
     return cell;
 }
 
-+(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block{
++(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block {
     RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell.textLabel setText:labelText];
-    //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     RHSwitch *switcher = [[RHSwitch alloc] initWithBlock:block state:state];
     [cell setAccessoryView:switcher];
@@ -114,19 +102,19 @@ static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
 }
 
 +(id)cellWithSingleLabel:(NSString *)labelText {
-    RHTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"RHSingleLabelTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHSingleLabelTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHSingleLabelTableViewCell" owner:nil options:nil] objectAtIndex:0];
     [cell.largeLabel setText:labelText];
     return cell;
 }
 
 +(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText {
-    RHTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"RHLabelTableViewCell" owner:nil options:nil] objectAtIndex:0];
-    [cell.leftLabel setTextColor:[UIColor darkGrayColor]];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHLabelTableViewCell" owner:nil options:nil] objectAtIndex:0];
     [cell.leftLabel setText:leftText];
     [cell.largeLabel setText:largeText];
     return cell;
 }
 
+/*
 -(void)layoutSubviews {
     [super layoutSubviews];
     
@@ -136,6 +124,7 @@ static NSTextAlignment _textLabelAlignment = NSTextAlignmentLeft;
     
     [self.leftLabel setTextAlignment:_textLabelAlignment];
 }
+ */
 
 -(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
     _didSelectBlock = didSelectBlock;

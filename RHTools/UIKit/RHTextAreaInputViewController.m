@@ -24,25 +24,12 @@
 
 #import "RHTextAreaInputViewController.h"
 
-static UIFont *_font = nil;
-
-
 @interface RHTextAreaInputViewController()
 @property (nonatomic, strong) NSString *initialText;
 @end
 
 
 @implementation RHTextAreaInputViewController
-
-+(void)setFont:(UIFont *)font {
-    _font = font;
-}
-
-+(void)initialize {
-    if(self == [RHTextAreaInputViewController class]){
-        [self setFont:[UIFont fontWithName:@"AmericanTypewriter" size:[UIFont systemFontSize]+3]];
-    }
-}
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
@@ -52,9 +39,9 @@ static UIFont *_font = nil;
 
 	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
 	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
+    [self.textView setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [self.textView setText:self.initialText];
-    [self.textView setFont:_font];
+
 	[self.textView setDelegate:self];
 	[self.textView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
     [self.textView observeKeyboard];

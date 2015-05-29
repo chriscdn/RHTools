@@ -21,18 +21,25 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
+@class RHTableViewCellLayout;
+@class RHTableViewCell;
 
 @interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;
+@property (nonatomic, assign) BOOL deselectRowAfterSelect;
+@property (nonatomic, strong) RHTableViewCellLayout *tableViewCellLayout;
 
 @property (nonatomic, strong) NSMutableArray *tableSections;
 @property (nonatomic, strong) NSMutableArray *tableRows;
 @property (nonatomic, strong) NSMutableArray *textLabels;
+@property (nonatomic, strong) NSMutableArray *inputFields;
 @property (nonatomic, strong) NSMutableArray *textFields;
 @property (nonatomic, strong) NSMutableArray *textViews;
-@property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;
-@property (nonatomic, assign) BOOL deselectRowAfterSelect;
+
 
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText;
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText;
@@ -41,12 +48,10 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
 -(RHTableViewCell *)addCell:(RHTableViewCell *)row;
 
+-(void)advanceFirstResponder:(UIView *)textFieldorTextView;
+-(void)setTextFieldsKeyboardReturnToNext;
 -(void)hideKeyboard;
 -(void)reset;
-
--(void)advanceFirstResponder:(UIView *)textFieldorTextView;
--(void)scrollToView:(UIView *)view;
--(void)setTextFieldsKeyboardReturnToNext;
 
 @end
 
