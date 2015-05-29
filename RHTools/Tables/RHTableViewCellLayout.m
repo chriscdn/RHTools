@@ -70,7 +70,7 @@
 
 -(UIColor *)largeLabelTextColor {
     if (_largeLabelTextColor == nil) {
-        _largeLabelTextColor = [UIColor blackColor];
+        _largeLabelTextColor = [UIColor darkGrayColor];
     }
     
     return _largeLabelTextColor;
@@ -90,8 +90,8 @@
     cell.textLabel.font = self.leftLabelFont;
     cell.textLabel.textColor = self.leftLabelTextColor;
 
-    cell.detailTextLabel.font = self.largeLabelFont;
-    cell.detailTextLabel.textColor = self.largeLabelTextColor;
+ //   cell.detailTextLabel.font = self.largeLabelFont;
+ //   cell.detailTextLabel.textColor = self.largeLabelTextColor;
 }
 
 @end

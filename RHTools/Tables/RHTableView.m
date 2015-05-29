@@ -165,9 +165,7 @@
 #pragma mark UITableViewDelegate & UITableViewDataSource delegate methods
 
 -(void)reloadData {
-    
-    
-    
+
     CGFloat labelWidth = 0;
     
     // get the max label width
@@ -192,8 +190,6 @@
     }
     
     [super reloadData];
-    
-   // [self layoutIfNeeded];
 
 }
 
