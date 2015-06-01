@@ -112,6 +112,10 @@
 -(RHTableViewCell *)addCell:(RHTableViewCell *)cell {
     [[self.tableRows lastObject] addObject:cell];
     
+    // It's quite important to apply this here and early such that autolayout will properly accomodate for
+    // any changes in font and font size. 2015-05-31
+    [self.tableViewCellLayout applyToTableViewCell:cell];
+    
     if (cell.textField) {
         
         RHTextField *textField = cell.textField;
@@ -133,7 +137,9 @@
     if (cell.leftLabel) {
         [self.textLabels addObject:cell.leftLabel];
     }
-  
+    
+    
+    
     return cell;
 }
 
@@ -164,8 +170,9 @@
 #pragma mark -
 #pragma mark UITableViewDelegate & UITableViewDataSource delegate methods
 
--(void)reloadData {
-
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    
     CGFloat labelWidth = 0;
     
     // get the max label width
@@ -177,10 +184,15 @@
     for (NSArray *section in self.tableRows) {
         for (RHTableViewCell *cell in section) {
             [[cell.leftLabel constraintForAttribute:NSLayoutAttributeWidth] setConstant:labelWidth];
-            [self.tableViewCellLayout applyToTableViewCell:cell];
         }
     }
+}
 
+
+-(void)reloadData {
+    
+    [super reloadData];
+    
     for (NSArray *section in self.tableRows) {
         for (RHTableViewCell *cell in section) {
             if (cell.reloadCellBlock) {
@@ -189,8 +201,6 @@
         }
     }
     
-    [super reloadData];
-
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -207,7 +217,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RHTableViewCell *row = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-
+    
     if (row.didSelectBlock) {
         row.didSelectBlock();
     }

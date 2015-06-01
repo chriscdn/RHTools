@@ -33,8 +33,9 @@
 
 typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 
-@property (nonatomic, copy) RHBoringBlock didSelectBlock;
-@property (nonatomic, copy) RHReloadCellBlock reloadCellBlock;
+@property (nonatomic, copy) void (^didSelectBlock)();
+@property (nonatomic, copy) void (^reloadCellBlock)();
+@property (nonatomic, copy) CGFloat (^heightBlock)();
 
 @property (strong, nonatomic) IBOutlet UILabel *leftLabel;
 

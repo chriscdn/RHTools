@@ -83,11 +83,11 @@
 
 +(id)cellWithTextView:(NSString *)labelText {
     RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextViewTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHTextViewTableViewCell" owner:nil options:nil] objectAtIndex:0];
-
+    
     cell.leftLabel.text = labelText;
     // give the textview a light gray background
     cell.textView.backgroundColor = RGB(245, 245, 245);
-   // cell.textView.text = nil;
+    // cell.textView.text = nil;
     
     return cell;
 }
@@ -115,15 +115,15 @@
 }
 
 /*
--(void)layoutSubviews {
-    [super layoutSubviews];
-    
-    if (_separatorColour) {
-        [self.labelSeparatorView setBackgroundColor:_separatorColour];
-    }
-    
-    [self.leftLabel setTextAlignment:_textLabelAlignment];
-}
+ -(void)layoutSubviews {
+ [super layoutSubviews];
+ 
+ if (_separatorColour) {
+ [self.labelSeparatorView setBackgroundColor:_separatorColour];
+ }
+ 
+ [self.leftLabel setTextAlignment:_textLabelAlignment];
+ }
  */
 
 -(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
@@ -137,11 +137,9 @@
 }
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView {
-    
-  //  if (self.heightBlock) {
-  //      return self.heightBlock();
-  //  } else if (self.textView) {
-    if (self.textView) {
+    if (self.heightBlock) {
+        return self.heightBlock();
+    } else if (self.textView) {
         return 100.0f;
     } else {
         return UITableViewAutomaticDimension;
