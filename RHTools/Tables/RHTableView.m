@@ -80,7 +80,9 @@
     self.inputFields = [NSMutableArray array];
     self.deselectRowAfterSelect = YES;
     
-    [self setEstimatedRowHeight:100.0f];
+    // trial and error indicates a low number here improves the changes of autolayout
+    // correctly setting the cell height based on an expanding UILabel
+    [self setEstimatedRowHeight:20.0f];
     [self setRowHeight:UITableViewAutomaticDimension];
 }
 
@@ -112,8 +114,7 @@
 -(RHTableViewCell *)addCell:(RHTableViewCell *)cell {
     [[self.tableRows lastObject] addObject:cell];
     
-    // It's quite important to apply this here and early such that autolayout will properly accomodate for
-    // any changes in font and font size. 2015-05-31
+    // It's quite important to apply this here and early such that autolayout will properly accomodate for any changes in font and font size. 2015-05-31
     [self.tableViewCellLayout applyToTableViewCell:cell];
     
     if (cell.textField) {
@@ -137,8 +138,6 @@
     if (cell.leftLabel) {
         [self.textLabels addObject:cell.leftLabel];
     }
-    
-    
     
     return cell;
 }

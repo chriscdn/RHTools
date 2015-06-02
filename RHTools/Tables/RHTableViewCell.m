@@ -69,7 +69,7 @@
 }
 
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextFieldTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHTextFieldTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextFieldTableViewCell"];
     cell.leftLabel.text = labelText;
     cell.textField.text = initialValue;
     cell.textField.adjustsFontSizeToFitWidth = YES;
@@ -82,7 +82,7 @@
 }
 
 +(id)cellWithTextView:(NSString *)labelText {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextViewTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHTextViewTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextViewTableViewCell"];
     
     cell.leftLabel.text = labelText;
     // give the textview a light gray background
@@ -102,29 +102,17 @@
 }
 
 +(id)cellWithSingleLabel:(NSString *)labelText {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHSingleLabelTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHSingleLabelTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHSingleLabelTableViewCell"];
     [cell.largeLabel setText:labelText];
     return cell;
 }
 
 +(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell"]; // [[[NSBundle mainBundle] loadNibNamed:@"RHLabelTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell"];
     [cell.leftLabel setText:leftText];
     [cell.largeLabel setText:largeText];
     return cell;
 }
-
-/*
- -(void)layoutSubviews {
- [super layoutSubviews];
- 
- if (_separatorColour) {
- [self.labelSeparatorView setBackgroundColor:_separatorColour];
- }
- 
- [self.leftLabel setTextAlignment:_textLabelAlignment];
- }
- */
 
 -(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
     _didSelectBlock = didSelectBlock;

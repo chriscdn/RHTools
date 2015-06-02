@@ -37,7 +37,6 @@
     return refreshControl;
 }
 
-
 -(void)refresh {
     if (self.block) {
         self.block(self);
