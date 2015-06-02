@@ -82,7 +82,7 @@
     
     // trial and error indicates a low number here improves the changes of autolayout
     // correctly setting the cell height based on an expanding UILabel
-    [self setEstimatedRowHeight:20.0f];
+    [self setEstimatedRowHeight:10.0f];
     [self setRowHeight:UITableViewAutomaticDimension];
 }
 
