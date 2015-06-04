@@ -27,12 +27,14 @@ typedef void (^RHBarButtonItemBlock)(void);
 
 @interface RHBarButtonItem : UIBarButtonItem
 
-+(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block;
-+(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block;
-+(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block;
+@property (nonatomic, copy) RHBarButtonItemBlock block;
 
--(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block;
--(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block;
--(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block;
++(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block;
++(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block;
++(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block;
+
+-(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block;
+-(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block;
+-(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block;
 
 @end

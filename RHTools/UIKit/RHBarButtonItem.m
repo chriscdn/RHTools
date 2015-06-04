@@ -25,44 +25,43 @@
 #import "RHBarButtonItem.h"
 
 @interface RHBarButtonItem()
-@property (nonatomic, copy) RHBarButtonItemBlock block;
+
 @end
 
 @implementation RHBarButtonItem
-@synthesize block;
 
-+(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block {
-    return [[self alloc] initWithTitle:title block:_block];
++(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block {
+    return [[self alloc] initWithTitle:title block:block];
 }
 
-+(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block {
-    return [[self alloc] initWithBarButtonSystemItem:systemItem block:_block];
++(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block {
+    return [[self alloc] initWithBarButtonSystemItem:systemItem block:block];
 }
 
-+(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block {
-	return [[self alloc] initWithImage:image block:_block];
++(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block {
+	return [[self alloc] initWithImage:image block:block];
 }
 
--(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)_block {
+-(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block {
  	if (self=[super initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
 		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:_block];
+		[self setBlock:block];
 	}
 	return self;
 }
 
--(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)_block {
+-(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block {
 	if (self=[super initWithBarButtonSystemItem:systemItem target:self action:@selector(tap:)]) {
 		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:_block]; // copied by @property
+		[self setBlock:block]; // copied by @property
 	}
 	return self;
 }
 
--(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)_block {
+-(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block {
 	if (self=[super initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
 		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:_block]; // copied by @property
+		[self setBlock:block]; // copied by @property
 	}
 	return self;
 }
