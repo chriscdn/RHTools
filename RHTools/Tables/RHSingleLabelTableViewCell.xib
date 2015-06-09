@@ -30,6 +30,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="largeLabel" destination="pBR-hQ-5ru" id="7TL-iP-mzb"/>
+                <outlet property="largeLabelLeadingConstraint" destination="gzT-Me-PZ1" id="ong-0P-57E"/>
             </connections>
             <point key="canvasLocation" x="230.5" y="186"/>
         </tableViewCell>
