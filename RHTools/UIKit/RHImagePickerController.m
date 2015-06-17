@@ -31,7 +31,6 @@
 @end
 
 @implementation RHImagePickerController
-// @synthesize pickerPopoverController;
 
 +(BOOL)isCameraAvailable {
 	return [self isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
