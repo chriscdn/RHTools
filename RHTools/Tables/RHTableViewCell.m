@@ -48,6 +48,21 @@
     return cell;
 }
 
++(id)cellWithLabelText:(NSString *)labelText
+       detailLabelText:(NSString *)detailLabelText
+        didSelectBlock:(RHBoringBlock)block
+           reloadBlock:(RHReloadCellBlock)reloadBlock
+                 style:(UITableViewCellStyle)style
+                 image:(UIImage *)image
+         accessoryType:(UITableViewCellAccessoryType)accessoryType {
+    
+    RHTableViewCell *cell = [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:block style:style image:image accessoryType:accessoryType];
+    
+    [cell setReloadCellBlock:reloadBlock];
+    
+    return cell;
+}
+
 // A style for a cell with a label on the left side of the cell with text that is right-aligned and blue; on the right side of the cell is another
 // label with smaller text that is left-aligned and black. The Phone/Contacts application uses cells in this style.
 
@@ -78,6 +93,9 @@
     cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     cell.textField.borderStyle = UITextBorderStyleNone;
     
+    // TODO: make this configurable
+    cell.textField.backgroundColor = RGB(245, 245, 245);
+    
     return cell;
 }
 
@@ -86,6 +104,7 @@
     
     cell.leftLabel.text = labelText;
     // give the textview a light gray background
+    // TODO: make this configurable
     cell.textView.backgroundColor = RGB(245, 245, 245);
     // cell.textView.text = nil;
     
@@ -93,7 +112,7 @@
 }
 
 +(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block {
-    RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     [cell.textLabel setText:labelText];
     
     RHSwitch *switcher = [[RHSwitch alloc] initWithBlock:block state:state];

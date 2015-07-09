@@ -51,7 +51,7 @@
     return found;
 }
 
--(NSString *)truncateToLength:(int)charLength {
+-(NSString *)truncateToLength:(NSUInteger)charLength {
     if ( self.length > charLength ) {
         NSRange range = {0, charLength-kEllipsis.length};
         return [[self substringWithRange:range] stringByAppendingFormat:kEllipsis];

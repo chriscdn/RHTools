@@ -28,7 +28,7 @@
 +(NSString *)UUID;
 -(NSString *)firstLetter;
 -(BOOL)containsString:(NSString *)substring;
--(NSString *)truncateToLength:(int)charLength;
+-(NSString *)truncateToLength:(NSUInteger)charLength;
 -(NSString *)trim;
 -(NSNumber *)toNumber;
 -(NSAttributedString *)htmlToAttributedString;

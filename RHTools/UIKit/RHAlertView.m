@@ -84,6 +84,8 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    self.selectedIndex = buttonIndex;
+    
 	NSNumber *key = [NSNumber numberWithInteger:buttonIndex];
 	RHAlertBlock block = [self.actions objectForKey:key];
 	

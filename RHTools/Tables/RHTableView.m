@@ -100,7 +100,7 @@
 }
 
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText {
-    RHTableSection *section = [[RHTableSection alloc] init];
+    RHTableSection *section = [RHTableSection new];
     section.headerText = headerText;
     section.footerText = footerText;
     [self addSection:section];
@@ -189,9 +189,7 @@
 
 
 -(void)reloadData {
-    
-    [super reloadData];
-    
+
     for (NSArray *section in self.tableRows) {
         for (RHTableViewCell *cell in section) {
             if (cell.reloadCellBlock) {
@@ -199,6 +197,8 @@
             }
         }
     }
+    
+    [super reloadData];
     
 }
 

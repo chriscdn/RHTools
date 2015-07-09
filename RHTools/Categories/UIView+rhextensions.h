@@ -26,6 +26,7 @@
 
 +(id)viewFromNib;
 +(id)viewFromNibNamed:(NSString *)nibName;
++(id)viewFromNibNamed:(NSString *)nibName owner:(id)owner;
 
 -(UIView *)findFirstResponder;
 -(void)stackSubviews;

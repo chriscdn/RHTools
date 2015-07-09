@@ -30,6 +30,8 @@ typedef void (^RHAlertBlock)(void);
 // @property (nonatomic, strong) RHAlertBlock willPresentBlock;
 // @property (nonatomic, strong) RHAlertBlock willDismissBlock;
 
+@property (nonatomic, assign) NSInteger selectedIndex;
+
 +(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message;
 +(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message;
 -(id)initWithTitle:(NSString *)title message:(NSString *)message;

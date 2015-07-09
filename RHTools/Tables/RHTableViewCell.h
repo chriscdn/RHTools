@@ -48,11 +48,19 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *largeLabelLeadingConstraint;
 
 +(id)cellWithLabelText:(NSString *)labelText
-                     detailLabelText:(NSString *)detailLabelText
-                      didSelectBlock:(RHBoringBlock)block
-                               style:(UITableViewCellStyle)style
-                               image:(UIImage *)image
-                       accessoryType:(UITableViewCellAccessoryType)accessoryType;
+       detailLabelText:(NSString *)detailLabelText
+        didSelectBlock:(RHBoringBlock)block
+                 style:(UITableViewCellStyle)style
+                 image:(UIImage *)image
+         accessoryType:(UITableViewCellAccessoryType)accessoryType;
+
++(id)cellWithLabelText:(NSString *)labelText
+       detailLabelText:(NSString *)detailLabelText
+        didSelectBlock:(RHBoringBlock)block
+           reloadBlock:(RHReloadCellBlock)reloadBlock
+                 style:(UITableViewCellStyle)style
+                 image:(UIImage *)image
+         accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
 +(id)cellStyle1WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;

@@ -48,6 +48,7 @@
 -(void)setOn:(BOOL)on animated:(BOOL)animated {
 	[super setOn:on animated:animated];
 	[self setState:on];
+    [self eventValueChanged:nil];
 }
 
 // Rapid tapping of the switch will only call this delegate method for the second tap event (not sure about 3rd or 4th).
@@ -56,8 +57,8 @@
 -(void)eventValueChanged:(id)sender {
     if (self.block) {
 		if (self.state != self.isOn) {
-			self.block( self.isOn );
 			[self setState:self.isOn];
+            self.block(self);
 		}
 	}
 }

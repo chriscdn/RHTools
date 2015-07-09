@@ -31,7 +31,11 @@
 }
 
 +(id)viewFromNibNamed:(NSString *)nibName {
-    return [[[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil] objectAtIndex:0];
+    return [self viewFromNibNamed:nibName owner:nil];
+}
+
++(id)viewFromNibNamed:(NSString *)nibName owner:(id)owner {
+    return [[[NSBundle mainBundle] loadNibNamed:nibName owner:owner options:nil] objectAtIndex:0];
 }
 
 -(UIView *)findFirstResponder {
