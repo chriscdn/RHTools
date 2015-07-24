@@ -23,8 +23,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-// #define kRHDetailLabelLeftMargin IsIOS61orEarlier ? 83 : 112
-// #define kRHTopBottomMargin 11
 #define kRHDefaultCellHeight 44
 
 #import "RHTextField.h"
@@ -46,6 +44,8 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *largeLabelLeadingConstraint;
+
++(void)setTextFieldBackgroundColour:(UIColor *)backgroundColor;
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText

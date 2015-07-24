@@ -112,4 +112,8 @@
     return [array filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
 }
 
+-(NSString *)nilify {
+    return (self.trim.length == 0) ? nil : self;
+}
+
 @end

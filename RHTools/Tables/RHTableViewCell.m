@@ -26,10 +26,24 @@
 
 #import "RHTableViewCell.h"
 
+static UIColor *textFieldBackgroundColour;
+static UIColor *textViewBackgroundColour;
+
 @interface RHTableViewCell()
 @end
 
 @implementation RHTableViewCell
+
++(void)initialize {
+    if (self == [RHTableViewCell class]) {
+        textFieldBackgroundColour =  RGB(245, 245, 245);
+        textViewBackgroundColour = RGB(245, 245, 245);
+    }
+}
+
++(void)setTextFieldBackgroundColour:(UIColor *)backgroundColor {
+    textFieldBackgroundColour = backgroundColor;
+}
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText
@@ -94,7 +108,7 @@
     cell.textField.borderStyle = UITextBorderStyleNone;
     
     // TODO: make this configurable
-    cell.textField.backgroundColor = RGB(245, 245, 245);
+    cell.textField.backgroundColor = textFieldBackgroundColour;
     
     return cell;
 }
@@ -105,7 +119,7 @@
     cell.leftLabel.text = labelText;
     // give the textview a light gray background
     // TODO: make this configurable
-    cell.textView.backgroundColor = RGB(245, 245, 245);
+    cell.textView.backgroundColor = textViewBackgroundColour;
     // cell.textView.text = nil;
     
     return cell;
