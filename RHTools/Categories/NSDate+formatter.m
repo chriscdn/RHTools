@@ -69,6 +69,21 @@
     return formatterWithoutDate;
 }
 
++(NSDateFormatter *)formatterISO8601 {
+    static NSDateFormatter *formatterISO8601 = nil;
+    static dispatch_once_t oncePredicate;
+    
+    dispatch_once(&oncePredicate, ^{
+        formatterISO8601= [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        [formatterISO8601 setLocale:enUSPOSIXLocale];
+        // @"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'" ??
+        [formatterISO8601 setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    });
+    
+    return formatterISO8601;
+}
+
 #pragma mark -
 #pragma mark Formatter with date & time
 -(NSString *)formatWithUTCTimeZone {

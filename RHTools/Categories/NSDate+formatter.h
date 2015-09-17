@@ -30,6 +30,7 @@
 +(NSDateFormatter *)formatter;
 +(NSDateFormatter *)formatterWithoutTime;
 +(NSDateFormatter *)formatterWithoutDate;
++(NSDateFormatter *)formatterISO8601;
 
 -(NSString *)formatWithUTCTimeZone;
 -(NSString *)formatWithLocalTimeZone;
