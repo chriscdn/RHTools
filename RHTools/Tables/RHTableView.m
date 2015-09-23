@@ -84,6 +84,9 @@
     // correctly setting the cell height based on an expanding UILabel
     [self setEstimatedRowHeight:10.0f];
     [self setRowHeight:UITableViewAutomaticDimension];
+    
+    // required for iOS9 and our custom tableviewcells
+    [self setCellLayoutMarginsFollowReadableWidth:NO];
 }
 
 -(RHTableViewCellLayout *)tableViewCellLayout {

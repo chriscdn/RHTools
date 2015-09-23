@@ -82,6 +82,21 @@ static UIColor *textViewBackgroundColour;
 
 +(id)cellStyle1WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
     return [self cellWithLabelText:labelText detailLabelText:detailLabelText didSelectBlock:nil style:UITableViewCellStyleValue1 image:nil accessoryType:UITableViewCellAccessoryNone];
+    
+    /*
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell"];
+    [cell.leftLabel setText:labelText];
+    [cell.largeLabel setText:detailLabelText];
+    
+    // [cell.largeLabel setNumberOfLines:1];
+    
+    [cell.leftLabel  setTextAlignment:NSTextAlignmentRight];
+    [cell.largeLabel setTextAlignment:NSTextAlignmentRight];
+   
+    // [cell.largeLabel setBackgroundColor:[UIColor redColor]];
+    
+    return cell;
+    */
 }
 
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText {
