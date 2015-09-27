@@ -130,7 +130,7 @@ static UIColor *textViewBackgroundColour;
 
 +(id)cellWithTextView:(NSString *)labelText {
     RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextViewTableViewCell"];
-    
+   
     cell.leftLabel.text = labelText;
     // give the textview a light gray background
     // TODO: make this configurable
@@ -142,6 +142,7 @@ static UIColor *textViewBackgroundColour;
 
 +(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block {
     RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    [cell setDidSelectBlock:nil];
     [cell.textLabel setText:labelText];
     
     RHSwitch *switcher = [[RHSwitch alloc] initWithBlock:block state:state];
@@ -161,6 +162,14 @@ static UIColor *textViewBackgroundColour;
     [cell.largeLabel setText:largeText];
     return cell;
 }
+
++(id)cellWithImage:(UIImage *)image label:(NSString *)labelText {
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHImageLabelTableViewCell"];
+    [cell.imageView2 setImage:image];
+    [cell.largeLabel setText:labelText];
+    return cell;
+}
+
 
 -(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
     _didSelectBlock = didSelectBlock;

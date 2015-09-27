@@ -36,12 +36,11 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 @property (nonatomic, copy) CGFloat (^heightBlock)();
 
 @property (strong, nonatomic) IBOutlet UILabel *leftLabel;
-
 @property (strong, nonatomic) IBOutlet UIView *labelSeparatorView;
-
 @property (strong, nonatomic) IBOutlet UILabel *largeLabel;
 @property (strong, nonatomic) IBOutlet RHTextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView2;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *largeLabelLeadingConstraint;
 
@@ -72,6 +71,7 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 +(id)cellWithSingleLabel:(NSString *)labelText;
 +(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText;
 +(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block;
++(id)cellWithImage:(UIImage *)image label:(NSString *)labelText;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;
 
