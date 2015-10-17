@@ -86,7 +86,9 @@
     [self setRowHeight:UITableViewAutomaticDimension];
     
     // required for iOS9 and our custom tableviewcells
-    [self setCellLayoutMarginsFollowReadableWidth:NO];
+    if ([self respondsToSelector:@selector(setCellLayoutMarginsFollowReadableWidth:)]) {
+        [self setCellLayoutMarginsFollowReadableWidth:NO];
+    }
 }
 
 -(RHTableViewCellLayout *)tableViewCellLayout {
