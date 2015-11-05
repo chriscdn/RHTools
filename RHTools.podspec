@@ -20,7 +20,6 @@ Pod::Spec.new do |s|
   s.source_files = 'RHTools/**/*.{h,m}'
   s.resources = 'RHTools/**/*.xib'
   s.dependency 'FrameAccessor'
-  s.dependency 'KVOBlocks'
   
   s.prefix_header_contents = '#import "RHTools.h"'
 end

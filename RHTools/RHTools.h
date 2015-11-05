@@ -53,7 +53,6 @@ typedef void (^RHBoringBlock)();
 #import "RHButton.h"
 #import "RHSwitch.h"
 #import "UIApplication+rhextensions.h"
-#import "NSObject+KVOBlocks.h"
 
 #import "RHKeyboardSlideView.h"
 #import "UIView+rhextensions.h"
