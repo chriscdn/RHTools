@@ -77,6 +77,7 @@
         formatterISO8601= [[NSDateFormatter alloc] init];
         NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         [formatterISO8601 setLocale:enUSPOSIXLocale];
+        [formatterISO8601 setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         // @"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'" ??
         [formatterISO8601 setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
     });
@@ -140,6 +141,13 @@
 -(NSString *)formatTimeWithTimeZone:(NSTimeZone *)timezone {
     NSDateFormatter *formatter = [NSDate formatterWithoutDate];
     [formatter setTimeZone:timezone];
+    return [formatter stringFromDate:self];
+}
+
+#pragma mark -
+#pragma mark Formatter without date
+-(NSString *)formatWithISO8601 {
+    NSDateFormatter *formatter = [NSDate formatterISO8601];
     return [formatter stringFromDate:self];
 }
 

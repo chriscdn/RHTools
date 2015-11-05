@@ -116,4 +116,8 @@
     return (self.trim.length == 0) ? nil : self;
 }
 
+-(id)nullify {
+    return (self.trim.length == 0) ? [NSNull null] : self;
+}
+
 @end

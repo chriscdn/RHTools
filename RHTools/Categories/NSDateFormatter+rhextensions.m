@@ -1,8 +1,7 @@
 //
-//  NSString+rhextensions.h
-//  Version: 0.2
+//  NSDateFormatter+rhextensions.m
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,22 +21,18 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-@interface NSString (rhextensions)
+#import "NSDateFormatter+rhextensions.h"
 
-+(NSString *)UUID;
--(NSString *)firstLetter;
--(BOOL)containsString:(NSString *)substring;
--(NSString *)truncateToLength:(NSUInteger)charLength;
--(NSString *)trim;
--(NSNumber *)toNumber;
--(NSAttributedString *)htmlToAttributedString;
--(NSAttributedString *)htmlToAttributedStringWithFont:(UIFont *)font;
--(NSString *)stripHTML;
--(BOOL)isEmailAddress;
--(BOOL)isEmpty;
--(NSArray *)whitespaceTokenize;
--(NSString *)nilify;
--(id)nullify;
+@implementation NSDateFormatter (rhextensions)
+
+-(NSDate *)dateFromString:(NSString *)string defaultValue:(NSDate *)defaultValue {
+    if (!string || [string isEqual:[NSNull null]]){
+        return defaultValue;
+    } else {
+        return [self dateFromString:string];
+    }
+}
 
 @end

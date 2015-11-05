@@ -1,7 +1,8 @@
 //
-//  NSObject+KVOBlocks.h
+//  NSDateFormatter+rhextensions.h
+//  Version: 0.1
 //
-//  Copyright (C) 2014 by Christopher Meyer
+//  Copyright (C) 2015 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,28 +22,10 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-// This class is based on NSObject+KVOBlocks (MIT licensed) by Stephan Leroux.
-// See here: https://github.com/sleroux/KVO-Blocks
+@interface NSDateFormatter (rhextensions)
 
-typedef void (^KVOBlock)(NSDictionary *change, void *context);
-
-@interface NSObject (KVOBlocks)
-
-- (void)addObserver:(NSObject *)observer
-         forKeyPath:(NSString *)keyPath
-            options:(NSKeyValueObservingOptions)options
-            context:(void *)context
-          withBlock:(KVOBlock)block;
-
--(void)removeBlockObserver:(NSObject *)observer
-                 forKeyPath:(NSString *)keyPath;
-
--(void)addObserverForKeyPath:(NSString *)keyPath
-                      options:(NSKeyValueObservingOptions)options
-                      context:(void *)context
-                    withBlock:(KVOBlock)block;
-
--(void)removeBlockObserverForKeyPath:(NSString *)keyPath;
+-(NSDate *)dateFromString:(NSString *)string defaultValue:(NSDate *)defaultValue;
 
 @end

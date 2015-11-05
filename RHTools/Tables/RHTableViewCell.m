@@ -113,7 +113,7 @@ static UIColor *textViewBackgroundColour;
 }
 
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextFieldTableViewCell"];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextFieldTableViewCell" owner:nil bundle:[NSBundle bundleForClass:[self class]]];
     cell.leftLabel.text = labelText;
     cell.textField.text = initialValue;
     cell.textField.adjustsFontSizeToFitWidth = YES;

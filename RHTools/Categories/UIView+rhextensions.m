@@ -35,7 +35,12 @@
 }
 
 +(id)viewFromNibNamed:(NSString *)nibName owner:(id)owner {
-    return [[[NSBundle mainBundle] loadNibNamed:nibName owner:owner options:nil] objectAtIndex:0];
+   //  return [[[NSBundle mainBundle] loadNibNamed:nibName owner:owner options:nil] objectAtIndex:0];
+    return [self viewFromNibNamed:nibName owner:owner bundle:[NSBundle mainBundle]];
+}
+
++(id)viewFromNibNamed:(NSString *)nibName owner:(id)owner bundle:(NSBundle *)bundle {
+    return [[bundle loadNibNamed:nibName owner:owner options:nil] objectAtIndex:0];
 }
 
 -(UIView *)findFirstResponder {

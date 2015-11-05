@@ -47,4 +47,6 @@
 -(NSString *)formatWithTimeZoneOffsetWithoutDate:(NSTimeInterval)offset;
 -(NSString *)formatTimeWithTimeZone:(NSTimeZone *)timezone;
 
+-(NSString *)formatWithISO8601;
+
 @end
