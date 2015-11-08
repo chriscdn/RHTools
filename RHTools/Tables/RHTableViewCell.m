@@ -151,20 +151,20 @@ static UIColor *textViewBackgroundColour;
 }
 
 +(id)cellWithSingleLabel:(NSString *)labelText {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHSingleLabelTableViewCell"];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHSingleLabelTableViewCell" owner:nil bundle:[NSBundle bundleForClass:self]];
     [cell.largeLabel setText:labelText];
     return cell;
 }
 
 +(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell"];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell" owner:nil bundle:[NSBundle bundleForClass:self]];
     [cell.leftLabel setText:leftText];
     [cell.largeLabel setText:largeText];
     return cell;
 }
 
 +(id)cellWithImage:(UIImage *)image label:(NSString *)labelText {
-    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHImageLabelTableViewCell"];
+    RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHImageLabelTableViewCell" owner:nil bundle:[NSBundle bundleForClass:self]];
     [cell.imageView2 setImage:image];
     [cell.largeLabel setText:labelText];
     return cell;
