@@ -120,4 +120,8 @@
     return (self.trim.length == 0) ? [NSNull null] : self;
 }
 
+-(NSString *)snakeCaseToTitleCase {
+    return [[self stringByReplacingOccurrencesOfString:@"_" withString:@" "] capitalizedString];
+}
+
 @end

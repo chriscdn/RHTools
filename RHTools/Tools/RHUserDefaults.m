@@ -27,7 +27,6 @@
 #import <objc/runtime.h>
 
 @interface RHUserDefaults()
--(NSArray *)propertyNames;
 @end
 
 @implementation RHUserDefaults
@@ -58,7 +57,6 @@
 
 -(id)defaultForKey:(NSString *)key {
     NSDictionary *defaultValues = @{};
-    
     return [defaultValues objectForKey:key];
 }
 

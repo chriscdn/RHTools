@@ -10,7 +10,7 @@
 
 @implementation UIImage (rhextensions)
 
--(UIImage *)scaleImageWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight {
+-(UIImage *)scaleImageWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice {
 	
 	float actualHeight = self.size.height;
 	float actualWidth = self.size.width;
@@ -28,20 +28,24 @@
 		actualWidth = maxWidth;
 	}
 
-	return [self fillImageInBoxWithMaxWidth:actualWidth maxHeight:actualHeight];
+	return [self fillImageInBoxWithMaxWidth:actualWidth maxHeight:actualHeight scaleForDevice:scaleForDevice];
 }
 
--(UIImage *)fillImageInBoxWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight {
+-(UIImage *)fillImageInBoxWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice {
 	CGRect rect = CGRectMake(0.0, 0.0, maxWidth, maxHeight);
-	UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-	[self drawInRect:rect];  // scales image to rect
+    
+    // 0 means use the device scaling
+    CGFloat scale = scaleForDevice ? 0 : 1;
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, scale);
+    
+    [self drawInRect:rect];  // scales image to rect
 	UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
 	return theImage;	
 }
 
--(UIImage *)imageByScalingAndCroppingWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight {
+-(UIImage *)imageByScalingAndCroppingWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice {
 	CGSize targetSize = CGSizeMake(maxWidth, maxHeight);
 	
 	UIImage *sourceImage = self;
@@ -77,7 +81,8 @@
 		}
 	}       
 	
-	UIGraphicsBeginImageContextWithOptions(targetSize, NO, 0); // this will crop
+    CGFloat scale = scaleForDevice ? 0 : 1;
+    UIGraphicsBeginImageContextWithOptions(targetSize, NO, scale);
 	
 	CGRect thumbnailRect = CGRectZero;
 	thumbnailRect.origin = thumbnailPoint;

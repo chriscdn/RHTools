@@ -28,5 +28,6 @@
 +(id)sharedInstance;
 -(id)defaultForKey:(NSString *)key;
 -(void)clearDefaults;
+-(NSArray *)propertyNames;
 
 @end

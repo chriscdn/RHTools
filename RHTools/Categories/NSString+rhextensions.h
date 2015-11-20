@@ -39,5 +39,6 @@
 -(NSArray *)whitespaceTokenize;
 -(NSString *)nilify;
 -(id)nullify;
+-(NSString *)snakeCaseToTitleCase;
 
 @end
