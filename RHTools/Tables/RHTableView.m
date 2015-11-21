@@ -220,10 +220,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    RHTableViewCell *row = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    RHTableViewCell *cell = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    if (row.didSelectBlock) {
-        row.didSelectBlock();
+    if (cell.didSelectBlock) {
+        cell.didSelectBlock(cell);
     }
     
     if (self.deselectRowAfterSelect) {

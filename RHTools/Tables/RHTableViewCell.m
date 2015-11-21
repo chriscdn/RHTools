@@ -156,7 +156,7 @@ static UIColor *textViewBackgroundColour;
 }
 
 
--(void)setDidSelectBlock:(RHBoringBlock)didSelectBlock {
+-(void)setDidSelectBlock:(void(^)(RHTableViewCell *cell))didSelectBlock {
     _didSelectBlock = didSelectBlock;
     
     if (didSelectBlock) {

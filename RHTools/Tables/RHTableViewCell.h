@@ -31,7 +31,7 @@
 
 typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 
-@property (nonatomic, copy) void (^didSelectBlock)();
+@property (nonatomic, copy) void (^didSelectBlock)(RHTableViewCell *cell);
 @property (nonatomic, copy) void (^reloadCellBlock)();
 @property (nonatomic, copy) CGFloat (^heightBlock)();
 
