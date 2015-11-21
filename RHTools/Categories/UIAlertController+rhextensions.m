@@ -27,6 +27,47 @@
 
 @implementation UIAlertController (rhextensions)
 
++(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message barButtonItem:(nullable UIBarButtonItem *)barButtonItem {
+    UIAlertController *alertController = [UIAlertController
+            alertControllerWithTitle:title
+            message:nil
+            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alertController.popoverPresentationController setBarButtonItem:barButtonItem];
+    
+    return alertController;
+}
+
++(nonnull UIAlertController *)alertWithTitle:(nullable NSString *)title message:(nullable NSString *)message {
+    return [UIAlertController
+            alertControllerWithTitle:title
+            message:nil
+            preferredStyle:UIAlertControllerStyleAlert];
+}
+
+-(void)addButtonWithTitle:(nullable NSString *)title block:(void (^ __nullable)(UIAlertAction * __nonnull action))block {
+    [self addAction:[UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:block]];
+}
+
+-(void)addDestructiveButtonWithTitle:(nullable NSString *)title block:(void (^ __nullable)(UIAlertAction * __nonnull action))block {
+    [self addAction:[UIAlertAction actionWithTitle:title style:UIAlertActionStyleDestructive handler:block]];
+}
+
+-(void)addCancelButtonWithTitle:(nullable NSString *)title block:(void (^ __nullable)(UIAlertAction * __nonnull action))block {
+    [self addAction:[UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:block]];
+}
+
+-(void)addCancelButtonWithTitle:(nullable NSString *)title {
+    [self addCancelButtonWithTitle:title block:nil];
+}
+
+-(void)addCancelButton {
+    [self addCancelButtonWithTitle:kCancel];
+}
+
+
+
+
 // if mimicing an action sheet then assert a presentation is setup.. this will crash on the iphone
 // to warn of a matching crash on the ipad
 

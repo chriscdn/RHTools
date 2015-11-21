@@ -61,6 +61,7 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
                  image:(UIImage *)image
          accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
++(id)cellStyleDefaultWithLabelText:(NSString *)labelText;
 +(id)cellStyle1WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;

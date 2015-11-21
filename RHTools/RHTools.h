@@ -69,6 +69,7 @@ typedef void (^RHBoringBlock)();
 #import "RHPopoverController.h"
 #import "UIImage+rhextensions.h"
 #import "RHRefreshControl.h"
+#import "UIAlertController+rhextensions.h"
 
 #import "RHTableView.h"
 #import "RHTableViewCell.h"

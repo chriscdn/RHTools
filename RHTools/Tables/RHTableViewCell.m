@@ -77,6 +77,10 @@ static UIColor *textViewBackgroundColour;
     return cell;
 }
 
++(id)cellStyleDefaultWithLabelText:(NSString *)labelText {
+   return [self cellWithLabelText:labelText detailLabelText:nil didSelectBlock:nil style:UITableViewCellStyleDefault image:nil accessoryType:UITableViewCellAccessoryNone];
+}
+
 // A style for a cell with a label on the left side of the cell with text that is right-aligned and blue; on the right side of the cell is another
 // label with smaller text that is left-aligned and black. The Phone/Contacts application uses cells in this style.
 
