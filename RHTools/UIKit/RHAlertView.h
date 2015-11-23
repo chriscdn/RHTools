@@ -22,24 +22,19 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-typedef void (^RHAlertBlock)(void);
-
-@interface RHAlertView : UIAlertView<UIAlertViewDelegate>
-
-// @property (nonatomic, strong) RHAlertBlock willPresentBlock;
-// @property (nonatomic, strong) RHAlertBlock willDismissBlock;
-
-@property (nonatomic, assign) NSInteger selectedIndex;
+@interface RHAlertView : NSObject
 
 +(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message;
 +(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message;
 -(id)initWithTitle:(NSString *)title message:(NSString *)message;
 
--(NSInteger)addButtonWithTitle:(NSString *)title block:(RHAlertBlock)block;
--(NSInteger)addOKButton;
--(NSInteger)addOKButtonWithBlock:(RHAlertBlock)block;
--(NSInteger)addCancelButton;
--(NSInteger)addCancelButtonWithTitle:(NSString *)title;
+-(void)addButtonWithTitle:(NSString *)title block:(void (^)())block;
+-(void)addOKButton;
+-(void)addOKButtonWithBlock:(void (^)())block;
+-(void)addCancelButton;
+-(void)addCancelButtonWithTitle:(NSString *)title;
+-(void)show;
 
 @end

@@ -30,10 +30,30 @@
 +(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message barButtonItem:(nullable UIBarButtonItem *)barButtonItem {
     UIAlertController *alertController = [UIAlertController
             alertControllerWithTitle:title
-            message:nil
+            message:message
             preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alertController.popoverPresentationController setBarButtonItem:barButtonItem];
+    
+    return alertController;
+}
+
++(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view {
+    
+    return [self actionSheetWithTitle:title message:message view:view rect:view.frame];
+    
+}
+
++(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view rect:(CGRect)rect {
+    
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:title
+                                          message:message
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alertController.popoverPresentationController setSourceView:view];
+    [alertController.popoverPresentationController setSourceRect:rect];
+    
     
     return alertController;
 }
@@ -65,10 +85,8 @@
     [self addCancelButtonWithTitle:kCancel];
 }
 
-
-
-
-// if mimicing an action sheet then assert a presentation is setup.. this will crash on the iphone
-// to warn of a matching crash on the ipad
+-(void)presentInViewController:(nullable UIViewController *)controller {
+    [controller presentViewController:self animated:YES completion:nil];
+}
 
 @end

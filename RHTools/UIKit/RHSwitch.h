@@ -23,14 +23,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-
 @interface RHSwitch : UISwitch
 
-typedef void (^RHSwitchBlock)(RHSwitch *rhswitch);
+@property (nonatomic, copy) void (^block)(RHSwitch *rhswitch);
 
-@property (nonatomic, copy) RHSwitchBlock block;
-
--(id)initWithBlock:(RHSwitchBlock)block state:(BOOL)state;
--(id)initWithBlock:(RHSwitchBlock)block;
+-(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block state:(BOOL)state;
+-(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block;
 
 @end

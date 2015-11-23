@@ -21,8 +21,7 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-
-
+//
 
 #import "RHTableViewCell.h"
 
@@ -47,7 +46,7 @@ static UIColor *textViewBackgroundColour;
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText
-        didSelectBlock:(RHBoringBlock)block
+        didSelectBlock:(void(^)(RHTableViewCell *cell))block
                  style:(UITableViewCellStyle)style
                  image:(UIImage *)image
          accessoryType:(UITableViewCellAccessoryType)accessoryType {
@@ -64,7 +63,7 @@ static UIColor *textViewBackgroundColour;
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText
-        didSelectBlock:(RHBoringBlock)block
+        didSelectBlock:(void(^)(RHTableViewCell *cell))block
            reloadBlock:(RHReloadCellBlock)reloadBlock
                  style:(UITableViewCellStyle)style
                  image:(UIImage *)image
@@ -129,7 +128,7 @@ static UIColor *textViewBackgroundColour;
     return cell;
 }
 
-+(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block {
++(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(void (^)(RHSwitch *rhswitch))block {
     RHTableViewCell *cell = [[RHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     [cell setDidSelectBlock:nil];
     [cell.textLabel setText:labelText];

@@ -22,10 +22,12 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 #define kRHDefaultCellHeight 44
 
 #import "RHTextField.h"
+#import "RHSwitch.h"
 
 @interface RHTableViewCell : UITableViewCell
 
@@ -48,14 +50,14 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText
-        didSelectBlock:(RHBoringBlock)block
+        didSelectBlock:(void(^)(RHTableViewCell *cell))block
                  style:(UITableViewCellStyle)style
                  image:(UIImage *)image
          accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
 +(id)cellWithLabelText:(NSString *)labelText
        detailLabelText:(NSString *)detailLabelText
-        didSelectBlock:(RHBoringBlock)block
+        didSelectBlock:(void(^)(RHTableViewCell *cell))block
            reloadBlock:(RHReloadCellBlock)reloadBlock
                  style:(UITableViewCellStyle)style
                  image:(UIImage *)image
@@ -71,7 +73,7 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 +(id)cellWithTextView:(NSString *)labelText;
 +(id)cellWithSingleLabel:(NSString *)labelText;
 +(id)cellWithLeftLabel:(NSString *)leftText largeLabel:(NSString *)largeText;
-+(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(RHSwitchBlock)block;
++(id)cellWithSwitch:(NSString *)labelText state:(BOOL)state block:(void (^)(RHSwitch *rhswitch))block;
 +(id)cellWithImage:(UIImage *)image label:(NSString *)labelText;
 
 -(CGFloat)heightWithTableView:(UITableView *)tableView;

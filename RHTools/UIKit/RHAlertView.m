@@ -23,9 +23,10 @@
 //  THE SOFTWARE.
 
 #import "RHAlertView.h"
+#import "UIAlertController+window.h"
 
 @interface RHAlertView()
-@property (nonatomic, strong) NSMutableDictionary *actions;
+@property (nonatomic, strong) UIAlertController *alertController;
 @end
 
 @implementation RHAlertView
@@ -42,59 +43,45 @@
 
 -(id)init {
 	if (self=[super init]) {
-		self.delegate = self;
-		self.actions = [NSMutableDictionary dictionary];
+        self.alertController = [UIAlertController alertWithTitle:nil message:nil];
 	}
 	return self;
 }
 
 -(id)initWithTitle:(NSString *)title message:(NSString *)message {
 	if (self=[self init]) {
-		self.title = title;
-		self.message = message;
+        [self.alertController setTitle:title];
+        [self.alertController setMessage:message];
 	}
 	return self;
 }
 
--(NSInteger)addButtonWithTitle:(NSString *)title block:(RHAlertBlock)block {
-	NSInteger index = [self addButtonWithTitle:title];
-	if (block) {
-		NSNumber *key = [NSNumber numberWithInteger:index];
-		[self.actions setObject:[block copy] forKey:key];
-	}
-	return index;
+-(void)addButtonWithTitle:(NSString *)title block:(void (^)())block {
+    [self.alertController addButtonWithTitle:title block:^(UIAlertAction * _Nonnull action) {
+        if (block) {
+            block();
+        }
+    }];
 }
 
--(NSInteger)addOKButton {
+-(void)addOKButton {
 	return [self addOKButtonWithBlock:nil];
 }
 
--(NSInteger)addOKButtonWithBlock:(RHAlertBlock)block {
+-(void)addOKButtonWithBlock:(void (^)())block {
 	return [self addButtonWithTitle:kOK block:block];
 }
 
--(NSInteger)addCancelButton {
+-(void)addCancelButton {
 	return [self addCancelButtonWithTitle:kCancel];
 }
 
--(NSInteger)addCancelButtonWithTitle:(NSString *)title {
-	NSInteger index = [self addButtonWithTitle:title];
-	[self setCancelButtonIndex:index];
-	return index;
+-(void)addCancelButtonWithTitle:(NSString *)title {
+    [self.alertController addCancelButtonWithTitle:title];
 }
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    self.selectedIndex = buttonIndex;
-    
-	NSNumber *key = [NSNumber numberWithInteger:buttonIndex];
-	RHAlertBlock block = [self.actions objectForKey:key];
-	
-	if (block) {
-		block();
-	}
-	
-	// This line prevents a retain cycle if alert is referenced within the block.
-	self.actions = nil;
+-(void)show {
+    [self.alertController show];
 }
 
 @end

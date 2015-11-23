@@ -31,7 +31,7 @@
 @implementation RHSwitch
 @synthesize state=_state;
 
--(id)initWithBlock:(RHSwitchBlock)block state:(BOOL)state {
+-(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block state:(BOOL)state {
     if (self=[self init]) {
         [self addTarget:self action:@selector(eventValueChanged:) forControlEvents:UIControlEventValueChanged];
 		[self setBlock:block];  // copied by @property
@@ -41,7 +41,7 @@
     return self;
 }
 
--(id)initWithBlock:(RHSwitchBlock)block {
+-(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block {
 	return [self initWithBlock:block state:NO];
 }
 
