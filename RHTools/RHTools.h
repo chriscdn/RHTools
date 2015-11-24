@@ -33,6 +33,8 @@
 #define async(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ })
 #define async_main(...) dispatch_async(dispatch_get_main_queue(), ^{ __VA_ARGS__ })
 
+#define isNillOrNull(item) (!item || [item isEqual:[NSNull null]])
+
 #define kOK NSLocalizedString(@"OK", nil)
 #define kCancel NSLocalizedString(@"Cancel", nil)
 #define kYes NSLocalizedString(@"Yes", nil)

@@ -100,6 +100,14 @@ static UIColor *textViewBackgroundColour;
     return [self cellWithTextField:labelText initialValue:nil];
 }
 
++(id)cellWithButtonLabel:(NSString *)label colour:(UIColor *)colour didSelectBlock:(void(^)(RHTableViewCell *cell))block {
+    RHTableViewCell *cell = [self cellStyleDefaultWithLabelText:label];
+    [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+    [cell.textLabel setTextColor:colour];
+    [cell setDidSelectBlock:block];
+    return cell;
+}
+
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue {
     RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHTextFieldTableViewCell" owner:nil bundle:[NSBundle bundleForClass:[self class]]];
     cell.leftLabel.text = labelText;

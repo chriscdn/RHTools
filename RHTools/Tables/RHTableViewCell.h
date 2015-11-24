@@ -67,6 +67,7 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 +(id)cellStyle1WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyle2WithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
 +(id)cellStyleSubtitleWithLabelText:(NSString *)labelText detailLabelText:(NSString *)detailLabelText;
++(id)cellWithButtonLabel:(NSString *)label colour:(UIColor *)colour didSelectBlock:(void(^)(RHTableViewCell *cell))block;
 
 +(id)cellWithTextField:(NSString *)labelText;
 +(id)cellWithTextField:(NSString *)labelText initialValue:(NSString *)initialValue;

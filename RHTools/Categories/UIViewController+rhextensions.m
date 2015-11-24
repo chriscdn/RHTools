@@ -30,10 +30,36 @@
     return [[UINavigationController alloc] initWithRootViewController:self];
 }
 
+-(UINavigationController *)wrapInNavigationControllerWithCloseButton {
+    __weak UIViewController *bself = self;
+    
+    self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+        [bself dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    return [self wrapInNavigationController];
+}
+
 -(UINavigationController *)wrapInNavigationControllerWithPresentationStyle:(UIModalPresentationStyle)modalPresentationStyle {
     UINavigationController *navController = [self wrapInNavigationController];
     [navController setModalPresentationStyle:modalPresentationStyle];
     return navController;
 }
+
+-(UINavigationController *)wrapInNavigationControllerWithCloseButtonWithPresentationStyle:(UIModalPresentationStyle)modalPresentationStyle {
+    UINavigationController *navController = [self wrapInNavigationControllerWithCloseButton];
+    [navController setModalPresentationStyle:modalPresentationStyle];
+    return navController;
+}
+
+/*
+-(void)addLeftBarButtonItemCloseButton {    
+    __weak UIViewController *bself = self;
+    
+    self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+        [bself dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+*/
 
 @end
