@@ -166,7 +166,6 @@ static UIColor *textViewBackgroundColour;
     return cell;
 }
 
-
 -(void)setDidSelectBlock:(void(^)(RHTableViewCell *cell))didSelectBlock {
     _didSelectBlock = didSelectBlock;
     
@@ -186,13 +185,12 @@ static UIColor *textViewBackgroundColour;
         return UITableViewAutomaticDimension;
     }
 }
-
+/*
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+*/
 @end
-
 
 @implementation RHTableSection
 @synthesize headerText;
