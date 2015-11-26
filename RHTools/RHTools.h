@@ -40,6 +40,19 @@
 #define kYes NSLocalizedString(@"Yes", nil)
 #define kNo NSLocalizedString(@"No", nil)
 
+
+// https://gist.github.com/bsneed/5980089
+#define strongify(v) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wshadow\"") \
+__strong __typeof(v) v = v ## _weak_ \
+_Pragma("clang diagnostic pop")
+
+#define weakify(v) \
+__weak __typeof(v) v ## _weak_ = v \
+
+
+
 // RHBoringBlock is just that - no arguments and no return value
 typedef void (^RHBoringBlock)();
 

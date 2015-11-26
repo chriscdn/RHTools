@@ -87,7 +87,7 @@
     cell.largeLabel.textColor = self.largeLabelTextColor;
     cell.largeLabel.textAlignment = self.largeLabelTextAlignment;
     
-    cell.textLabel.font = self.leftLabelFont;
+    // cell.textLabel.font = self.leftLabelFont;
     // cell.textLabel.textColor = self.leftLabelTextColor;
     
     // cell.detailTextLabel.font = self.largeLabelFont;

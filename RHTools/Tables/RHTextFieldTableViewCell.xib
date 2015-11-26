@@ -16,24 +16,24 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAp-Cj-jzM">
-                        <rect key="frame" x="8" y="8" width="100" height="20"/>
+                        <rect key="frame" x="8" y="8" width="40" height="27"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="yoe-bW-2nC"/>
+                            <constraint firstAttribute="width" constant="40" id="yoe-bW-2nC"/>
                         </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwJ-CP-hVf">
-                        <rect key="frame" x="116" y="8" width="1" height="27"/>
+                        <rect key="frame" x="56" y="8" width="1" height="27"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="EST-JS-rfO"/>
                         </constraints>
                     </view>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iok-pX-tar" customClass="RHTextField">
-                        <rect key="frame" x="125" y="8" width="187" height="27"/>
+                        <rect key="frame" x="65" y="8" width="247" height="27"/>
                         <animations/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <textInputTraits key="textInputTraits"/>
@@ -43,7 +43,7 @@
                 <constraints>
                     <constraint firstItem="iok-pX-tar" firstAttribute="leading" secondItem="nwJ-CP-hVf" secondAttribute="trailing" constant="8" id="3sA-b6-9at"/>
                     <constraint firstAttribute="bottomMargin" secondItem="nwJ-CP-hVf" secondAttribute="bottom" id="7K6-lz-fth"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="PAp-Cj-jzM" secondAttribute="bottom" id="Cco-Pf-Hyh"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PAp-Cj-jzM" secondAttribute="bottom" id="Cco-Pf-Hyh"/>
                     <constraint firstItem="nwJ-CP-hVf" firstAttribute="leading" secondItem="PAp-Cj-jzM" secondAttribute="trailing" constant="8" id="IM7-3X-j0U"/>
                     <constraint firstItem="PAp-Cj-jzM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OLy-Tb-kZG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iok-pX-tar" secondAttribute="trailing" id="asM-CJ-Ky7"/>

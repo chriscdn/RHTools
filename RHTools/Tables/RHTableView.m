@@ -126,16 +126,16 @@
         
         RHTextField *textField = cell.textField;
         
-        __weak RHTableView *bself = self;
+        weakify(self);
         [textField setDidBeginEditingBlock:^(RHTextField *textField) {
-            [bself scrollToView:textField];
+            strongify(self);
+            [self scrollToView:textField];
         }];
         
         [self.textFields addObject:textField];
         [self.inputFields addObject:textField];
         
     } else if (cell.textView) {
-        // [cell.textView setDelegate:self];
         [self.textViews addObject:cell.textView];
         [self.inputFields addObject:cell.textView];
     }
@@ -143,6 +143,10 @@
     if (cell.leftLabel) {
         [self.textLabels addObject:cell.leftLabel];
     }
+
+    // This call doesn't do anything immediately... it just tells the next update cycle to call updateConstraints.
+    // http://stackoverflow.com/questions/20609206/setneedslayout-vs-setneedsupdateconstraints-and-layoutifneeded-vs-updateconstra
+    [self setNeedsUpdateConstraints];
     
     return cell;
 }
@@ -174,9 +178,9 @@
 #pragma mark -
 #pragma mark UITableViewDelegate & UITableViewDataSource delegate methods
 
--(void)layoutSubviews {
-    [super layoutSubviews];
-    
+// http://stackoverflow.com/questions/20609206/setneedslayout-vs-setneedsupdateconstraints-and-layoutifneeded-vs-updateconstra
+-(void)updateConstraints {
+   
     CGFloat labelWidth = 0;
     
     // get the max label width
@@ -190,11 +194,10 @@
             [[cell.leftLabel constraintForAttribute:NSLayoutAttributeWidth] setConstant:labelWidth];
         }
     }
+      [super updateConstraints];
 }
 
-
 -(void)reloadData {
-
     for (NSArray *section in self.tableRows) {
         for (RHTableViewCell *cell in section) {
             if (cell.reloadCellBlock) {
@@ -204,7 +207,6 @@
     }
     
     [super reloadData];
-    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -290,8 +292,10 @@
     [self.inputFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
 }
 
+/*
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+*/
 
 @end
