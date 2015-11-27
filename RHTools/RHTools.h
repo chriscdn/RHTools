@@ -35,6 +35,8 @@
 
 #define isNillOrNull(item) (!item || [item isEqual:[NSNull null]])
 
+#define LocaleIsMetric ([[[NSLocale currentLocale] objectForKey:NSLocaleUsesMetricSystem] boolValue])
+
 #define kOK NSLocalizedString(@"OK", nil)
 #define kCancel NSLocalizedString(@"Cancel", nil)
 #define kYes NSLocalizedString(@"Yes", nil)
