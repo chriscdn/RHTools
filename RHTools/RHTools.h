@@ -54,7 +54,6 @@ _Pragma("clang diagnostic pop")
 __weak __typeof(v) v ## _weak_ = v \
 
 
-
 // RHBoringBlock is just that - no arguments and no return value
 typedef void (^RHBoringBlock)();
 

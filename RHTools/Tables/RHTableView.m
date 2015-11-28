@@ -274,16 +274,14 @@
 }
 
 -(void)setTextFieldsKeyboardReturnToNext {
-    __weak RHTableView *bself = self;
+    weakify(self);
     for (RHTextField *textField in self.textFields) {
-        
         [textField setReturnKeyType:UIReturnKeyNext];
-        
         [textField setShouldReturnBlock:^BOOL(RHTextField *textField) {
-            [bself advanceFirstResponder:textField];
+            strongify(self);
+            [self advanceFirstResponder:textField];
             return YES;
         }];
-        
     }
 }
 
