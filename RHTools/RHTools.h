@@ -83,7 +83,6 @@ typedef void (^RHBoringBlock)();
 #import "RHAlertView.h"
 #import "RHBarButtonItem.h"
 #import "RHButton.h"
-#import "RHImagePickerController.h"
 #import "RHKeyboardScrunchView.h"
 #import "RHKeyboardSlideView.h"
 #import "RHPopoverController.h"
