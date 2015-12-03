@@ -41,6 +41,7 @@
 #define kCancel NSLocalizedString(@"Cancel", nil)
 #define kYes NSLocalizedString(@"Yes", nil)
 #define kNo NSLocalizedString(@"No", nil)
+#define kOneMoment NSLocalizedString(@"One moment...", nil)
 
 
 // https://gist.github.com/bsneed/5980089
