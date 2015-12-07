@@ -36,7 +36,7 @@ static UIColor *textViewBackgroundColour;
 +(void)initialize {
     if (self == [RHTableViewCell class]) {
         textFieldBackgroundColour =  RGB(245, 245, 245);
-        textViewBackgroundColour = RGB(245, 245, 245);
+        textViewBackgroundColour  = RGB(245, 245, 245);
     }
 }
 
@@ -118,6 +118,10 @@ static UIColor *textViewBackgroundColour;
     cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     cell.textField.borderStyle = UITextBorderStyleNone;
     
+    // http://stackoverflow.com/questions/27420888/uitableviewcell-with-autolayout-left-margin-different-on-iphone-and-ipad#
+    [cell setPreservesSuperviewLayoutMargins:YES];
+    [cell.contentView setPreservesSuperviewLayoutMargins:YES];
+    
     // TODO: make this configurable
     cell.textField.backgroundColor = textFieldBackgroundColour;
     
@@ -132,6 +136,9 @@ static UIColor *textViewBackgroundColour;
     // TODO: make this configurable
     cell.textView.backgroundColor = textViewBackgroundColour;
     // cell.textView.text = nil;
+    
+    [cell setPreservesSuperviewLayoutMargins:YES];
+    [cell.contentView setPreservesSuperviewLayoutMargins:YES];
     
     return cell;
 }
@@ -149,6 +156,10 @@ static UIColor *textViewBackgroundColour;
 +(id)cellWithSingleLabel:(NSString *)labelText {
     RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHSingleLabelTableViewCell" owner:nil bundle:[NSBundle bundleForClass:self]];
     [cell.largeLabel setText:labelText];
+    
+    [cell setPreservesSuperviewLayoutMargins:YES];
+    [cell.contentView setPreservesSuperviewLayoutMargins:YES];
+    
     return cell;
 }
 
@@ -156,6 +167,10 @@ static UIColor *textViewBackgroundColour;
     RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHLabelTableViewCell" owner:nil bundle:[NSBundle bundleForClass:self]];
     [cell.leftLabel setText:leftText];
     [cell.largeLabel setText:largeText];
+    
+    [cell setPreservesSuperviewLayoutMargins:YES];
+    [cell.contentView setPreservesSuperviewLayoutMargins:YES];
+    
     return cell;
 }
 
@@ -163,6 +178,10 @@ static UIColor *textViewBackgroundColour;
     RHTableViewCell *cell = [UIView viewFromNibNamed:@"RHImageLabelTableViewCell" owner:nil bundle:[NSBundle bundleForClass:self]];
     [cell.imageView2 setImage:image];
     [cell.largeLabel setText:labelText];
+    
+    [cell setPreservesSuperviewLayoutMargins:YES];
+    [cell.contentView setPreservesSuperviewLayoutMargins:YES];
+    
     return cell;
 }
 
