@@ -65,13 +65,8 @@
 	NSArray *toolbarItems = [self toolbarItems];
 
 	if (toolbarItems) {
-		UIToolbar *toolbar = [[UIToolbar alloc] init];
-		[toolbar sizeToFit];
-
-		// CGRect frame = toolbar.frame;
-		// frame.size.height = 30;
-		// [toolbar setFrame:frame];
-        [toolbar setHeight:30.0f];
+        UIToolbar *toolbar = [UIToolbar new];
+        [toolbar setHeight:44.0f];
 		[toolbar setItems:toolbarItems];
 		[self.textView setInputAccessoryView:toolbar];
 	}
