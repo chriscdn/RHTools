@@ -34,7 +34,7 @@
 +(id)sharedInstance {
     static dispatch_once_t once;
     static id sharedInstance;
-    dispatch_once(&once, ^ {
+    dispatch_once(&once, ^{
         sharedInstance = [self new];
     });
     return sharedInstance;
@@ -63,7 +63,8 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
-    if (!newValue || [newValue isEqual:[NSNull null]] ) {
+    // if (!newValue || [newValue isEqual:[NSNull null]] ) {
+    if isNillOrNull(newValue) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:keyPath];
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:newValue forKey:keyPath];

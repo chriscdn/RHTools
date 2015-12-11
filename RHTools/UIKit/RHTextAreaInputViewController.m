@@ -38,7 +38,7 @@
 	[self.view setBackgroundColor:[UIColor whiteColor]];
 
 	[self setTextView:[[UITextView alloc] initWithFrame:self.view.bounds]];
-	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+	[self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.textView setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [self.textView setText:self.initialText];
 

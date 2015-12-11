@@ -88,9 +88,8 @@
     UIEdgeInsets newInset = self.contentInset;
     newInset.bottom = MAX(self.height - adjustedViewHeight, 0);
     
-    //    self.contentInset = newInset;
-    //   self.scrollIndicatorInsets = newInset;
-    
+    // self.contentInset = newInset;
+    // self.scrollIndicatorInsets = newInset;
     
     NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationOptions animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
