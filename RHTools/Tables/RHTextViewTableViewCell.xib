@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,6 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAp-Cj-jzM">
                         <rect key="frame" x="8" y="8" width="100" height="20"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="yoe-bW-2nC"/>
                         </constraints>
@@ -26,20 +25,17 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwJ-CP-hVf">
                         <rect key="frame" x="116" y="8" width="1" height="123"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="EST-JS-rfO"/>
                         </constraints>
                     </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ur7-fa-mvU">
                         <rect key="frame" x="125" y="8" width="187" height="123"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstItem="ur7-fa-mvU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3Hg-ji-Cpu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="nwJ-CP-hVf" secondAttribute="bottom" id="7K6-lz-fth"/>
@@ -53,7 +49,6 @@
                     <constraint firstItem="ur7-fa-mvU" firstAttribute="leading" secondItem="nwJ-CP-hVf" secondAttribute="trailing" constant="8" id="rpk-R8-LOj"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="labelSeparatorView" destination="nwJ-CP-hVf" id="Jg9-C4-cbI"/>
                 <outlet property="leftLabel" destination="PAp-Cj-jzM" id="1N1-B7-7Uz"/>
