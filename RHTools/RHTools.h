@@ -42,6 +42,7 @@
 #define kYes NSLocalizedString(@"Yes", nil)
 #define kNo NSLocalizedString(@"No", nil)
 #define kOneMoment NSLocalizedString(@"One moment...", nil)
+#define kEmptyPromise [AnyPromise promiseWithResolverBlock:^(PMKResolver  _Nonnull resolve) {resolve(nil);}];
 
 
 // https://gist.github.com/bsneed/5980089

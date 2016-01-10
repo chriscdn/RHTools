@@ -169,7 +169,7 @@
                                                 didSelectBlock:block
                                                          style:UITableViewCellStyleDefault
                                                          image:nil
-                                                 accessoryType:UITableViewCellAccessoryNone];
+                                                 accessoryType:block ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
     [self addCell:cell];
     
     return cell;
