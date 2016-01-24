@@ -1,7 +1,7 @@
 //
 //  RHUserDefaults.h
 //
-//  Copyright (C) 2015 by Christopher Meyer
+//  Copyright (C) 2016 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -63,7 +63,6 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
-    // if (!newValue || [newValue isEqual:[NSNull null]] ) {
     if isNillOrNull(newValue) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:keyPath];
     } else {
