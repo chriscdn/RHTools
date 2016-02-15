@@ -30,12 +30,8 @@
 		
 	id value = [self objectForKey:aKey];
 	
-	if ( (value == nil) || (value == [NSNull null]) ) {
-		return defaultValue;
-	}
-	
-	return value;
-
+    return isNillOrNull(value) ? defaultValue : value;
+    
 }
 
 @end

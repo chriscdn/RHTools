@@ -80,6 +80,10 @@
     [self.alertController addCancelButtonWithTitle:title];
 }
 
+-(void)addCancelButtonWithTitle:(NSString *)title block:(void (^)())block {
+    [self.alertController addCancelButtonWithTitle:title block:block];
+}
+
 -(void)show {
     [self.alertController show];
 }

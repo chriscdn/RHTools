@@ -35,6 +35,7 @@
 -(void)addOKButtonWithBlock:(void (^)())block;
 -(void)addCancelButton;
 -(void)addCancelButtonWithTitle:(NSString *)title;
+-(void)addCancelButtonWithTitle:(NSString *)title block:(void (^)())block;
 -(void)show;
 
 @end
