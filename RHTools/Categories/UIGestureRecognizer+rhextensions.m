@@ -26,7 +26,7 @@
 #import <objc/runtime.h>
 
 @interface UIGestureRecognizer (rhextensionsprivate)
-@property (nonatomic, copy) void (^block) (UIGestureRecognizer* gesture);
+@property (nonatomic, copy) void (^block) (UIGestureRecognizer *gesture);
 @end
 
 @implementation UIGestureRecognizer (rhextensions)
@@ -42,10 +42,15 @@ static NSString const *key = @"f94993c0-987a-41a6-84ab-c1f94e28dfb8";
 }
 
 -(void)gesturePerformed:(UIGestureRecognizer *)gesture {
-    RHGestureBlock block = [self block];
-    if (block) {
-        block(gesture);
+    /*   RHGestureBlock block = [self block];
+     if (block) {
+     block(gesture);
+     }
+     */
+    if (self.block) {
+        self.block(gesture);
     }
+    
 }
 
 -(RHGestureBlock)block {

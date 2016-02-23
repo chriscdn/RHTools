@@ -103,7 +103,7 @@
 
 
 -(NSArray *)constaintsForAttribute:(NSLayoutAttribute)attribute {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", attribute];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d AND className == %@", attribute, @"NSLayoutConstraint"];
     return [[self constraints] filteredArrayUsingPredicate:predicate];
 }
 
