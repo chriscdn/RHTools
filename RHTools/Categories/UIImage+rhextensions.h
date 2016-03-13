@@ -10,8 +10,12 @@
 
 @interface UIImage (rhextensions)
 
--(UIImage *)scaleImageWithMaxWidth:(float) maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice ;
--(UIImage *)fillImageInBoxWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice ;
--(UIImage *)imageByScalingAndCroppingWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice ;
+-(CGFloat)aspectRatio;
+-(BOOL)isLandscape;
+-(BOOL)isPortrait;
+
+-(UIImage *)scaleImageWithMaxWidth:(CGFloat) maxWidth maxHeight:(CGFloat)maxHeight scaleForDevice:(BOOL)scaleForDevice ;
+-(UIImage *)fillImageInBoxWithMaxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight scaleForDevice:(BOOL)scaleForDevice ;
+-(UIImage *)imageByScalingAndCroppingWithMaxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight scaleForDevice:(BOOL)scaleForDevice ;
 
 @end

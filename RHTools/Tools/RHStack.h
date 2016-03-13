@@ -1,7 +1,7 @@
 //
-//  RHPopoverController.m
+//  RHStack.h
 //
-//  Copyright (C) 2015 by Christopher Meyer
+//  Copyright (C) 2016 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,32 +21,15 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-#import "RHPopoverController.h"
+@interface RHStack : NSObject
 
-static RHPopoverController *_sharedInstance;
++(instancetype)stack;
 
-@implementation RHPopoverController
-
-+(RHPopoverController *)sharedInstance {
-    return _sharedInstance;
-}
-
-+(RHPopoverController *)popoverWithContentViewController:(UIViewController *)controller {
-    RHPopoverController *popover = [[RHPopoverController alloc] initWithContentViewController:controller];
-    _sharedInstance = popover;
-    return [self sharedInstance];
-}
-
-+(RHPopoverController *)popoverWithContentViewController:(UIViewController *)controller presentFromBarButtonItem:(UIBarButtonItem *)barButtonItem permittedArrowDirection:(UIPopoverArrowDirection)arrowDirections {
-    RHPopoverController *popover = [self popoverWithContentViewController:controller];
-    [popover presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:arrowDirections animated:YES];
-    
-    return popover;
-}
-
-+(void)dismiss {
-    [[self sharedInstance] dismissPopoverAnimated:YES];
-}
+-(BOOL)isEmpty;
+-(void)push:(NSObject *)item;
+-(id)pop;
+-(id)peek;
 
 @end

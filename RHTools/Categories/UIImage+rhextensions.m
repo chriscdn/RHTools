@@ -10,13 +10,31 @@
 
 @implementation UIImage (rhextensions)
 
--(UIImage *)scaleImageWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice {
-	
-	float actualHeight = self.size.height;
-	float actualWidth = self.size.width;
+-(CGFloat)aspectRatio {
+    CGFloat actualHeight = self.size.height;
+    CGFloat actualWidth = self.size.width;
+    
+    // prevent a divide by zero
+    actualHeight = MAX(1, actualHeight);
+    
+    return actualWidth/actualHeight;
+}
 
-	float imgRatio = actualWidth / actualHeight;
-	float maxRatio = maxWidth / maxHeight;
+-(BOOL)isLandscape {
+    return (self.aspectRatio >= 1);
+}
+
+-(BOOL)isPortrait {
+    return !self.isLandscape;
+}
+
+-(UIImage *)scaleImageWithMaxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight scaleForDevice:(BOOL)scaleForDevice {
+	
+	CGFloat actualHeight = self.size.height;
+	CGFloat actualWidth = self.size.width;
+
+	CGFloat imgRatio = actualWidth / actualHeight;
+	CGFloat maxRatio = maxWidth / maxHeight;
 
 	if(imgRatio < maxRatio) {
 		imgRatio = maxHeight / actualHeight;
@@ -31,7 +49,7 @@
 	return [self fillImageInBoxWithMaxWidth:actualWidth maxHeight:actualHeight scaleForDevice:scaleForDevice];
 }
 
--(UIImage *)fillImageInBoxWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice {
+-(UIImage *)fillImageInBoxWithMaxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight scaleForDevice:(BOOL)scaleForDevice {
 	CGRect rect = CGRectMake(0.0, 0.0, maxWidth, maxHeight);
     
     // 0 means use the device scaling
@@ -45,7 +63,7 @@
 	return theImage;	
 }
 
--(UIImage *)imageByScalingAndCroppingWithMaxWidth:(float)maxWidth maxHeight:(float)maxHeight scaleForDevice:(BOOL)scaleForDevice {
+-(UIImage *)imageByScalingAndCroppingWithMaxWidth:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight scaleForDevice:(BOOL)scaleForDevice {
 	CGSize targetSize = CGSizeMake(maxWidth, maxHeight);
 	
 	UIImage *sourceImage = self;

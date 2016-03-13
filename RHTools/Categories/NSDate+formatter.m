@@ -37,7 +37,7 @@
         formatter = [[NSDateFormatter alloc] init];
 		[formatter setDateStyle:NSDateFormatterMediumStyle];
 		[formatter setTimeStyle:NSDateFormatterShortStyle];
-		[formatter setDoesRelativeDateFormatting:YES];
+		[formatter setDoesRelativeDateFormatting:NO];
     });
 	
     return formatter;

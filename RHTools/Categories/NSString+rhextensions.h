@@ -26,6 +26,7 @@
 @interface NSString (rhextensions)
 
 +(NSString *)UUID;
++(id)stringWithFormat:(NSString *)format array:(NSArray *)arguments;
 -(NSString *)firstLetter;
 -(BOOL)containsString:(NSString *)substring;
 -(NSString *)truncateToLength:(NSUInteger)charLength;
@@ -40,5 +41,6 @@
 -(NSString *)nilify;
 -(id)nullify;
 -(NSString *)snakeCaseToTitleCase;
+-(NSAttributedString *)attributedString;
 
 @end

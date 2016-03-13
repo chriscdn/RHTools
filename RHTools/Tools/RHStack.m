@@ -1,9 +1,7 @@
 //
-//  RHPopoverController.h
-//  Version: 0.1
+//  RHStack.m
 //
-//  Copyright (C) 2015 by Christopher Meyer
-//  http://schwiiz.org/
+//  Copyright (C) 2016 by Christopher Meyer
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +22,41 @@
 //  THE SOFTWARE.
 //
 
-@interface RHPopoverController : UIPopoverController
+#import "RHStack.h"
 
-+(RHPopoverController *)sharedInstance;
-+(RHPopoverController *)popoverWithContentViewController:(UIViewController *)controller;
-+(RHPopoverController *)popoverWithContentViewController:(UIViewController *)controller presentFromBarButtonItem:(UIBarButtonItem *)barButtonItem permittedArrowDirection:(UIPopoverArrowDirection)arrowDirections;
-+(void)dismiss;
+@interface RHStack()
+@property (nonatomic, strong) NSMutableArray *items;
+@end
+
+@implementation RHStack
+
++(instancetype)stack {
+    return [RHStack new];
+}
+
+-(instancetype)init {
+    if (self=[super init]) {
+        self.items = [NSMutableArray array];
+    }
+    return self;
+}
+
+-(BOOL)isEmpty {
+    return (self.items.count == 0);
+}
+
+-(void)push:(NSObject *)item {
+    [self.items insertObject:item atIndex:0];
+}
+
+-(id)pop {
+    id item = self.peek;
+    [self.items removeObjectAtIndex:0];
+    return item;
+}
+
+-(id)peek {
+    return self.items.firstObject;
+}
 
 @end
