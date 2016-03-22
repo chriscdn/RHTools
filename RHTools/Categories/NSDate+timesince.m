@@ -77,15 +77,30 @@ static NSArray *_unitValues;
 	return [self timesinceWithDepth:2];
 }
 
+-(NSString *)timesinceLabel {
+    return [self timesinceLabelWithDepth:2];
+}
+
+-(NSString *)timesinceLabelWithDepth:(NSUInteger)depth {
+    NSDate *now = [NSDate date];
+    if ([self compare:now] == NSOrderedDescending) {
+        // future
+        return [NSString stringWithFormat:NSLocalizedString(@"%@ from now", nil), [self timesinceDate:now withDepth:depth]];
+    } else {
+        // past, or now
+        return [NSString stringWithFormat:NSLocalizedString(@"%@ ago", nil), [self timesinceDate:now withDepth:depth]];
+    }
+}
+
 -(NSString *)timesince1 {
 	return [self timesinceWithDepth:1];
 }
 
--(NSString *)timesinceWithDepth:(int)depth {
+-(NSString *)timesinceWithDepth:(NSUInteger)depth {
     return [self timesinceDate:[NSDate date] withDepth:depth];
 }
 
--(NSString *)timesinceDate:(NSDate *)date withDepth:(int)depth {	
+-(NSString *)timesinceDate:(NSDate *)date withDepth:(NSUInteger)depth {
     NSArray *units_singular = [NSDate unitsSingular];
     NSArray *units_plural = [NSDate unitsPlural];
 	NSArray *values = [NSDate unitValues];
