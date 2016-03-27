@@ -23,10 +23,10 @@
 //  THE SOFTWARE.
 
 #import "RHAlertView.h"
-#import "UIAlertController+window.h"
+#import "RHAlertController.h"
 
 @interface RHAlertView()
-@property (nonatomic, strong) UIAlertController *alertController;
+@property (nonatomic, strong) RHAlertController *alertController;
 @end
 
 @implementation RHAlertView
@@ -43,7 +43,7 @@
 
 -(id)init {
 	if (self=[super init]) {
-        self.alertController = [UIAlertController alertWithTitle:nil message:nil];
+        self.alertController = [RHAlertController alertWithTitle:nil message:nil];
 	}
 	return self;
 }

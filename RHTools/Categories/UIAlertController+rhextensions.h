@@ -25,10 +25,10 @@
 
 @interface UIAlertController (rhextensions)
 
-+(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message barButtonItem:(nullable UIBarButtonItem *)barButtonItem;
-+(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view;
-+(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view rect:(CGRect)rect;
-+(nonnull UIAlertController *)alertWithTitle:(nullable NSString *)title message:(nullable NSString *)message;
++(nonnull instancetype)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message barButtonItem:(nullable UIBarButtonItem *)barButtonItem;
++(nonnull instancetype)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view;
++(nonnull instancetype)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view rect:(CGRect)rect;
++(nonnull instancetype)alertWithTitle:(nullable NSString *)title message:(nullable NSString *)message;
 
 -(void)addButtonWithTitle:(nullable NSString *)title block:(void (^ __nullable)(UIAlertAction * __nonnull action))block;
 -(void)addDestructiveButtonWithTitle:(nullable NSString *)title block:(void (^ __nullable)(UIAlertAction * __nonnull action))block;

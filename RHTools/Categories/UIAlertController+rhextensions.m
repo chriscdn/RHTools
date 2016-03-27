@@ -27,8 +27,8 @@
 
 @implementation UIAlertController (rhextensions)
 
-+(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message barButtonItem:(nullable UIBarButtonItem *)barButtonItem {
-    UIAlertController *alertController = [UIAlertController
++(nonnull instancetype)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message barButtonItem:(nullable UIBarButtonItem *)barButtonItem {
+    UIAlertController *alertController = [self
             alertControllerWithTitle:title
             message:message
             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -38,13 +38,13 @@
     return alertController;
 }
 
-+(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view {
++(nonnull instancetype)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view {
     
     return [self actionSheetWithTitle:title message:message view:view rect:view.frame];
     
 }
 
-+(nonnull UIAlertController *)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view rect:(CGRect)rect {
++(nonnull instancetype)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message view:(nullable UIView *)view rect:(CGRect)rect {
     
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:title
@@ -58,8 +58,8 @@
     return alertController;
 }
 
-+(nonnull UIAlertController *)alertWithTitle:(nullable NSString *)title message:(nullable NSString *)message {
-    return [UIAlertController
++(nonnull instancetype)alertWithTitle:(nullable NSString *)title message:(nullable NSString *)message {
+    return [self
             alertControllerWithTitle:title
             message:nil
             preferredStyle:UIAlertControllerStyleAlert];

@@ -1,8 +1,8 @@
 //
-//  RHTextField+rhextensions.h
+//  RHAlertController.h
 //  Version: 0.1
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2016 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,12 +24,9 @@
 //  THE SOFTWARE.
 //
 
-@interface RHTextField : UITextField
+@interface RHAlertController : UIAlertController
 
-@property (nonatomic, assign) BOOL(^shouldBeginEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) void(^didBeginEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) BOOL(^shouldEndEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) void(^didEndEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) BOOL(^shouldReturnBlock)(RHTextField *textField);
+-(void)show;
+-(void)showAnimated:(BOOL)animated;
 
 @end

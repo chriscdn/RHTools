@@ -1,9 +1,8 @@
 //
-//  RHTextField+rhextensions.h
+//  RHAlertController.m
 //  Version: 0.1
 //
-//  Copyright (C) 2013 by Christopher Meyer
-//  http://schwiiz.org/
+//  Copyright (C) 2016 by Christopher Meyer
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +23,37 @@
 //  THE SOFTWARE.
 //
 
-@interface RHTextField : UITextField
+#import "RHAlertController.h"
 
-@property (nonatomic, assign) BOOL(^shouldBeginEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) void(^didBeginEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) BOOL(^shouldEndEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) void(^didEndEditingBlock)(RHTextField *textField);
-@property (nonatomic, assign) BOOL(^shouldReturnBlock)(RHTextField *textField);
+@interface RHAlertController ()
+@property (nonatomic, strong) UIWindow *alertWindow;
+@end
+
+@implementation RHAlertController
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.alertWindow.hidden = YES;
+    self.alertWindow = nil;
+}
+
+-(void)show {
+    [self showAnimated:YES];
+}
+
+// https://github.com/kirbyt/WPSKit/blob/master/WPSKit/UIKit/WPSAlertController.h
+-(void)showAnimated:(BOOL)animated {
+    UIViewController *viewController = [UIViewController new];
+    // [[blankViewController view] setBackgroundColor:[UIColor clearColor]];
+    
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [window setRootViewController:viewController];
+    // [window setBackgroundColor:[UIColor clearColor]];
+    [window setWindowLevel:UIWindowLevelAlert + 1];
+    [window makeKeyAndVisible];
+    [self setAlertWindow:window];
+    
+    [viewController presentViewController:self animated:animated completion:nil];
+}
 
 @end
