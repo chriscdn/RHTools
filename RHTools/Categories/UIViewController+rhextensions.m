@@ -33,7 +33,7 @@
 -(UINavigationController *)wrapInNavigationControllerWithCloseButton {
     __weak UIViewController *bself = self;
     
-    self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+    self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^(RHBarButtonItem *barButtonItem){
         [bself dismissViewControllerAnimated:YES completion:nil];
     }];
     

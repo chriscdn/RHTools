@@ -26,10 +26,8 @@
 #import "RHTableView.h"
 
 @interface RHTableView()
-
 -(void)addSection:(RHTableSection *)section;
 -(void)scrollToView:(UIView *)view;
-
 @end
 
 
@@ -180,7 +178,7 @@
 
 // http://stackoverflow.com/questions/20609206/setneedslayout-vs-setneedsupdateconstraints-and-layoutifneeded-vs-updateconstra
 -(void)updateConstraints {
-   
+    
     CGFloat labelWidth = 0;
     
     // get the max label width
@@ -194,7 +192,8 @@
             [[cell.leftLabel constraintForAttribute:NSLayoutAttributeWidth] setConstant:labelWidth];
         }
     }
-      [super updateConstraints];
+    
+    [super updateConstraints];
 }
 
 -(void)reloadData {
@@ -214,11 +213,11 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.tableRows objectAtIndex:section] count];
+    return [[self visibileRowsForSection:section] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    return [[self visibileRowsForSection:indexPath.section] objectAtIndex:indexPath.row];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -255,6 +254,64 @@
 }
 
 #pragma mark -
+
+-(NSArray *)visibileRowsForSection:(NSInteger)section {
+    NSArray *rows = [self.tableRows objectAtIndex:section];
+    return [rows filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"hidden == NO"]];
+}
+
+
+// A simple implementation to hide and show table view cells.
+// This only permits one cell from being hidden or displayed at a time.
+// Sections are not supported yet either.
+-(void)cell:(RHTableViewCell *)cell setHidden:(BOOL)hidden {
+    
+    if (cell.hidden == hidden) {
+        // do nothing
+    } else {
+        
+        [self beginUpdates];
+        
+        if (hidden) {
+            NSIndexPath *indexPath = [self visibleIndexPath:cell];
+            if (indexPath) {
+                [cell setHidden:YES];
+                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            }
+        } else {
+            [cell setHidden:NO];
+            NSIndexPath *indexPath = [self visibleIndexPath:cell];
+            if (indexPath) {
+                [self insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            }
+        }
+        
+        [self endUpdates];
+    }
+}
+
+-(NSIndexPath *)visibleIndexPath:(RHTableViewCell *)cell {
+    NSInteger section;
+    NSInteger row;
+    
+    for (section=0; section < [self numberOfSectionsInTableView:self]; section++) {
+        row = [[self visibileRowsForSection:section] indexOfObject:cell];
+        
+        if (row != NSNotFound) {
+            break;
+        }
+    }
+    
+    if (row != NSNotFound) {
+        return [NSIndexPath indexPathForRow:row inSection:section];
+    } else {
+        return nil;
+    }
+    
+}
+
+
+#pragma mark -
 -(void)advanceFirstResponder:(UIView *)textFieldorTextView {
     NSUInteger index = [self.inputFields indexOfObject:textFieldorTextView];
     
@@ -289,11 +346,5 @@
 -(void)hideKeyboard {
     [self.inputFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
 }
-
-/*
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-*/
 
 @end

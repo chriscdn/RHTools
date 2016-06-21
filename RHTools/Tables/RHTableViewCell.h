@@ -43,6 +43,7 @@ typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 @property (strong, nonatomic) IBOutlet RHTextField *textField;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView2;
+@property (assign, nonatomic) BOOL hidden;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *largeLabelLeadingConstraint;
 

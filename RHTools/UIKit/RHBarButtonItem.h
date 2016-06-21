@@ -23,9 +23,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-typedef void (^RHBarButtonItemBlock)(void);
+
 
 @interface RHBarButtonItem : UIBarButtonItem
+
+typedef void (^RHBarButtonItemBlock)(RHBarButtonItem *barButtonItem);
 
 @property (nonatomic, copy) RHBarButtonItemBlock block;
 

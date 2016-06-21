@@ -108,12 +108,12 @@
 	[super viewDidLoad];
 
 	__weak RHTextAreaInputForNavigationViewController *bself = self;
-
-	self.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemCancel block:^{
+    
+	self.navigationItem.leftBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemCancel block:^(RHBarButtonItem *barButtonItem){
 		[bself dismissViewControllerAnimated:YES completion:nil];
 	}];
 
-	self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemSave block:^{
+	self.navigationItem.rightBarButtonItem = [RHBarButtonItem itemWithBarButtonSystemItem:UIBarButtonSystemItemSave block:^(RHBarButtonItem *barButtonItem){
 		if (bself.didSaveTextBlock) {
 			bself.didSaveTextBlock(bself.textView.text);
 		}

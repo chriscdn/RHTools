@@ -48,6 +48,8 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
 -(RHTableViewCell *)addCell:(RHTableViewCell *)row;
 
+-(void)cell:(RHTableViewCell *)cell setHidden:(BOOL)hidden;
+
 -(void)advanceFirstResponder:(UIView *)textFieldorTextView;
 -(void)setTextFieldsKeyboardReturnToNext;
 -(void)hideKeyboard;

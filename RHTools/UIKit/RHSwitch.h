@@ -26,6 +26,7 @@
 @interface RHSwitch : UISwitch
 
 @property (nonatomic, copy) void (^block)(RHSwitch *rhswitch);
+@property (nonatomic, strong) NSNumber *value; // value, which can also be used for kvo
 
 -(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block state:(BOOL)state;
 -(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block;

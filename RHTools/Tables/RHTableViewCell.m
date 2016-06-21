@@ -57,6 +57,7 @@ static UIColor *textViewBackgroundColour;
     [cell.detailTextLabel setText:detailLabelText];
     [cell setAccessoryType:accessoryType];
     [cell setDidSelectBlock:block];
+    [cell setHidden:NO];
     
     return cell;
 }

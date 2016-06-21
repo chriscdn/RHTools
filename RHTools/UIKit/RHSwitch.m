@@ -21,33 +21,32 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 #import "RHSwitch.h"
 
 @interface RHSwitch()
-@property (nonatomic, assign) BOOL state;
 @end
 
 @implementation RHSwitch
-@synthesize state=_state;
 
 -(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block state:(BOOL)state {
     if (self=[self init]) {
         [self addTarget:self action:@selector(eventValueChanged:) forControlEvents:UIControlEventValueChanged];
-		[self setBlock:block];  // copied by @property
-		[self setOn:state];
+        [self setBlock:block];
+        [self setOn:state];
     }
     
     return self;
 }
 
 -(id)initWithBlock:(void (^)(RHSwitch *rhswitch))block {
-	return [self initWithBlock:block state:NO];
+    return [self initWithBlock:block state:NO];
 }
 
 -(void)setOn:(BOOL)on animated:(BOOL)animated {
-	[super setOn:on animated:animated];
-	[self setState:on];
+    [super setOn:on animated:animated];
+    [self setValue:[NSNumber numberWithBool:on]];
     [self eventValueChanged:nil];
 }
 
@@ -55,16 +54,16 @@
 // This can cause problems if block() is called and the value hasn't actually changed.
 // We get around this by introducing this "state" boolean and only firing the block if the value has changed.
 -(void)eventValueChanged:(id)sender {
-    if (self.block) {
-		if (self.state != self.isOn) {
-			[self setState:self.isOn];
+    if (self.value.boolValue != self.isOn) {
+        [self setValue:[NSNumber numberWithBool:self.isOn]];
+        if (self.block) {
             self.block(self);
-		}
-	}
+        }
+    }
 }
 
 -(void)dealloc {
-	[self removeTarget:self action:@selector(eventValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self removeTarget:self action:@selector(eventValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 @end
