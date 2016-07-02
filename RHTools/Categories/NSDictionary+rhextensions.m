@@ -30,7 +30,7 @@
 		
 	id value = [self objectForKey:aKey];
 	
-    return isNillOrNull(value) ? defaultValue : value;
+    return isNilOrNull(value) ? defaultValue : value;
     
 }
 

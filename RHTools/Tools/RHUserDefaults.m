@@ -63,7 +63,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
-    if isNillOrNull(newValue) {
+    if isNilOrNull(newValue) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:keyPath];
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:newValue forKey:keyPath];

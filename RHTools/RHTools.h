@@ -33,7 +33,8 @@
 #define async(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ })
 #define async_main(...) dispatch_async(dispatch_get_main_queue(), ^{ __VA_ARGS__ })
 
-#define isNillOrNull(item) (!item || [item isEqual:[NSNull null]])
+// #define isNillOrNull(item) (!item || [item isEqual:[NSNull null]])
+#define isNilOrNull(item) ((item == nil) || [item isKindOfClass:[NSNull class]])
 
 #define LocaleIsMetric ([[[NSLocale currentLocale] objectForKey:NSLocaleUsesMetricSystem] boolValue])
 
@@ -42,7 +43,7 @@
 #define kYes NSLocalizedString(@"Yes", nil)
 #define kNo NSLocalizedString(@"No", nil)
 #define kOneMoment NSLocalizedString(@"One moment...", nil)
-#define kEmptyPromise [AnyPromise promiseWithResolverBlock:^(PMKResolver  _Nonnull resolve) {resolve(nil);}];
+#define kEmptyPromise [AnyPromise promiseWithValue:nil];
 
 
 // https://gist.github.com/bsneed/5980089
