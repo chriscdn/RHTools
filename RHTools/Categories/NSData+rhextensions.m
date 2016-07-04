@@ -1,8 +1,7 @@
 //
-//  NSDate+formatter.h
-//  Version: 0.3
+//  NSData+rhextensions.m
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2016 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,28 +23,15 @@
 //  THE SOFTWARE.
 //
 
-@interface NSDate (formatter)
+#import "NSData+rhextensions.h"
+#import <ImageIO/ImageIO.h>
 
-+(NSDateFormatter *)formatter;
-+(NSDateFormatter *)formatterWithoutTime;
-+(NSDateFormatter *)formatterWithoutDate;
-+(NSDateFormatter *)formatterISO8601;
+@implementation NSData (rhextensions)
 
--(NSString *)formatWithUTCTimeZone;
--(NSString *)formatWithLocalTimeZone;
--(NSString *)formatWithTimeZoneOffset:(NSTimeInterval)offset;
--(NSString *)formatWithTimeZone:(NSTimeZone *)timezone;
-
--(NSString *)formatWithUTCTimeZoneWithoutTime;
--(NSString *)formatWithLocalTimeZoneWithoutTime;
--(NSString *)formatWithTimeZoneOffsetWithoutTime:(NSTimeInterval)offset;
--(NSString *)formatWithTimeZoneWithoutTime:(NSTimeZone *)timezone;
-
--(NSString *)formatWithUTCWithoutDate;
--(NSString *)formatWithLocalTimeWithoutDate;
--(NSString *)formatWithTimeZoneOffsetWithoutDate:(NSTimeInterval)offset;
--(NSString *)formatTimeWithTimeZone:(NSTimeZone *)timezone;
-
--(NSString *)formatWithISO8601;
+-(NSDictionary *)imageMetadata {
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)self, NULL);
+    CFDictionaryRef imageMetaData = CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
+    return (__bridge NSDictionary*)imageMetaData;
+}
 
 @end

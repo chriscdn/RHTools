@@ -61,7 +61,7 @@
 +(nonnull instancetype)alertWithTitle:(nullable NSString *)title message:(nullable NSString *)message {
     return [self
             alertControllerWithTitle:title
-            message:nil
+            message:message
             preferredStyle:UIAlertControllerStyleAlert];
 }
 

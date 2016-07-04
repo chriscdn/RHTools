@@ -26,7 +26,9 @@
 @interface RHUserDefaults : NSObject
 
 +(id)sharedInstance;
+-(NSUserDefaults *)userDefaults;
 -(id)defaultForKey:(NSString *)key;
+-(void)reload;
 -(void)clearDefaults;
 -(NSArray *)propertyNames;
 

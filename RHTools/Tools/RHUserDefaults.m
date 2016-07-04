@@ -42,17 +42,25 @@
 
 -(id)init {
     if (self=[super init]) {
-        [self.propertyNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            id value = [[NSUserDefaults standardUserDefaults] valueForKey:obj];
-            if (value == nil) {
-                value = [self defaultForKey:obj];
-            }
-            [self setValue:value forKey:obj];
-            [self addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-        }];
+        [self reload];
     }
     
     return self;
+}
+
+-(NSUserDefaults *)userDefaults {
+    return [NSUserDefaults standardUserDefaults];
+}
+
+-(void)reload {
+    [self.propertyNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        id value = [self.userDefaults valueForKey:obj];
+        if (value == nil) {
+            value = [self defaultForKey:obj];
+        }
+        [self setValue:value forKey:obj];
+        [self addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    }];
 }
 
 -(id)defaultForKey:(NSString *)key {
@@ -64,10 +72,12 @@
     NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
     if isNilOrNull(newValue) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:keyPath];
+        [self.userDefaults removeObjectForKey:keyPath];
     } else {
-        [[NSUserDefaults standardUserDefaults] setObject:newValue forKey:keyPath];
+        [self.userDefaults setObject:newValue forKey:keyPath];
     }
+    
+    [self.userDefaults synchronize];
 }
 
 -(NSArray *)propertyNames {
@@ -91,8 +101,8 @@
 }
 
 -(void)clearDefaults {
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.userDefaults removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
+    [self.userDefaults synchronize];
 }
 
 @end

@@ -1,8 +1,7 @@
 //
-//  NSDate+formatter.h
-//  Version: 0.3
+//  NSData+rhextensions.h
 //
-//  Copyright (C) 2013 by Christopher Meyer
+//  Copyright (C) 2016 by Christopher Meyer
 //  http://schwiiz.org/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,28 +23,8 @@
 //  THE SOFTWARE.
 //
 
-@interface NSDate (formatter)
+@interface NSData (rhextensions)
 
-+(NSDateFormatter *)formatter;
-+(NSDateFormatter *)formatterWithoutTime;
-+(NSDateFormatter *)formatterWithoutDate;
-+(NSDateFormatter *)formatterISO8601;
-
--(NSString *)formatWithUTCTimeZone;
--(NSString *)formatWithLocalTimeZone;
--(NSString *)formatWithTimeZoneOffset:(NSTimeInterval)offset;
--(NSString *)formatWithTimeZone:(NSTimeZone *)timezone;
-
--(NSString *)formatWithUTCTimeZoneWithoutTime;
--(NSString *)formatWithLocalTimeZoneWithoutTime;
--(NSString *)formatWithTimeZoneOffsetWithoutTime:(NSTimeInterval)offset;
--(NSString *)formatWithTimeZoneWithoutTime:(NSTimeZone *)timezone;
-
--(NSString *)formatWithUTCWithoutDate;
--(NSString *)formatWithLocalTimeWithoutDate;
--(NSString *)formatWithTimeZoneOffsetWithoutDate:(NSTimeInterval)offset;
--(NSString *)formatTimeWithTimeZone:(NSTimeZone *)timezone;
-
--(NSString *)formatWithISO8601;
+-(NSDictionary *)imageMetadata;
 
 @end
