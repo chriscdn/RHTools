@@ -38,7 +38,7 @@
 }
 
 -(id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue {
-    if (index < [self count]) {
+    if ((0 <= index ) && (index < [self count])) {
         return [self objectAtIndex:index];
     }
 
