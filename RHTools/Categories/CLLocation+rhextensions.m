@@ -35,23 +35,28 @@
     
     [[[CLGeocoder alloc] init] reverseGeocodeLocation:self completionHandler:^(NSArray *placemarks, NSError *error) {
         
-        NSTimeZone *timezone = nil;
+        NSTimeZone *timeZone = nil;
         
         if (error == nil && [placemarks count] > 0) {
             
             CLPlacemark *placeMark = [placemarks firstObject];
-            NSString *desc = [placeMark description];
+            timeZone = placeMark.timeZone;
             
-            NSRegularExpression  *regex  = [NSRegularExpression regularExpressionWithPattern:@"identifier = \"([a-z]*\\/[a-z]*_*[a-z]*)\"" options:NSRegularExpressionCaseInsensitive error:nil];
-            NSTextCheckingResult *result = [regex firstMatchInString:desc options:0 range:NSMakeRange(0, [desc length])];
-            
-            NSString *timezoneString = [desc substringWithRange:[result rangeAtIndex:1]];
-            
-            timezone = [NSTimeZone timeZoneWithName:timezoneString];
-            
+            /*
+             CLPlacemark *placeMark = [placemarks firstObject];
+             
+             NSString *desc = [placeMark description];
+             
+             NSRegularExpression  *regex  = [NSRegularExpression regularExpressionWithPattern:@"identifier = \"([a-z]*\\/[a-z]*_*[a-z]*)\"" options:NSRegularExpressionCaseInsensitive error:nil];
+             NSTextCheckingResult *result = [regex firstMatchInString:desc options:0 range:NSMakeRange(0, [desc length])];
+             
+             NSString *timezoneString = [desc substringWithRange:[result rangeAtIndex:1]];
+             
+             timezone = [NSTimeZone timeZoneWithName:timezoneString];
+             */
         }
         
-        block(timezone);
+        block(timeZone);
         
     }];
     
