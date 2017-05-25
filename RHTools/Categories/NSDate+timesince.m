@@ -39,7 +39,7 @@ static NSArray *_unitValues;
                           NSLocalizedStringFromTable(@"day", @"NSDate+timesince", nil),
                           NSLocalizedStringFromTable(@"hour", @"NSDate+timesince", nil),
                           NSLocalizedStringFromTable(@"minute", @"NSDate+timesince", nil),
-                           nil];
+                          nil];
     }
     return _unitsSingular;
 }
@@ -53,7 +53,7 @@ static NSArray *_unitValues;
                         NSLocalizedStringFromTable(@"days", @"NSDate+timesince", nil),
                         NSLocalizedStringFromTable(@"hours", @"NSDate+timesince", nil),
                         NSLocalizedStringFromTable(@"minutes", @"NSDate+timesince", nil),
-                         nil];
+                        nil];
     }
     return _unitsPlural;
 }
@@ -68,13 +68,13 @@ static NSArray *_unitValues;
                        [NSNumber numberWithInt:kHour],
                        [NSNumber numberWithInt:kMinute],
                        [NSNumber numberWithInt:kSecond],
-                        nil];
+                       nil];
     }
     return _unitValues;
 }
 
 -(NSString *)timesince {
-	return [self timesinceWithDepth:2];
+    return [self timesinceWithDepth:2];
 }
 
 -(NSString *)timesinceLabel {
@@ -93,7 +93,7 @@ static NSArray *_unitValues;
 }
 
 -(NSString *)timesince1 {
-	return [self timesinceWithDepth:1];
+    return [self timesinceWithDepth:1];
 }
 
 -(NSString *)timesinceWithDepth:(NSUInteger)depth {
@@ -103,37 +103,40 @@ static NSArray *_unitValues;
 -(NSString *)timesinceDate:(NSDate *)date withDepth:(NSUInteger)depth {
     NSArray *units_singular = [NSDate unitsSingular];
     NSArray *units_plural = [NSDate unitsPlural];
-	NSArray *values = [NSDate unitValues];
-	
-	int delta = fabs([self timeIntervalSinceDate:date]);
-	
-	if ( delta < 60 ) {
+    NSArray *values = [NSDate unitValues];
+    
+    // keep in mind a year and month varies (leap years, 31, 30, or 28 days per month)
+    int delta = fabs([self timeIntervalSinceDate:date]);
+    
+    if ( delta < 60 ) {
         // return "0 minutes" if the difference is less than a minute ago
-		return [NSString stringWithFormat:@"0 %@", [units_plural lastObject]];
+        return [NSString stringWithFormat:@"0 %@", [units_plural lastObject]];
     }
-	
+    
     NSMutableArray *comp = [NSMutableArray array];
-	
-    for(int i=0; i < [units_singular count]; i++) {
+    
+    for (int i=0; i < [units_singular count]; i++) {
         
-		int unit = [[values objectAtIndex:i] intValue];
+        int unit = [[values objectAtIndex:i] intValue];
         int v = (int)(delta/unit);
-		
-        delta = delta % unit;
-		
-        if ( (v == 0) || (depth == 0) ) {
+        
+        if ((v == 0) || (depth == 0)) {
             // do nothing
         } else {
-			if (v == 1) {
-				[comp addObject:[NSString stringWithFormat:@"%i %@", v, [units_singular objectAtIndex:i]]];
+
+            if (v == 1) {
+                [comp addObject:[NSString stringWithFormat:@"%i %@", v, [units_singular objectAtIndex:i]]];
             } else {
-				[comp addObject:[NSString stringWithFormat:@"%i %@", v, [units_plural objectAtIndex:i]]];
-			}
+                [comp addObject:[NSString stringWithFormat:@"%i %@", v, [units_plural objectAtIndex:i]]];
+            }
             
-			depth--;
+            depth--;
         }
+        
+        delta = delta % unit;
+    
     }
-	
+    
     return [comp componentsJoinedByString:@", "];
 }
 
