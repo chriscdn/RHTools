@@ -74,11 +74,11 @@ static NSArray *_unitValues;
 }
 
 -(NSString *)timesince {
-    return [self timesinceWithDepth:2];
+    return [self timesinceWithDepth:1];
 }
 
 -(NSString *)timesinceLabel {
-    return [self timesinceLabelWithDepth:2];
+    return [self timesinceLabelWithDepth:1];
 }
 
 -(NSString *)timesinceLabelWithDepth:(NSUInteger)depth {
