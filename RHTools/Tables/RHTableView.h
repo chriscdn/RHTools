@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
+typedef void (^RHWillDisplayCellBlock)(UITableView * _Nonnull tableView, UITableViewCell * _Nonnull cell, NSIndexPath * _Nonnull indexPath);
 @class RHTableViewCellLayout;
 @class RHTableViewCell;
 
@@ -44,7 +44,8 @@ typedef void (^RHWillDisplayCellBlock)(UITableView *tableView, UITableViewCell *
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText;
 -(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText;
 
--(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
+// -(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
+-(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(void (^ __nullable)(RHTableViewCell *cell))block;
 -(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
 -(RHTableViewCell *)addCell:(RHTableViewCell *)row;
 

@@ -56,7 +56,7 @@
 	return self;
 }
 
--(void)addButtonWithTitle:(NSString *)title block:(void (^)())block {
+-(void)addButtonWithTitle:(NSString *)title block:(void (^)(void))block {
     [self.alertController addButtonWithTitle:title block:^(UIAlertAction * _Nonnull action) {
         if (block) {
             block();
@@ -68,7 +68,7 @@
 	return [self addOKButtonWithBlock:nil];
 }
 
--(void)addOKButtonWithBlock:(void (^)())block {
+-(void)addOKButtonWithBlock:(void (^)(void))block {
 	return [self addButtonWithTitle:kOK block:block];
 }
 
@@ -80,7 +80,7 @@
     [self.alertController addCancelButtonWithTitle:title];
 }
 
--(void)addCancelButtonWithTitle:(NSString *)title block:(void (^)())block {
+-(void)addCancelButtonWithTitle:(NSString *)title block:(void (^ _Nonnull)(UIAlertAction *action))block {
     [self.alertController addCancelButtonWithTitle:title block:block];
 }
 

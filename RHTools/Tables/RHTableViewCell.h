@@ -34,8 +34,8 @@
 typedef void (^RHReloadCellBlock)(RHTableViewCell *cell);
 
 @property (nonatomic, copy) void (^didSelectBlock)(RHTableViewCell *cell);
-@property (nonatomic, copy) void (^reloadCellBlock)();
-@property (nonatomic, copy) CGFloat (^heightBlock)();
+@property (nonatomic, copy) void (^reloadCellBlock)(RHTableViewCell *cell);
+@property (nonatomic, copy) CGFloat (^heightBlock)(void);
 
 @property (strong, nonatomic) IBOutlet UILabel *leftLabel;
 @property (strong, nonatomic) IBOutlet UIView *labelSeparatorView;

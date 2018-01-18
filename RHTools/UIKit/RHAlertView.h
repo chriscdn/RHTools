@@ -30,12 +30,12 @@
 +(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message;
 -(id)initWithTitle:(NSString *)title message:(NSString *)message;
 
--(void)addButtonWithTitle:(NSString *)title block:(void (^)())block;
+-(void)addButtonWithTitle:(NSString *)title block:(void (^)(void))block;
 -(void)addOKButton;
--(void)addOKButtonWithBlock:(void (^)())block;
+-(void)addOKButtonWithBlock:(void (^)(void))block;
 -(void)addCancelButton;
 -(void)addCancelButtonWithTitle:(NSString *)title;
--(void)addCancelButtonWithTitle:(NSString *)title block:(void (^)())block;
+-(void)addCancelButtonWithTitle:(NSString *)title block:(void (^ _Nonnull)(UIAlertAction *action))block;
 -(void)show;
 
 @end

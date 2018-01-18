@@ -161,7 +161,7 @@
     return cell;
 }
 
--(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block {
+-(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(void (^ __nullable)(RHTableViewCell *cell))block {
     RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
                                                detailLabelText:nil
                                                 didSelectBlock:block
