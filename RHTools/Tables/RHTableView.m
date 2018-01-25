@@ -98,11 +98,11 @@
 
 #pragma mark -
 
--(void)addSectionWithSectionHeaderText:(NSString *)headerText {
+-(void)addSectionWithSectionHeaderText:(NSString *_Nullable)headerText {
     return [self addSectionWithSectionHeaderText:headerText footerText:nil];
 }
 
--(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText {
+-(void)addSectionWithSectionHeaderText:(NSString *_Nullable)headerText footerText:(NSString *_Nullable)footerText {
     RHTableSection *section = [RHTableSection new];
     section.headerText = headerText;
     section.footerText = footerText;
@@ -149,7 +149,7 @@
     return cell;
 }
 
--(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText {
+-(RHTableViewCell *_Nonnull)addCell:(NSString *_Nonnull)labelText detailText:(NSString *_Nonnull)detailText {
     RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
                                                detailLabelText:detailText
                                                 didSelectBlock:nil
@@ -161,7 +161,7 @@
     return cell;
 }
 
--(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(void (^ __nullable)(RHTableViewCell *cell))block {
+-(RHTableViewCell *_Nonnull)addCell:(NSString *_Nonnull)labelText didSelectBlock:(void (^ __nullable)(RHTableViewCell * _Nullable cell))block {
     RHTableViewCell *cell = [RHTableViewCell cellWithLabelText:labelText
                                                detailLabelText:nil
                                                 didSelectBlock:block
@@ -264,7 +264,7 @@
 // A simple implementation to hide and show table view cells.
 // This only permits one cell from being hidden or displayed at a time.
 // Sections are not supported yet either.
--(void)cell:(RHTableViewCell *)cell setHidden:(BOOL)hidden {
+-(void)cell:(RHTableViewCell *_Nonnull)cell setHidden:(BOOL)hidden {
     
     if (cell.hidden == hidden) {
         // do nothing
@@ -290,9 +290,9 @@
     }
 }
 
--(NSIndexPath *)visibleIndexPath:(RHTableViewCell *)cell {
+-(NSIndexPath *_Nonnull)visibleIndexPath:(RHTableViewCell *_Nonnull)cell {
     NSInteger section;
-    NSInteger row;
+    NSInteger row = NSNotFound;
     
     for (section=0; section < [self numberOfSectionsInTableView:self]; section++) {
         row = [[self visibileRowsForSection:section] indexOfObject:cell];
@@ -307,12 +307,11 @@
     } else {
         return nil;
     }
-    
 }
 
 
 #pragma mark -
--(void)advanceFirstResponder:(UIView *)textFieldorTextView {
+-(void)advanceFirstResponder:(UIView *_Nonnull)textFieldorTextView {
     NSUInteger index = [self.inputFields indexOfObject:textFieldorTextView];
     
     id nextTextFieldorTextView = [self.inputFields objectAtIndex:index+1 defaultValue:nil];

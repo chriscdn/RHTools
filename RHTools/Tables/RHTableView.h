@@ -29,29 +29,30 @@ typedef void (^RHWillDisplayCellBlock)(UITableView * _Nonnull tableView, UITable
 
 @interface RHTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, copy) RHWillDisplayCellBlock willDisplayCellBlock;
+@property (nonatomic, copy) RHWillDisplayCellBlock _Nullable willDisplayCellBlock;
 @property (nonatomic, assign) BOOL deselectRowAfterSelect;
-@property (nonatomic, strong) RHTableViewCellLayout *tableViewCellLayout;
+@property (nonatomic, strong) RHTableViewCellLayout * _Nonnull tableViewCellLayout;
 
-@property (nonatomic, strong) NSMutableArray *tableSections;
-@property (nonatomic, strong) NSMutableArray *tableRows;
-@property (nonatomic, strong) NSMutableArray *textLabels;
-@property (nonatomic, strong) NSMutableArray *inputFields;
-@property (nonatomic, strong) NSMutableArray *textFields;
-@property (nonatomic, strong) NSMutableArray *textViews;
+@property (nonatomic, strong) NSMutableArray * _Nonnull tableSections;
+@property (nonatomic, strong) NSMutableArray * _Nonnull tableRows;
+@property (nonatomic, strong) NSMutableArray * _Nonnull textLabels;
+@property (nonatomic, strong) NSMutableArray * _Nonnull inputFields;
+@property (nonatomic, strong) NSMutableArray * _Nonnull textFields;
+@property (nonatomic, strong) NSMutableArray * _Nonnull textViews;
 
 
--(void)addSectionWithSectionHeaderText:(NSString *)headerText;
--(void)addSectionWithSectionHeaderText:(NSString *)headerText footerText:(NSString *)footerText;
+-(void)addSectionWithSectionHeaderText:(NSString *_Nullable)headerText;
+-(void)addSectionWithSectionHeaderText:(NSString *_Nullable)headerText footerText:(NSString *_Nullable)footerText;
 
 // -(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(RHBoringBlock)block;
--(RHTableViewCell *)addCell:(NSString *)labelText didSelectBlock:(void (^ __nullable)(RHTableViewCell *cell))block;
--(RHTableViewCell *)addCell:(NSString *)labelText detailText:(NSString *)detailText;
--(RHTableViewCell *)addCell:(RHTableViewCell *)row;
+-(RHTableViewCell *_Nonnull)addCell:(NSString *_Nonnull)labelText didSelectBlock:(void (^ __nullable)(RHTableViewCell * _Nullable cell))block;
+-(RHTableViewCell *_Nonnull)addCell:(NSString *_Nonnull)labelText detailText:(NSString *_Nonnull)detailText;
+-(RHTableViewCell *_Nonnull)addCell:(RHTableViewCell *_Nonnull)row;
 
--(void)cell:(RHTableViewCell *)cell setHidden:(BOOL)hidden;
+-(void)cell:(RHTableViewCell *_Nonnull)cell setHidden:(BOOL)hidden;
+-(NSIndexPath *_Nonnull)visibleIndexPath:(RHTableViewCell *_Nonnull)cell;
 
--(void)advanceFirstResponder:(UIView *)textFieldorTextView;
+-(void)advanceFirstResponder:(UIView *_Nonnull)textFieldorTextView;
 -(void)setTextFieldsKeyboardReturnToNext;
 -(void)hideKeyboard;
 -(void)reset;
