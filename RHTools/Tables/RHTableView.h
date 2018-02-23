@@ -62,7 +62,7 @@ typedef void (^RHWillDisplayCellBlock)(UITableView * _Nonnull tableView, UITable
 
 @interface RHTableSection : NSObject
 
-@property (nonatomic, strong) NSString *headerText;
-@property (nonatomic, strong) NSString *footerText;
+@property (nonatomic, strong) NSString * _Nullable headerText;
+@property (nonatomic, strong) NSString * _Nullable footerText;
 
 @end
