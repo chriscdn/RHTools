@@ -31,12 +31,15 @@ typedef void (^RHBarButtonItemBlock)(RHBarButtonItem *barButtonItem);
 
 @property (nonatomic, copy) RHBarButtonItemBlock block;
 
-+(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block;
-+(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block;
-+(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block;
++(instancetype)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block;
++(instancetype)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block;
++(instancetype)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block;
++(instancetype)itemWithCustomView:(UIView *)customView block:(RHBarButtonItemBlock)block;
++(instancetype)flexibleSpace;
 
--(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block;
--(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block;
--(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block;
+-(instancetype)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block;
+-(instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block;
+-(instancetype)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block;
+-(instancetype)initWithCustomView:(UIView *)customView block:(RHBarButtonItemBlock)block;
 
 @end

@@ -30,46 +30,63 @@
 
 @implementation RHBarButtonItem
 
-+(id)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block {
++(instancetype)itemWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block {
     return [[self alloc] initWithTitle:title block:block];
 }
 
-+(id)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block {
++(instancetype)itemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block {
     return [[self alloc] initWithBarButtonSystemItem:systemItem block:block];
 }
 
-+(id)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block {
-	return [[self alloc] initWithImage:image block:block];
++(instancetype)itemWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block {
+    return [[self alloc] initWithImage:image block:block];
 }
 
--(id)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block {
- 	if (self=[super initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
-		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:block];
-	}
-	return self;
++(instancetype)itemWithCustomView:(UIView *)customView block:(RHBarButtonItemBlock)block {
+    return [[self alloc] initWithCustomView:customView block:block];
 }
 
--(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block {
-	if (self=[super initWithBarButtonSystemItem:systemItem target:self action:@selector(tap:)]) {
-		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:block]; // copied by @property
-	}
-	return self;
++(instancetype)flexibleSpace {
+    return  [[self alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 
--(id)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block {
-	if (self=[super initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
-		// http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
-		[self setBlock:block]; // copied by @property
-	}
-	return self;
+-(instancetype)initWithTitle:(NSString *)title block:(RHBarButtonItemBlock)block {
+    if (self=[super initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
+        // http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
+        [self setBlock:block];
+    }
+    return self;
+}
+
+-(instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem block:(RHBarButtonItemBlock)block {
+    if (self=[super initWithBarButtonSystemItem:systemItem target:self action:@selector(tap:)]) {
+        // http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
+        [self setBlock:block]; // copied by @property
+    }
+    return self;
+}
+
+-(instancetype)initWithImage:(UIImage *)image block:(RHBarButtonItemBlock)block {
+    if (self=[super initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(tap:)]) {
+        // http://stackoverflow.com/questions/6065963/do-i-have-to-retain-blocks-in-objective-c-for-ios
+        [self setBlock:block]; // copied by @property
+    }
+    return self;
+}
+
+-(instancetype)initWithCustomView:(UIView *)customView block:(RHBarButtonItemBlock)block {
+    if (self=[super initWithCustomView:customView]) {
+        [self setTarget:self];
+        [self setAction:@selector(tap:)];
+        [self setBlock:block]; // copied by @property
+    }
+    return self;
 }
 
 -(void)tap:(id)sender {
-	if (self.block) {
-		self.block(self);
-	}
+    if (self.block) {
+        self.block(self);
+    }
 }
 
 @end
