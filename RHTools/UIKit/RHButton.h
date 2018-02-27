@@ -27,6 +27,8 @@ typedef void (^RHButtonBlock)(void);
 
 @interface RHButton : UIButton
 
+@property (nonatomic, copy) RHButtonBlock block;
+
 +(id)buttonWithType:(UIButtonType)buttonType block:(RHButtonBlock)block;
 
 @end

@@ -24,24 +24,41 @@
 
 #import "RHButton.h"
 
-@interface RHButton()
-@property (nonatomic, copy) RHButtonBlock block;
-@end
-
 @implementation RHButton
 
 +(id)buttonWithType:(UIButtonType)buttonType block:(RHButtonBlock)block {
-	RHButton *button = [RHButton buttonWithType:buttonType];
-	[button addTarget:button action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-	[button setBlock:block];
+    RHButton *button = [RHButton buttonWithType:buttonType];
+    //    [button addTarget:button action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+    [button setBlock:block];
+    
+    return button;
+}
 
-	return button;
+-(instancetype)init {
+    if (self=[super init]) {
+        [self addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
+
+-(instancetype) initWithCoder:(NSCoder *)aDecoder {
+    if (self=[super initWithCoder:aDecoder]) {
+        [self addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame {
+    if (self=[super initWithFrame:frame]) {
+        [self addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
 }
 
 -(void)tap:(id)sender {
-	if (self.block) {
-		self.block();
-	}
+    if (self.block) {
+        self.block();
+    }
 }
 
 @end
