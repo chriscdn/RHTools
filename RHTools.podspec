@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/chriscdn/RHTools.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/chriscdn'
 
-  s.ios.deployment_target = '8.3'
+  s.ios.deployment_target = '9.0'
   s.requires_arc = true
 
   s.source_files = 'RHTools/**/*.{h,m}'

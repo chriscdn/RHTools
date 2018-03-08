@@ -23,13 +23,24 @@
 //  THE SOFTWARE.
 //
 
+#define CREATE_SHARED_INSTANCE          \
++ (instancetype)sharedInstance {        \
+    static dispatch_once_t once;        \
+    static id instance = nil;           \
+    dispatch_once(&once, ^{             \
+        instance = [[self alloc] init]; \
+    });                                 \
+    return instance;                    \
+}
+
+
 @interface RHUserDefaults : NSObject
 
 +(id)sharedInstance;
 -(NSUserDefaults *)userDefaults;
 -(id)defaultForKey:(NSString *)key;
 -(void)reload;
--(void)clearDefaults;
+-(void)reset;
 -(NSArray *)propertyNames;
 
 @end

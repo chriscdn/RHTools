@@ -50,6 +50,7 @@
 	
     dispatch_once(&oncePredicate, ^{
 		formatterWithoutTime = [[NSDate formatter] copy];
+        [formatterWithoutTime setDateStyle:NSDateFormatterLongStyle];
 		[formatterWithoutTime setTimeStyle:NSDateFormatterNoStyle];
     });
 	

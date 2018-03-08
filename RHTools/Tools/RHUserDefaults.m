@@ -31,13 +31,9 @@
 
 @implementation RHUserDefaults
 
-+(id)sharedInstance {
-    static dispatch_once_t once;
-    static id sharedInstance;
-    dispatch_once(&once, ^{
-        sharedInstance = [self new];
-    });
-    return sharedInstance;
++(instancetype)sharedInstance {
+    [NSException raise:@"Call to unimplemented sharedInstance" format:@"%@ does not implement sharedInstance.", NSStringFromClass([self class])];
+    return nil;
 }
 
 -(id)init {
@@ -100,9 +96,12 @@
     return propertyNames;
 }
 
--(void)clearDefaults {
-    [self.userDefaults removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
-    [self.userDefaults synchronize];
+-(void)reset {
+    weakify(self);
+    [self.propertyNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        strongify(self);
+        [self setValue:[self defaultForKey:obj] forKey:obj];
+    }];
 }
 
 @end
