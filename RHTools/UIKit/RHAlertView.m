@@ -31,17 +31,17 @@
 
 @implementation RHAlertView
 
-+(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message {
++(RHAlertView * _Nonnull)alertWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message {
 	return [[self alloc] initWithTitle:title message:message];
 }
 
-+(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message {
++(RHAlertView * _Nonnull)alertWithOKButtonWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message {
 	RHAlertView *alert = [self alertWithTitle:title message:message];
 	[alert addOKButton];
 	return alert;
 }
 
--(id)init {
+-(instancetype)init {
 	if (self=[super init]) {
         self.alertController = [RHAlertController alertWithTitle:nil message:nil];
 	}

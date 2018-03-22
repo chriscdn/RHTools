@@ -26,9 +26,9 @@
 
 @interface RHAlertView : NSObject
 
-+(RHAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message;
-+(RHAlertView *)alertWithOKButtonWithTitle:(NSString *)title message:(NSString *)message;
--(id)initWithTitle:(NSString *)title message:(NSString *)message;
++(RHAlertView * _Nonnull)alertWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message;
++(RHAlertView * _Nonnull)alertWithOKButtonWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message;
+-(instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
 
 -(void)addButtonWithTitle:(NSString *)title block:(void (^)(void))block;
 -(void)addOKButton;

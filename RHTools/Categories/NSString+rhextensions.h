@@ -42,5 +42,6 @@
 -(id)nullify;
 -(NSString *)snakeCaseToTitleCase;
 -(NSAttributedString *)attributedString;
+-(NSString *)safeJoin:(NSString *)str;
 
 @end

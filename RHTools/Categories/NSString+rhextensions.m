@@ -136,4 +136,19 @@
     return [[NSAttributedString alloc] initWithString:self];
 }
 
+-(NSString *)safeJoin:(NSString *)str {
+    NSString *string1 = [self trim];
+    NSString *string2 = [str trim];
+    
+    while ([string1 hasSuffix:@"/"]) {
+        string1 = [string1 substringWithRange:NSMakeRange(0, string1.length-1)];;
+    }
+    
+    while ([string2 hasPrefix:@"/"]) {
+        string2 = [string2 substringFromIndex:1];
+    }
+    
+    return [NSString stringWithFormat:@"%@/%@", string1, string2];
+}
+
 @end
