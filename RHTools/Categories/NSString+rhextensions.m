@@ -29,6 +29,11 @@
 @implementation NSString (rhextensions)
 
 +(NSString *)UUID {
+    return [[[NSUUID UUID] UUIDString] lowercaseString];
+}
+
+/*
++(NSString *)UUID {
     // Returns a UUID
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
@@ -36,6 +41,7 @@
     
     return [uuidStr lowercaseString];
 }
+ */
 
 +(id)stringWithFormat:(NSString *)format array:(NSArray *)arguments {
     NSRange range = NSMakeRange(0, [arguments count]);
