@@ -221,7 +221,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    RHTableViewCell *cell = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    // RHTableViewCell *cell = [[self.tableRows objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    RHTableViewCell *cell = [[self visibileRowsForSection:indexPath.section] objectAtIndex:indexPath.row];
     
     if (cell.didSelectBlock) {
         cell.didSelectBlock(cell);
