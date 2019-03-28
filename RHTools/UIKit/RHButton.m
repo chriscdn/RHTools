@@ -57,7 +57,7 @@
 
 -(void)tap:(id)sender {
     if (self.block) {
-        self.block();
+        self.block(self);
     }
 }
 
