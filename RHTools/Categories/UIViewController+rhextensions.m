@@ -53,13 +53,13 @@
 }
 
 /*
--(void)addLeftBarButtonItemCloseButton {    
-    __weak UIViewController *bself = self;
-    
-    self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
-        [bself dismissViewControllerAnimated:YES completion:nil];
-    }];
-}
-*/
+ -(void)addLeftBarButtonItemCloseButton {
+ __weak UIViewController *bself = self;
+ 
+ self.navigationItem.leftBarButtonItem = [[RHBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop block:^{
+ [bself dismissViewControllerAnimated:YES completion:nil];
+ }];
+ }
+ */
 
 @end

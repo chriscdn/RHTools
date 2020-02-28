@@ -36,7 +36,12 @@
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	UITableViewCell *cell = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
-	[cell.detailTextLabel setTextColor:[UIColor darkGrayColor]];
+    if (@available(iOS 13.0, *)) {
+        [cell.detailTextLabel setTextColor:[UIColor secondaryLabelColor]];
+    } else {
+        [cell.detailTextLabel setTextColor:[UIColor darkGrayColor]];
+    }
+    
 	return (id)cell;
 }
 

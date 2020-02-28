@@ -31,7 +31,7 @@
     RHTableViewCellLayout *layout = [RHTableViewCellLayout new];
     layout.leftLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     layout.leftLabelTextAlignment = NSTextAlignmentRight;
-    layout.leftLabelTextColor = [UIColor grayColor];
+    layout.leftLabelTextColor = [UIColor systemGrayColor];
     layout.separatorViewColor = [UIColor groupTableViewBackgroundColor];
     return layout;
 }
@@ -54,7 +54,11 @@
 
 -(UIColor *)leftLabelTextColor {
     if (_leftLabelTextColor == nil) {
-        _leftLabelTextColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            _leftLabelTextColor = [UIColor labelColor];
+        } else {
+            _leftLabelTextColor = [UIColor darkTextColor];
+        }
     }
     
     return _leftLabelTextColor;

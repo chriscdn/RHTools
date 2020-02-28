@@ -114,7 +114,7 @@ static UIColor *textViewBackgroundColour;
     cell.leftLabel.text = labelText;
     cell.textField.text = initialValue;
     cell.textField.adjustsFontSizeToFitWidth = YES;
-    cell.textField.textColor = [UIColor colorWithRed:0.196 green:0.31 blue:0.522 alpha:1.0 ];
+//    cell.textField.textColor = [UIColor colorWithRed:0.196 green:0.31 blue:0.522 alpha:1.0 ];
     cell.textField.returnKeyType = UIReturnKeyDone;
     cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     cell.textField.borderStyle = UITextBorderStyleNone;
